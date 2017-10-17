@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/tabIcon_announce"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_event_note_3x"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+    </ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabIcon_announce"
+        android:layout_centerHorizontal="true"
+        android:text="@string/tab_icon_event"
+        android:textSize="12sp"
+        android:textColor="@color/black"/>
+
+</RelativeLayout>
+
+

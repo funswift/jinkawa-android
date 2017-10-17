@@ -8,18 +8,12 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.content.Intent
 import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
-
-import com.example.taross.jinkawa_android.EventDetailActivity
 
 
 class ListActivity : AppCompatActivity() {
@@ -57,7 +51,9 @@ class ListActivity : AppCompatActivity() {
         val tabLayout = findViewById(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(mViewPager)
 
-        tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_storage_black_24dp)
+        tabLayout.getTabAt(0)?.setCustomView(R.layout.tabicon_event)
+        tabLayout.getTabAt(1)?.setCustomView(R.layout.tabicon_announcement)
+        tabLayout.getTabAt(2)?.setCustomView(R.layout.tabicon_setting)
 
         if (LoginManager.isLogin) {
             val fab = findViewById(R.id.fab) as FloatingActionButton
