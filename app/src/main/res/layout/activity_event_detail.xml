@@ -29,57 +29,6 @@
         android:layout_below="@+id/detail_toolbar"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/detail_department_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="8pt"
-        android:textColor="#000000"
-        android:ems="10"
-        android:text="部署名"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:id="@+id/detail_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="8pt"
-        android:textColor="#000000"
-        android:text="未定"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/detail_department_name"
-        android:layout_alignStart="@+id/detail_department_name" />
-
-    <TextView
-        android:id="@+id/detail_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="8pt"
-        android:textColor="#000000"
-        android:inputType="textPersonName"
-        android:text="未定"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/detail_date"
-        android:layout_alignStart="@+id/detail_capacity" />
-
-
-    <TextView
-        android:id="@+id/detail_capacity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="8pt"
-        android:textColor="#000000"
-        android:inputType="textPersonName"
-        android:text="上限なし"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/detail_location"
-        android:layout_alignEnd="@+id/detail_date" />
 
     <Button
         android:id="@+id/button_entry"
@@ -89,15 +38,145 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/departmentTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="部署名"
-        android:textSize="8pt"
-        android:textColor="#000000"
-        android:layout_alignBaseline="@+id/detail_department_name"
-        android:layout_alignBottom="@+id/detail_department_name"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/imageView"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp" />
+        android:layout_above="@+id/button_entry">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/detail_department_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text=""
+                android:textColor="#000000"
+                android:textSize="8pt"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignBottom="@+id/detail_title_department"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/detail_title_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="部署"
+                android:textColor="#000000"
+                android:textSize="8pt"
+                />
+
+            <TextView
+                android:id="@+id/detail_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="未定"
+                android:textColor="#000000"
+                android:textSize="8pt"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/detail_department_name"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/detail_title_date"
+                />
+
+            <TextView
+                android:id="@+id/detail_title_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="日程"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/detail_title_department"
+                android:textColor="#000000"
+                android:textSize="8pt"
+                />
+
+            <TextView
+                android:id="@+id/detail_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="未定"
+                android:textColor="#000000"
+                android:textSize="8pt"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/detail_date"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/detail_title_location"
+                />
+
+            <TextView
+                android:id="@+id/detail_title_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="開催場所"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/detail_title_date"
+                android:textColor="#000000"
+                android:textSize="8pt"
+                />
+
+            <TextView
+                android:id="@+id/detail_capacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="なし"
+                android:textColor="#000000"
+                android:textSize="8pt"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/detail_location"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/detail_title_capacity"
+                />
+
+            <TextView
+                android:id="@+id/detail_title_capacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="参加上限"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/detail_title_location"
+                android:textColor="#000000"
+                android:textSize="8pt"
+                />
+
+            <TextView
+                android:id="@+id/detail_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"
+                android:textColor="#000000"
+                android:textSize="8pt"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/detail_capacity"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/detail_title_description"
+                />
+
+            <TextView
+                android:id="@+id/detail_title_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="説明文"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/detail_title_capacity"
+                android:textColor="#000000"
+                android:textSize="8pt"
+                />
+
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
 </RelativeLayout>
