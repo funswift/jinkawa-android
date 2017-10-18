@@ -9,4 +9,9 @@
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_e">eActivity</string>
     <string name="title_activity_event_detail">EventDetailActivity</string>
+
+    <!-- タブアイコンのテキスト -->
+    <string name="tab_icon_event">イベント</string>
+    <string name="tab_icon_announcement">お知らせ</string>
+    <string name="tab_icon_setting">設定</string>
 </resources>
