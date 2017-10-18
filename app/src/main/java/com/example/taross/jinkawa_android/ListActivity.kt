@@ -57,7 +57,9 @@ class ListActivity : AppCompatActivity() {
         val tabLayout = findViewById(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(mViewPager)
 
-        tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_storage_black_24dp)
+        tabLayout.getTabAt(0)?.setCustomView(R.layout.tabicon_event)
+        tabLayout.getTabAt(1)?.setCustomView(R.layout.tabicon_announcement)
+        tabLayout.getTabAt(2)?.setCustomView(R.layout.tabicon_setting)
 
         if (LoginManager.isLogin) {
             val fab = findViewById(R.id.fab) as FloatingActionButton
