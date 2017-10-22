@@ -8,6 +8,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Design.TextInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColorHint">#444444</item><!-- 何も入力してないとき入力フォーム内のHintの色 -->
+        <item name="colorControlNormal">#444444</item><!-- 通常時EditTextの下線 -->
+        <item name="colorControlActivated">@color/jipriMainColor</item><!-- フォーカス時の下線の色 -->
+    </style>
+
+    <!-- hintのスタイル -->
+    <style name="AppTheme.Design.TextAppearance.Design.Hint" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item><!-- 上の方のhintの表示サイズ -->
+        <item name="android:textColor">@color/jipriMainColor</item><!--  上の方のhintの表示の色 -->
+    </style>
+
+    <!-- エラーのスタイル -->
+    <style name="AppTheme.Design.TextAppearance.Design.Error" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">20sp</item><!-- errorの表示サイズ -->
+        <item name="android:textColor">#aa3333</item><!--  errorの表示の色.error時の下線の色でもある -->
+    </style>
+
     <style name="BaseToolbar" parent="@style/Widget.AppCompat.Toolbar">
         <item name="android:theme">@style/ToolbarTheme</item>
     </style>

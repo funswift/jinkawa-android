@@ -2,11 +2,12 @@
     <string name="app_name">Jinkawa-Android</string>
     <string name="title_activity_event_list">Test</string>
     <string name="action_settings">Settings</string>
-    <string name="action_viewparticipants">参加者リストを見る</string>
+    <string name="action_view_participants">参加者リストを見る</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_v">v</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_e">eActivity</string>
     <string name="title_activity_event_detail">EventDetailActivity</string>
+    <string name="hint_event_name">10文字以内で入力してください。</string>
 </resources>

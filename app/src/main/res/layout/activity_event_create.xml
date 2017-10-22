@@ -1,54 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.taross.jinkawa_android.EventCreateActivity">
 
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="551dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/BaseToolbar"
+        android:background="@color/jipriMainColor"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="@color/white"
+        android:title="イベント作成"
+        android:popupTheme="@style/PopupOverlay"/>
 
-        <EditText
-            android:id="@+id/editText"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/toolbar2">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:layout_height="wrap_content">
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <android.support.design.widget.TextInputLayout
+                app:theme="@style/AppTheme.Design.TextInputLayout"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
 
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textInput_eventtitle"
+                >
 
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+                <EditText
+                    android:id="@+id/edit_eventtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="10文字以内で入力してください"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/editText4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            <android.support.design.widget.TextInputLayout
+                app:theme="@style/AppTheme.Design.TextInputLayout"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                android:id="@+id/textInput_eventlocate"
+                android:layout_width="match_parent"
+                android:layout_below="@id/textInput_eventtitle"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+                <EditText
+                    android:id="@+id/edit_eventlocate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="開催予定地を入力してください"
+                    android:inputType="textMultiLine"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                app:theme="@style/AppTheme.Design.TextInputLayout"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textInput_eventlocate"
+                android:id="@+id/textInput_eventdate"
+                >
+
+                <Button
+                    android:id="@+id/button_eventdate_picker"
+                    android:layout_width="169dp"
+                    android:layout_height="37dp"
+                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:text="カレンダーで選択" />
+
+                <EditText
+                    android:id="@+id/edit_eventdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="51dp"
+                    android:hint="開催予定日を入力してください"
+                    android:inputType="datetime" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
