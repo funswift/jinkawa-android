@@ -13,5 +13,5 @@
     <!-- タブアイコンのテキスト -->
     <string name="tab_icon_event">イベント</string>
     <string name="tab_icon_announcement">お知らせ</string>
-    <string name="tab_icon_setting">設定</string>
+    <string name="tab_icon_setting">オプション</string>
 </resources>

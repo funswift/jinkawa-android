@@ -18,6 +18,7 @@ import android.widget.ListView
 import android.content.Intent
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
+import android.util.Log
 
 import com.example.taross.jinkawa_android.EventDetailActivity
 
@@ -44,6 +45,7 @@ class ListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_list)
 
         val toolbar = findViewById(R.id.toolbar) as Toolbar
+        toolbar.title = getString(R.string.tab_icon_event)
         setSupportActionBar(toolbar)
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -53,6 +55,22 @@ class ListActivity : AppCompatActivity() {
         val mViewPager = findViewById(R.id.container) as ViewPager
         mViewPager.adapter = mSectionsPagerAdapter
 
+        mViewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+
+            override fun onPageScrollStateChanged(state: Int) {
+                //throw UnsupportedOperationException()
+                // your code
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                //throw UnsupportedOperationException()
+                // your code
+            }
+
+            override fun onPageSelected(position: Int){
+                toolbar.title = mViewPager.adapter.getPageTitle(position)
+            }
+        });
 
         val tabLayout = findViewById(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(mViewPager)
@@ -76,6 +94,7 @@ class ListActivity : AppCompatActivity() {
             val fab = findViewById(R.id.fab) as FloatingActionButton
             fab.hide()
         }
+
     }
 
 
@@ -100,9 +119,9 @@ class ListActivity : AppCompatActivity() {
 
         override fun getPageTitle(position: Int): CharSequence? {
             when (position) {
-                0 -> return ""
-                1 -> return "SECTION 2"
-                2 -> return "SECTION 3"
+                0 -> return getString(R.string.tab_icon_event)
+                1 -> return getString(R.string.tab_icon_announcement)
+                2 -> return getString(R.string.tab_icon_setting)
             }
             return null
         }
