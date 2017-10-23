@@ -30,6 +30,26 @@
             android:layout_marginRight="10dp">
 
 
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="役員のみ公開"
+                android:layout_toRightOf="@+id/textInput_deadline"
+                android:layout_alignBottom="@+id/button_deadline_picker"
+                android:layout_below="@+id/textInput_description"
+                android:layout_alignStart="@+id/textInput_eventtime_start" />
+
+            <Button
+                android:id="@+id/button_eventcreate"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="イベントを作成する"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@+id/textInput_deadline"/>
+
             <TextView
                 android:id="@+id/title_department"
                 android:layout_width="wrap_content"
@@ -125,16 +145,15 @@
                     android:textAlignment="textStart"
                     android:textSize="18sp" />
 
-            </android.support.design.widget.TextInputLayout>
+                <Button
+                    android:id="@+id/button_eventdate_start_picker"
+                    android:layout_width="170dp"
+                    android:layout_height="37dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:text="時間を選択" />
 
-            <Button
-                android:id="@+id/button_eventdate_start_picker"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignBottom="@+id/textInput_eventdate_start"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/ic_event_note_3x"
-                android:layout_toEndOf="@+id/textInput_eventdate_start" />
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInput_eventtime_start"
