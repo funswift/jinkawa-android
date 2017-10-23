@@ -42,12 +42,13 @@ class EventCreateActivity : AppCompatActivity() {
 
         start_date_button.setOnClickListener {
             val date = Calendar.getInstance()
-            val dialog = DatePickerDialog(this, OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            var dialog = DatePickerDialog(this, OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 if (!view.isShown) {
                     return@OnDateSetListener
                 }
                 Log.d("hoge", "onDateSet")
-                start_date.text = "$year/$monthOfYear/$dayOfMonth"
+                val fixed_month = monthOfYear + 1
+                start_date.text = "$year/$fixed_month/$dayOfMonth"
             }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
             dialog.show()
         }

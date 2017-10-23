@@ -25,7 +25,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
 
@@ -35,35 +35,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textColor="#222222"
                 android:text="部署名"
-                />
+                android:textColor="#222222" />
 
             <Spinner
                 android:id="@+id/spinner_department"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@+id/title_department"
-                />
+                android:layout_below="@+id/title_department" />
 
             <TextView
                 android:id="@+id/title_eventname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
                 android:text="イベント名"
                 android:textColor="#222222"
-                android:layout_marginTop="20dp"
                 android:layout_below="@+id/spinner_department"
-                />
+                android:layout_alignParentStart="true" />
 
             <android.support.design.widget.TextInputLayout
-                app:theme="@style/AppTheme.Design.TextInputLayout"
-                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
-                android:layout_below="@+id/title_eventname"
+                android:id="@+id/textInput_eventtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textInput_eventtitle"
-                >
+                android:layout_below="@+id/title_eventname"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
 
                 <EditText
                     android:id="@+id/edit_eventtitle"
@@ -78,28 +75,26 @@
                 android:id="@+id/title_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_below="@+id/textInput_eventtitle"
                 android:layout_marginTop="20dp"
+                android:layout_weight="1"
                 android:text="開催地"
-                android:textColor="#222222"/>
+                android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
-                app:theme="@style/AppTheme.Design.TextInputLayout"
-                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
                 android:id="@+id/textInput_eventlocate"
                 android:layout_width="match_parent"
-                android:layout_below="@id/title_location"
                 android:layout_height="wrap_content"
-                >
+                android:layout_below="@id/title_location"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
 
                 <EditText
                     android:id="@+id/edit_eventlocate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="開催予定地を入力してください"
-                    android:inputType="textMultiLine"
-                    />
+                    android:inputType="textMultiLine" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -109,8 +104,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textInput_eventlocate"
                 android:layout_marginTop="20dp"
-                android:textColor="#222222"
-                android:text="開始日" />
+                android:text="開始日"
+                android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInput_eventdate_start"
@@ -123,39 +118,38 @@
 
                 <TextView
                     android:id="@+id/edit_eventdate_start"
-                    android:layout_width="165dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="0.58"
                     android:text="下のボタンで選択"
                     android:textAlignment="textStart"
                     android:textSize="18sp" />
 
-                <Button
-                    android:id="@+id/button_eventdate_start_picker"
-                    android:layout_width="170dp"
-                    android:layout_height="37dp"
-                    android:layout_marginLeft="0dp"
-                    android:background="@drawable/common_google_signin_btn_icon_light"
-                    android:text="日付を選択" />
-
             </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/button_eventdate_start_picker"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignBottom="@+id/textInput_eventdate_start"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/ic_event_note_3x"
+                android:layout_toEndOf="@+id/textInput_eventdate_start" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInput_eventtime_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/textInput_eventdate_start"
                 android:layout_below="@+id/title_eventdatetime_start"
-                android:weightSum="1"
                 android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/textInput_eventdate_start"
+                android:weightSum="1"
                 app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
-                app:theme="@style/AppTheme.Design.TextInputLayout"
-                >
+                app:theme="@style/AppTheme.Design.TextInputLayout">
 
                 <TextView
                     android:id="@+id/edit_eventtime_start"
-                    android:layout_width="165dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="0.58"
@@ -179,8 +173,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textInput_eventtime_start"
                 android:layout_marginTop="20dp"
-                android:textColor="#222222"
-                android:text="終了日" />
+                android:text="終了日"
+                android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInput_eventdate_end"
@@ -215,13 +209,12 @@
                 android:id="@+id/textInput_eventtime_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/textInput_eventdate_end"
                 android:layout_below="@+id/title_eventdatetime_end"
-                android:weightSum="1"
                 android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/textInput_eventdate_end"
+                android:weightSum="1"
                 app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
-                app:theme="@style/AppTheme.Design.TextInputLayout"
-                >
+                app:theme="@style/AppTheme.Design.TextInputLayout">
 
                 <TextView
                     android:id="@+id/edit_eventtime_end"
@@ -248,27 +241,25 @@
                 android:id="@+id/title_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="説明文"
-                android:textColor="#222222"
-                android:layout_marginTop="20dp"
                 android:layout_below="@+id/textInput_eventdate_end"
-                />
+                android:layout_marginTop="20dp"
+                android:text="説明文"
+                android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
-                app:theme="@style/AppTheme.Design.TextInputLayout"
-                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
-                android:layout_below="@+id/title_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/textInput_description"
-                >
-
-            <EditText
-                android:id="@+id/edit_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="10文字以内で入力してください"
-                android:inputType="textMultiLine" />
+                android:layout_below="@+id/title_description"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
+
+                <EditText
+                    android:id="@+id/edit_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="10文字以内で入力してください"
+                    android:inputType="textMultiLine" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -278,8 +269,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textInput_description"
                 android:layout_marginTop="20dp"
-                android:textColor="#222222"
-                android:text="申込締切日" />
+                android:text="申込締切日"
+                android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInput_deadline"
@@ -309,6 +300,7 @@
                     android:text="日付を選択" />
 
             </android.support.design.widget.TextInputLayout>
+
 
         </RelativeLayout>
     </ScrollView>
