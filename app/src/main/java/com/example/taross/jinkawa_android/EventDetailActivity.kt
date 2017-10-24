@@ -39,7 +39,7 @@ class EventDetailActivity : AppCompatActivity() {
         departmentTextView.text = event.department
 
         val dateTextView = findViewById(R.id.detail_date) as TextView
-        dateTextView.text = event.date
+        dateTextView.text = event.date_start
 
         val locationTextView = findViewById(R.id.detail_location) as TextView
         locationTextView.text = event.location

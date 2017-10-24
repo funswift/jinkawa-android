@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.*
 import java.util.Calendar
 import android.widget.ArrayAdapter
+import com.example.taross.model.Event
 import org.w3c.dom.Text
 
 
@@ -25,6 +26,22 @@ class EventCreateActivity : AppCompatActivity() {
         personalAdapter.add("青年部")
         personalAdapter.add("総務部")
 
+        /*
+
+        プロジェクトに余裕ができたらリファクタリング予定
+
+        プロジェクト
+
+                            余裕ができたら
+
+                                                            リファクタリング
+
+
+
+
+        */
+
+
         department.adapter = personalAdapter
 
         val start_date = findViewById(R.id.edit_eventdate_start) as TextView
@@ -39,6 +56,8 @@ class EventCreateActivity : AppCompatActivity() {
 
         val deadline = findViewById(R.id.edit_deadline) as TextView
         val deadline_button = findViewById(R.id.button_deadline_picker) as Button
+        val create_button = findViewById(R.id.button_eventcreate) as Button
+
 
         start_date_button.setOnClickListener {
             val date = Calendar.getInstance()
@@ -94,6 +113,21 @@ class EventCreateActivity : AppCompatActivity() {
             }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
             dialog.show()
         }
+
+        create_button.setOnClickListener{
+            val title = "none"
+            val department = ""
+            val location = ""
+            val capacity = ""
+            val deadline =""
+            val officer_only = false
+
+            val event =Event(title, "" ,department, start_date.text.toString(), start_time.text.toString(), end_date.text.toString(), end_time.text.toString(), location, capacity, deadline, officer_only)
+            event.save()
+
+        }
+
+
     }
 
 

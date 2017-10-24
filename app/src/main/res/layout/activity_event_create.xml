@@ -36,8 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="役員のみ公開"
                 android:layout_toRightOf="@+id/textInput_deadline"
-                android:layout_alignBottom="@+id/button_deadline_picker"
-                android:layout_below="@+id/textInput_description"
+                android:layout_alignBottom="@+id/textInput_deadline"
                 android:layout_alignStart="@+id/textInput_eventtime_start" />
 
             <Button
@@ -62,6 +61,7 @@
                 android:id="@+id/spinner_department"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
                 android:layout_below="@+id/title_department" />
 
             <TextView
@@ -138,7 +138,7 @@
 
                 <TextView
                     android:id="@+id/edit_eventdate_start"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="下のボタンで選択"
@@ -147,9 +147,11 @@
 
                 <Button
                     android:id="@+id/button_eventdate_start_picker"
-                    android:layout_width="170dp"
+                    android:layout_width="match_parent"
                     android:layout_height="37dp"
+                    android:layout_alignStart="@+id/edit_eventdate_start"
                     android:layout_marginLeft="0dp"
+
                     android:background="@drawable/common_google_signin_btn_icon_light"
                     android:text="時間を選択" />
 
@@ -178,7 +180,7 @@
 
                 <Button
                     android:id="@+id/button_eventtime_start_picker"
-                    android:layout_width="170dp"
+                    android:layout_width="match_parent"
                     android:layout_height="37dp"
                     android:layout_marginLeft="0dp"
                     android:background="@drawable/common_google_signin_btn_icon_light"
