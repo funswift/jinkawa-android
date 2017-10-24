@@ -5,17 +5,25 @@ import android.os.Bundle
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.text.Editable
 import android.util.Log
 import android.widget.*
 import java.util.Calendar
 import android.widget.ArrayAdapter
 import com.example.taross.model.Event
+import com.nifty.cloud.mb.core.DoneCallback
+import com.nifty.cloud.mb.core.NCMBException
 import org.w3c.dom.Text
 
 
-class EventCreateActivity : AppCompatActivity() {
+class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
+    //DoneCallBack インターフェースの実装
+    override fun done(arg1: NCMBException?){
+        val intent = Intent(applicationContext,  ListActivity::class.java)
+        startActivity(intent)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_create)
@@ -57,7 +65,6 @@ class EventCreateActivity : AppCompatActivity() {
         val deadline = findViewById(R.id.edit_deadline) as TextView
         val deadline_button = findViewById(R.id.button_deadline_picker) as Button
         val create_button = findViewById(R.id.button_eventcreate) as Button
-
 
         start_date_button.setOnClickListener {
             val date = Calendar.getInstance()
@@ -115,18 +122,20 @@ class EventCreateActivity : AppCompatActivity() {
         }
 
         create_button.setOnClickListener{
-            val title = "none"
-            val department = ""
-            val location = ""
-            val capacity = ""
-            val deadline =""
+            val title = "なし"
+            val department = "総務部"
+            val location = "未定"
+            val capacity = "0"
+            val deadline ="締め切りなし"
             val officer_only = false
 
+            if(true){
+
+            }
+
             val event =Event(title, "" ,department, start_date.text.toString(), start_time.text.toString(), end_date.text.toString(), end_time.text.toString(), location, capacity, deadline, officer_only)
-            event.save()
-
+            event.save(this)
         }
-
 
     }
 

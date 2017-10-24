@@ -1,7 +1,14 @@
 package com.example.taross.model
 
+import android.content.Context
+import android.content.Intent
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.v4.content.ContextCompat.startActivity
+import com.example.taross.jinkawa_android.EventCreateActivity
+import com.example.taross.jinkawa_android.ListActivity
+import com.nifty.cloud.mb.core.DoneCallback
+import com.nifty.cloud.mb.core.NCMBException
 import com.nifty.cloud.mb.core.NCMBObject
 
 /**
@@ -43,7 +50,7 @@ data class Event(val title: String, val id:String, val department:String, val da
         }
     }
 
-    fun save(){
+    fun save(activity :EventCreateActivity){
         val data = NCMBObject("Event")
         data.put("event_name", this.title)
         data.put("event_department_name",this.department)
@@ -55,6 +62,6 @@ data class Event(val title: String, val id:String, val department:String, val da
         data.put("capacity", this.capacity)
         data.put("deadline_day", this.deadline)
         data.put("officer_only", this.officer_only)
-        data.save()
+        data.saveInBackground(activity as DoneCallback)
     }
 }

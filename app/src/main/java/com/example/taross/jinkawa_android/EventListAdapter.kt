@@ -44,7 +44,7 @@ class EventListAdapter(private val context: Context): BaseAdapter(){
                         result.getString("event_name"),
                         result.getString("objectId"),
                         result.getString("event_department_name"),
-                        result.getString("day"),
+                        result.getString("date_start"),
                         "",
                         "",
                         "",
