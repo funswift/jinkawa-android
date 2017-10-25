@@ -8,6 +8,7 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.text.Editable
 import android.util.Log
+import android.view.WindowManager
 import android.widget.*
 import java.util.Calendar
 import android.widget.ArrayAdapter
@@ -26,6 +27,8 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
         setContentView(R.layout.activity_event_create)
 
 

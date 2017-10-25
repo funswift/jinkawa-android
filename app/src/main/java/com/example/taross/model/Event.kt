@@ -35,6 +35,8 @@ data class Event(val title: String, val id:String, val department:String, val da
     override fun describeContents(): Int = 0
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
+        val officer = if(officer_only == true) 1 else 0
+
         dest.run {
             writeString(title)
             writeString(id)
@@ -46,7 +48,7 @@ data class Event(val title: String, val id:String, val department:String, val da
             writeString(location)
             writeString(capacity)
             writeString(deadline)
-            writeInt(officer_only as Int)
+            writeInt(officer)
         }
     }
 
