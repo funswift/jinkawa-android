@@ -37,39 +37,30 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
         personalAdapter.add("青年部")
         personalAdapter.add("総務部")
 
-        /*
-
-        プロジェクトに余裕ができたらリファクタリング予定
-
-        プロジェクト
-
-                            余裕ができたら
-
-                                                            リファクタリング
-
-
-
-
-        */
-
 
         department.adapter = personalAdapter
 
-        val start_date = findViewById(R.id.edit_eventdate_start) as TextView
-        val start_date_button = findViewById(R.id.button_eventdate_start_picker) as Button
-        val start_time =findViewById(R.id.edit_eventtime_start) as TextView
-        val start_time_button = findViewById(R.id.button_eventtime_start_picker) as Button
+        val titleEditText = findViewById(R.id.edit_eventtitle) as EditText
+        val departmentSpinner = findViewById(R.id.spinner_department) as Spinner
+        val locationEditText = findViewById(R.id.edit_eventlocate) as EditText
+        val capacityEditText = findViewById(R.id.edit_capacity) as EditText
+        val officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch
 
-        val end_date = findViewById(R.id.edit_eventdate_end) as TextView
-        val end_date_button = findViewById(R.id.button_eventdate_end_picker) as Button
-        val end_time =findViewById(R.id.edit_eventtime_end) as TextView
-        val end_time_button = findViewById(R.id.button_eventtime_end_picker) as Button
+        val startDateTextView = findViewById(R.id.edit_eventdate_start) as TextView
+        val startDateButton = findViewById(R.id.button_eventdate_start_picker) as Button
+        val startTimeTextView =findViewById(R.id.edit_eventtime_start) as TextView
+        val startTimeButton = findViewById(R.id.button_eventtime_start_picker) as Button
 
-        val deadline = findViewById(R.id.edit_deadline) as TextView
-        val deadline_button = findViewById(R.id.button_deadline_picker) as Button
-        val create_button = findViewById(R.id.button_eventcreate) as Button
+        val endDateTextView = findViewById(R.id.edit_eventdate_end) as TextView
+        val endDateButton = findViewById(R.id.button_eventdate_end_picker) as Button
+        val endTimeTextView = findViewById(R.id.edit_eventtime_end) as TextView
+        val endTimeButton = findViewById(R.id.button_eventtime_end_picker) as Button
 
-        start_date_button.setOnClickListener {
+        val deadlineTextView = findViewById(R.id.edit_deadline) as TextView
+        val deadlineButton = findViewById(R.id.button_deadline_picker) as Button
+        val createButton = findViewById(R.id.button_eventcreate) as Button
+
+        startDateButton.setOnClickListener {
             val date = Calendar.getInstance()
             var dialog = DatePickerDialog(this, OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 if (!view.isShown) {
@@ -77,66 +68,73 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
                 }
                 Log.d("hoge", "onDateSet")
                 val fixed_month = monthOfYear + 1
-                start_date.text = "$year/$fixed_month/$dayOfMonth"
+                startDateTextView.text = "$year/$fixed_month/$dayOfMonth"
             }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
             dialog.show()
         }
 
-        start_time_button.setOnClickListener{
+        startTimeButton.setOnClickListener{
             val calendar = Calendar.getInstance()
             val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{view, hourOfDay, minute->
 
-                start_time.text = "$hourOfDay:$minute"
+                startTimeTextView.text = "$hourOfDay:$minute"
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),true)
             dialog.show()
         }
 
-        end_date_button.setOnClickListener {
+        endDateButton.setOnClickListener {
             val date = Calendar.getInstance()
             val dialog = DatePickerDialog(this, OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 if (!view.isShown) {
                     return@OnDateSetListener
                 }
                 Log.d("hoge", "onDateSet")
-                end_date.text = "$year/$monthOfYear/$dayOfMonth"
+                val fixed_month = monthOfYear + 1
+                endDateTextView.text = "$year/$fixed_month/$dayOfMonth"
             }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
             dialog.show()
         }
 
-        end_time_button.setOnClickListener{
+        endTimeButton.setOnClickListener{
             val calendar = Calendar.getInstance()
             val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{view, hourOfDay, minute->
 
-                end_time.text = "$hourOfDay:$minute"
+                endTimeTextView.text = "$hourOfDay:$minute"
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),true)
             dialog.show()
         }
 
-        deadline_button.setOnClickListener {
+        deadlineButton.setOnClickListener {
             val date = Calendar.getInstance()
             val dialog = DatePickerDialog(this, OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 if (!view.isShown) {
                     return@OnDateSetListener
                 }
                 Log.d("hoge", "onDateSet")
-                deadline.text = "$year/$monthOfYear/$dayOfMonth"
+                val fixed_month = monthOfYear + 1
+                deadlineTextView.text = "$year/$fixed_month/$dayOfMonth"
             }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
             dialog.show()
         }
 
-        create_button.setOnClickListener{
-            val title = "なし"
-            val department = "総務部"
-            val location = "未定"
-            val capacity = "0"
-            val deadline ="締め切りなし"
-            val officer_only = false
+        createButton.setOnClickListener{
+            val title = titleEditText.text.toString()
+            val department = departmentSpinner.selectedItem.toString()
+            val location = locationEditText.text.toString()
+            val start_date = startDateTextView.text.toString()
+            val start_time = startTimeTextView.text.toString()
+            val end_date = endDateTextView.text.toString()
+            val end_time = endTimeTextView.text.toString()
+            val capacity = capacityEditText.text.toString()
+            val deadline = deadlineTextView.text.toString()
+            val officer_only = officerOnlySwitch.showText
+
 
             if(true){
 
             }
 
-            val event =Event(title, "" ,department, start_date.text.toString(), start_time.text.toString(), end_date.text.toString(), end_time.text.toString(), location, capacity, deadline, officer_only)
+            val event = Event(title, "" ,department, start_date, start_time, end_date, end_time, location, capacity, deadline, officer_only)
             event.save(this)
         }
 
