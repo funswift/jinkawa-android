@@ -47,6 +47,9 @@ class EventDetailActivity : AppCompatActivity() {
         val capacityTextView = findViewById(R.id.detail_capacity) as TextView
         capacityTextView.text = event.capacity
 
+        val descriptionTextView = findViewById(R.id.detail_description) as TextView
+        descriptionTextView.text = event.description
+
         val entryButton = findViewById(R.id.button_entry) as Button
         entryButton.setOnClickListener({
             startActivity(Intent(applicationContext, EntryActivity::class.java).putExtra("EVENT_ID_EXTRA", event.id))

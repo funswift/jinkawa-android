@@ -15,12 +15,12 @@ import com.nifty.cloud.mb.core.NCMBObject
  * Created by taross on 2017/08/12.
  */
 
-data class Event(val title: String, val id:String, val department:String, val date_start:String, val time_start:String, val date_end:String, val time_end:String,  val location:String, val capacity:String, val deadline:String, val officer_only:Boolean): Parcelable{
+data class Event(val title: String, val id:String, val department:String, val date_start:String, val time_start:String, val date_end:String, val time_end:String,  val description:String,val location:String, val capacity:String, val deadline:String, val officer_only:Boolean): Parcelable{
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<Event> = object : Parcelable.Creator<Event>{
             override fun createFromParcel(source: Parcel): Event = source.run {
-                Event(readString(),readString(),readString(),readString(),readString(),readString(),readString(),readString(),readString(), readString(), (readInt() == 1))
+                Event(readString(),readString(),readString(),readString(),readString(),readString(),readString(),readString(),readString(), readString(),readString() ,readInt() == 1)
             }
 
             override fun newArray(size: Int): Array<Event?> = arrayOfNulls(size)
@@ -45,6 +45,7 @@ data class Event(val title: String, val id:String, val department:String, val da
             writeString(time_start)
             writeString(date_end)
             writeString(time_end)
+            writeString(description)
             writeString(location)
             writeString(capacity)
             writeString(deadline)
@@ -60,6 +61,7 @@ data class Event(val title: String, val id:String, val department:String, val da
         data.put("time_start", this.time_start)
         data.put("date_end", this.date_end)
         data.put("time_end", this.time_end)
+        data.put("description", this.description)
         data.put("location", this.location)
         data.put("capacity", this.capacity)
         data.put("deadline_day", this.deadline)

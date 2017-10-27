@@ -45,6 +45,7 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
         val locationEditText = findViewById(R.id.edit_eventlocate) as EditText
         val capacityEditText = findViewById(R.id.edit_capacity) as EditText
         val officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch
+        val descriptionEditText = findViewById(R.id.edit_description) as EditText
 
         val startDateTextView = findViewById(R.id.edit_eventdate_start) as TextView
         val startDateButton = findViewById(R.id.button_eventdate_start_picker) as Button
@@ -120,6 +121,7 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
         createButton.setOnClickListener{
             val title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
+            val description = descriptionEditText.text.toString()
             val location = locationEditText.text.toString()
             val start_date = startDateTextView.text.toString()
             val start_time = startTimeTextView.text.toString()
@@ -134,7 +136,7 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
             }
 
-            val event = Event(title, "" ,department, start_date, start_time, end_date, end_time, location, capacity, deadline, officer_only)
+            val event = Event(title, "" ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, officer_only)
             event.save(this)
         }
 

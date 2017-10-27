@@ -48,6 +48,7 @@ class EventListAdapter(private val context: Context): BaseAdapter(){
                         "",
                         "",
                         "",
+                        result.getString("description"),
                         result.getString("location"),
                         result.getString("capacity"),
                         result.getString("deadline_day"),
