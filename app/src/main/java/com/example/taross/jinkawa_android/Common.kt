@@ -17,7 +17,7 @@ class CsvHelper{
     companion object {
         public fun csvListOutput(event:Event, participants:MutableList<Participant>){
             
-            var data = event.title + "," + event.date + "," + event.location + "," + event.department
+            var data = event.title + "," + event.date_start + "," + event.location + "," + event.department
             data += "\r\n"
             data += " "
             data += "\r\n"

@@ -44,9 +44,15 @@ class EventListAdapter(private val context: Context): BaseAdapter(){
                         result.getString("event_name"),
                         result.getString("objectId"),
                         result.getString("event_department_name"),
-                        result.getString("day"),
+                        result.getString("date_start"),
+                        "",
+                        "",
+                        "",
+                        result.getString("description"),
                         result.getString("location"),
-                        result.getString("capacity")
+                        result.getString("capacity"),
+                        result.getString("deadline_day"),
+                        result.getBoolean("officer_only")
                 )
                 eveltList.add(event)
             }

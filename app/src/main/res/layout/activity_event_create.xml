@@ -1,54 +1,357 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.taross.jinkawa_android.EventCreateActivity">
 
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="551dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/BaseToolbar"
+        android:background="@color/jipriMainColor"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="@color/white"
+        android:title="イベント作成"
+        android:popupTheme="@style/PopupOverlay"/>
 
-        <EditText
-            android:id="@+id/editText"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/toolbar2">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            <Switch
+                android:id="@+id/switch_officeronly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="役員のみ公開"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/textInput_deadline"
+                android:layout_alignBottom="@+id/textInput_deadline"
+                android:layout_alignStart="@+id/textInput_eventtime_start" />
 
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            <Button
+                android:id="@+id/button_eventcreate"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="イベントを作成する"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@+id/textInput_deadline"/>
 
-        <EditText
-            android:id="@+id/editText4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            <TextView
+                android:id="@+id/title_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="部署名"
+                android:textColor="#222222" />
 
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+            <Spinner
+                android:id="@+id/spinner_department"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/title_department" />
+
+            <TextView
+                android:id="@+id/title_eventname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:text="イベント名"
+                android:textColor="#222222"
+                android:layout_below="@+id/spinner_department"
+                android:layout_alignParentStart="true" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_eventtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_eventname"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
+
+                <EditText
+                    android:id="@+id/edit_eventtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="10文字以内で入力"
+                    android:inputType="text" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/title_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInput_eventtitle"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="開催地"
+                android:textColor="#222222" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_eventlocate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_location"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
+
+                <EditText
+                    android:id="@+id/edit_eventlocate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="30字以内で入力"
+                    android:inputType="textMultiLine" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/title_capacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInput_eventlocate"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="定員"
+                android:textColor="#222222" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_capacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_capacity"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
+
+                <EditText
+                    android:id="@+id/edit_capacity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="5桁以内で入力"
+                    android:inputType="number" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/title_eventdatetime_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInput_capacity"
+                android:layout_marginTop="20dp"
+                android:text="開始日"
+                android:textColor="#222222" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_eventdate_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_eventdatetime_start"
+                android:weightSum="1"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
+
+                <TextView
+                    android:id="@+id/edit_eventdate_start"
+                    android:layout_width="145dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="下のボタンで入力"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/button_eventdate_start_picker"
+                    android:layout_width="150dp"
+                    android:layout_height="37dp"
+                    android:layout_alignStart="@+id/edit_eventdate_start"
+                    android:layout_marginLeft="0dp"
+
+                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:text="日付を選択" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_eventtime_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_eventdatetime_start"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/textInput_eventdate_start"
+                android:weightSum="1"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
+
+                <TextView
+                    android:id="@+id/edit_eventtime_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.58"
+                    android:text="下のボタンで入力"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/button_eventtime_start_picker"
+                    android:layout_width="150dp"
+                    android:layout_height="37dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:text="時間を選択" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/title_eventdatetime_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInput_eventtime_start"
+                android:layout_marginTop="20dp"
+                android:text="終了日"
+                android:textColor="#222222" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_eventdate_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_eventdatetime_end"
+                android:weightSum="1"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
+
+                <TextView
+                    android:id="@+id/edit_eventdate_end"
+                    android:layout_width="145dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.58"
+                    android:text="下のボタンで入力"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/button_eventdate_end_picker"
+                    android:layout_width="150dp"
+                    android:layout_height="37dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:text="日付を選択" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_eventtime_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_eventdatetime_end"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/textInput_eventdate_end"
+                android:weightSum="1"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
+
+                <TextView
+                    android:id="@+id/edit_eventtime_end"
+                    android:layout_width="145dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.58"
+                    android:text="下のボタンで入力"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/button_eventtime_end_picker"
+                    android:layout_width="150dp"
+                    android:layout_height="37dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:text="時間を選択" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/title_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInput_eventdate_end"
+                android:layout_marginTop="20dp"
+                android:text="説明文"
+                android:textColor="#222222" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_description"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
+
+                <EditText
+                    android:id="@+id/edit_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="250字以内で入力"
+                    android:inputType="textMultiLine" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/title_deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInput_description"
+                android:layout_marginTop="20dp"
+                android:text="申込締切日"
+                android:textColor="#222222" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_deadline"
+                android:weightSum="1"
+                app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
+                app:theme="@style/AppTheme.Design.TextInputLayout">
+
+                <TextView
+                    android:id="@+id/edit_deadline"
+                    android:layout_width="145dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.58"
+                    android:text="下のボタンで選択"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/button_deadline_picker"
+                    android:layout_width="150dp"
+                    android:layout_height="37dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:text="日付を選択" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

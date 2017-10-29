@@ -39,13 +39,16 @@ class EventDetailActivity : AppCompatActivity() {
         departmentTextView.text = event.department
 
         val dateTextView = findViewById(R.id.detail_date) as TextView
-        dateTextView.text = event.date
+        dateTextView.text = event.date_start
 
         val locationTextView = findViewById(R.id.detail_location) as TextView
         locationTextView.text = event.location
 
         val capacityTextView = findViewById(R.id.detail_capacity) as TextView
         capacityTextView.text = event.capacity
+
+        val descriptionTextView = findViewById(R.id.detail_description) as TextView
+        descriptionTextView.text = event.description
 
         val entryButton = findViewById(R.id.button_entry) as Button
         entryButton.setOnClickListener({
