@@ -21,8 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         val loginButton = findViewById(R.id.button2) as Button
         loginButton.setOnClickListener({
-            LoginManager.login()
-            val intent = Intent(application, ListActivity::class.java)
+            val intent = Intent(application, LoginActivity::class.java)
             startActivity(intent)
         })
         NCMB.initialize(this.getApplicationContext(),"fe37c2186e22a438c980af699d831ac26d2ce6e05909c89e0677309528274a4d","9fd56b4ec717815b4d72081d9ae9e58192bdec9be30a416319d0069a6c33fd9f")
