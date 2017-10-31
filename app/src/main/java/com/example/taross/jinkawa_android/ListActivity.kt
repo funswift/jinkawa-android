@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.content.Intent
+import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.util.Log
@@ -93,6 +94,14 @@ class ListActivity : AppCompatActivity() {
         else{
             val fab = findViewById(R.id.fab) as FloatingActionButton
             fab.hide()
+        }
+
+        //ログイン時のスナックバーの設定
+        if (LoginManager.isLogin) {
+            val layout = findViewById(R.id.main_content) as CoordinatorLayout
+            Snackbar
+                    .make(layout, "あなたは${LoginManager.account?.userId}でログインしています", Snackbar.LENGTH_LONG)
+                    .show()
         }
 
     }
