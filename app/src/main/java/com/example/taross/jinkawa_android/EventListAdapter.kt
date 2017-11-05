@@ -41,9 +41,9 @@ class EventListAdapter(private val context: Context): BaseAdapter(){
         if (results.isNotEmpty()) {
             for(result in results){
                 val event: Event = Event(
-                        result.getString("event_name"),
+                        result.getString("name"),
                         result.getString("objectId"),
-                        result.getString("event_department_name"),
+                        result.getString("department"),
                         result.getString("date_start"),
                         "",
                         "",

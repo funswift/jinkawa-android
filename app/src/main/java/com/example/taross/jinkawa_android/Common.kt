@@ -7,7 +7,12 @@ import java.io.File
 import com.nifty.cloud.mb.core.NCMBFile
 import java.io.Console
 import android.R.attr.data
+import android.content.Context
 import java.nio.charset.Charset
+import com.nifty.cloud.mb.core.NCMBException
+import com.nifty.cloud.mb.core.FetchFileCallback
+
+
 
 
 /**
@@ -39,10 +44,6 @@ class CsvHelper{
             file.saveInBackground {
                 callback()
             }
-        }
-
-        fun csvListDownload(event: Event){
-
         }
     }
 }

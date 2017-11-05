@@ -53,6 +53,7 @@ class ParticipantsListActivity : AppCompatActivity() {
             event?.let {
                 adapter.listExport(it, {
                     val bottomSheetDialog = CustomBottomSheetDialog.newInstance()
+                    bottomSheetDialog.event = it
                     bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
                 })
 
