@@ -33,6 +33,7 @@ class CustomBottomSheetDialog : BottomSheetDialogFragment() {
 
     lateinit var saveInDeviceButton:ImageButton
     lateinit var event:Event
+    lateinit var activity:Activity
 
     @SuppressLint("RestrictedApi")
     override fun setupDialog(dialog: Dialog, style: Int) {
@@ -62,9 +63,17 @@ class CustomBottomSheetDialog : BottomSheetDialogFragment() {
                 file.writeText(writeText)
 
                 Log.d("result", "OK! CSV was wrote! writeText is $writeText")
+
                 dismiss()
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Snackbar
+                .make(getActivity().findViewById(R.id.layout_participants_list) as LinearLayout, "Downloadsへの保存が完了しました", Snackbar.LENGTH_LONG)
+                .show()
     }
 
     companion object {

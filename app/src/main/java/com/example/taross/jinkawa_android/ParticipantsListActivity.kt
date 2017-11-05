@@ -1,13 +1,19 @@
 package com.example.taross.jinkawa_android
 
+import android.Manifest
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
+import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
 import android.support.v7.widget.Toolbar
+import android.view.View
+import android.widget.LinearLayout
 import com.example.taross.jinkawa_android.CsvHelper
 import com.example.taross.model.Event
 import com.example.taross.view.CustomBottomSheetDialog
