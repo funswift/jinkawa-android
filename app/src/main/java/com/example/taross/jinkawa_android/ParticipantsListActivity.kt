@@ -10,6 +10,9 @@ import android.widget.ListView
 import android.support.v7.widget.Toolbar
 import com.example.taross.jinkawa_android.CsvHelper
 import com.example.taross.model.Event
+import com.example.taross.view.CustomBottomSheetDialog
+
+
 
 class ParticipantsListActivity : AppCompatActivity() {
     var event:Event? = null
@@ -48,7 +51,11 @@ class ParticipantsListActivity : AppCompatActivity() {
 
         if (id == R.id.action_save_csv) {
             event?.let {
-                adapter.listExport(it)
+                adapter.listExport(it, {
+                    val bottomSheetDialog = CustomBottomSheetDialog.newInstance()
+                    bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
+                })
+
             }
             return true
         }
