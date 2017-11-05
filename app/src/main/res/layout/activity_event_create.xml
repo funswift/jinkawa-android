@@ -15,7 +15,7 @@
         android:minHeight="?attr/actionBarSize"
         android:titleTextColor="@color/white"
         android:title="イベント作成"
-        android:popupTheme="@style/PopupOverlay"/>
+        android:popupTheme="@android:style/Theme.Material"/>
 
     <ScrollView
         android:layout_width="match_parent"

@@ -35,7 +35,7 @@ class CsvHelper{
                 data += "\r\n"
             }
 
-            val file = NCMBFile("test.csv", data.toByteArray(Charsets.UTF_16), NCMBAcl())
+            val file = NCMBFile("${event.id}.csv", data.toByteArray(Charsets.UTF_16), NCMBAcl())
             file.saveInBackground {
                 print("upload")
             }
