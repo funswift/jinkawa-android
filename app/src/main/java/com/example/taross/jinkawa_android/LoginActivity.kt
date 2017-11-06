@@ -85,8 +85,6 @@ class LoginActivity : AppCompatActivity() {
         if (!mayRequestContacts()) {
             return
         }
-
-
     }
 
     private fun mayRequestContacts(): Boolean {

@@ -8,10 +8,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import com.example.taross.jinkawa_android.CsvHelper
@@ -28,6 +30,13 @@ class ParticipantsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_participants_list)
 
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    0)
+        }
+
         val toolBar = findViewById(R.id.toolbar3) as Toolbar
         toolBar.title = "参加者リスト"
 
@@ -41,6 +50,8 @@ class ParticipantsListActivity : AppCompatActivity() {
             listView.adapter = adapter
         }
     }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
