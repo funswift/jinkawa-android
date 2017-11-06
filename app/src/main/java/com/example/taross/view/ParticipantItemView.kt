@@ -20,14 +20,20 @@ class ParticipantItemView: FrameLayout {
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    var nameTextView: TextView? = null
+    var nameTextView: TextView
+    var genderTextView:TextView
+    var addressTextView:TextView
 
     init {
         LayoutInflater.from(context).inflate(R.layout.participantlist_item, this)
         nameTextView = findViewById(R.id.participant_name) as TextView
+        genderTextView = findViewById(R.id.participant_gender) as TextView
+        addressTextView = findViewById(R.id.participant_address) as TextView
     }
 
     fun setItem(item : Participant){
         nameTextView?.text = item.name
+        genderTextView?.text = item.gender
+        addressTextView?.text = item.address
     }
 }
