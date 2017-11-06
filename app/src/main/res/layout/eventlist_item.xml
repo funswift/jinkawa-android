@@ -38,9 +38,8 @@
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/department"
         android:maxLines="1"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="11sp"
-        android:text="最終更新日：" />
+        android:textSize="12sp"
+        android:text="@string/list_text_update" />
 
     <TextView
         android:id="@+id/ValueUpdateAt"
@@ -50,8 +49,8 @@
         android:layout_alignBottom="@+id/TextUpdateAt"
         android:layout_toEndOf="@+id/TextUpdateAt"
         android:maxLines="1"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="11sp"
+        android:maxLength="10"
+        android:textSize="12sp"
         tools:text="20XX/YY/ZZ" />
 
     <TextView
@@ -73,7 +72,6 @@
         android:layout_alignStart="@+id/title"
         android:layout_below="@+id/title"
         android:maxLines="1"
-        android:textColor="@android:color/darker_gray"
         android:textSize="14sp"
         tools:text="20XX/YY/ZZ" />
 
@@ -85,7 +83,6 @@
         android:layout_toRightOf="@+id/dateStart"
         android:paddingStart="8dp"
         android:maxLines="1"
-        android:textColor="@android:color/darker_gray"
         android:textSize="14sp"
         tools:text="AA:BB:CC" />
 
@@ -96,7 +93,6 @@
         android:layout_alignStart="@+id/dateStart"
         android:layout_below="@+id/dateStart"
         android:maxLines="1"
-        android:textColor="@android:color/darker_gray"
         android:textSize="14sp"
         tools:text="Test Location" />
 
