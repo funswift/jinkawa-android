@@ -39,7 +39,7 @@
         android:layout_toEndOf="@+id/department"
         android:maxLines="1"
         android:textColor="@android:color/darker_gray"
-        android:textSize="14sp"
+        android:textSize="11sp"
         android:text="最終更新日：" />
 
     <TextView
@@ -51,7 +51,7 @@
         android:layout_toEndOf="@+id/TextUpdateAt"
         android:maxLines="1"
         android:textColor="@android:color/darker_gray"
-        android:textSize="14sp"
+        android:textSize="11sp"
         tools:text="20XX/YY/ZZ" />
 
     <TextView
