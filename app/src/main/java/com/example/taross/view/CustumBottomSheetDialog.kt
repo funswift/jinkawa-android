@@ -35,6 +35,8 @@ class CustomBottomSheetDialog : BottomSheetDialogFragment() {
     lateinit var event:Event
     lateinit var activity:Activity
 
+    var state = 0 //csvの保存先を示す
+
     @SuppressLint("RestrictedApi")
     override fun setupDialog(dialog: Dialog, style: Int) {
         super.setupDialog(dialog, style)
@@ -60,9 +62,10 @@ class CustomBottomSheetDialog : BottomSheetDialogFragment() {
                 val writeText =  response.body()?.string().toString()
 
                 val file = File(fileName)
-                file.writeText(writeText)
+                file.writeText(writeText, Charsets.UTF_16)
 
                 Log.d("result", "OK! CSV was wrote! writeText is $writeText")
+                state = 1
 
                 dismiss()
             }
@@ -71,9 +74,13 @@ class CustomBottomSheetDialog : BottomSheetDialogFragment() {
 
     override fun onPause() {
         super.onPause()
-        Snackbar
-                .make(getActivity().findViewById(R.id.layout_participants_list) as LinearLayout, "Downloadsへの保存が完了しました", Snackbar.LENGTH_LONG)
-                .show()
+        when(state){
+            1 -> {
+                Snackbar
+                        .make(getActivity().findViewById(R.id.layout_participants_list) as LinearLayout, "Downloadsへの保存が完了しました", Snackbar.LENGTH_LONG)
+                        .show()
+            }
+        }
     }
 
     companion object {
