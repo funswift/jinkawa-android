@@ -15,12 +15,12 @@ import com.nifty.cloud.mb.core.NCMBObject
  * Created by taross on 2017/08/12.
  */
 
-data class Event(val title: String, val id:String, val department:String, val date_start:String, val time_start:String, val date_end:String, val time_end:String,  val description:String,val location:String, val capacity:String, val deadline:String, val officer_only:Boolean): Parcelable{
+data class Event(val title: String, val id:String, val department:String, val date_start:String, val time_start:String, val date_end:String, val time_end:String,  val description:String,val location:String, val capacity:String, val deadline:String, val update_date:String, val officer_only:Boolean): Parcelable{
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<Event> = object : Parcelable.Creator<Event>{
             override fun createFromParcel(source: Parcel): Event = source.run {
-                Event(readString(),readString(),readString(),readString(),readString(),readString(),readString(),readString(),readString(), readString(),readString() ,readInt() == 1)
+                Event(readString(),readString(),readString(),readString(),readString(),readString(),readString(),readString(),readString(), readString(),readString() ,readString(), readInt() == 1)
             }
 
             override fun newArray(size: Int): Array<Event?> = arrayOfNulls(size)
@@ -49,14 +49,15 @@ data class Event(val title: String, val id:String, val department:String, val da
             writeString(location)
             writeString(capacity)
             writeString(deadline)
+            writeString(update_date)
             writeInt(officer)
         }
     }
 
     fun save(activity :EventCreateActivity){
         val data = NCMBObject("Event")
-        data.put("event_name", this.title)
-        data.put("event_department_name",this.department)
+        data.put("name", this.title)
+        data.put("department",this.department)
         data.put("date_start", this.date_start)
         data.put("time_start", this.time_start)
         data.put("date_end", this.date_end)
