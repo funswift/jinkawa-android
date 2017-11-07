@@ -28,6 +28,7 @@
     <string name="option_setting_form_text">フォーム履歴の確認</string>
     <string name="option_setting_notification_text">プッシュ通知の受信</string>
     <string name="option_setting_contact">問い合わせ</string>
+    <string name="option_setting_contact_jinkawa">陣川あさひ町会</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

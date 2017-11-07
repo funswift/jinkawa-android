@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,33 +19,67 @@
 
     <LinearLayout
         android:id="@+id/option_setting_list"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/option_setting">
+        android:layout_below="@+id/option_setting"
+        android:orientation="vertical"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/option_setting">
 
-        <TextView
-            android:id="@+id/option_setting_form"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:textSize="22sp"
-            android:text="@string/option_setting_form_text"/>
+        <RelativeLayout
+            android:id="@+id/option_setting_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
+            <TextView
+                android:id="@+id/option_setting_form_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:paddingTop="12dp"
+                android:text="@string/option_setting_form_text"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_chevron_right_black_24dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/option_setting_notification"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:textSize="22sp"
-            android:text="@string/option_setting_notification_text"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/option_setting_notification_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:paddingTop="12dp"
+                android:text="@string/option_setting_notification_text"
+                android:textSize="22sp" />
+
+            <Switch
+                android:id="@+id/option_setting_notification_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:checked="true"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -51,14 +87,41 @@
         android:id="@+id/option_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
         android:layout_below="@+id/option_setting_list"
+        android:background="@android:color/darker_gray"
+        android:paddingBottom="8dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:textSize="18sp"
-        android:text="@string/option_setting_contact"/>
+        android:text="@string/option_setting_contact"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:id="@+id/option_contact_jinkawa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/option_contact">
+
+        <TextView
+            android:id="@+id/option_contact_jinkawa_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="12dp"
+            android:text="@string/option_setting_contact_jinkawa"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_chevron_right_black_24dp" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>
