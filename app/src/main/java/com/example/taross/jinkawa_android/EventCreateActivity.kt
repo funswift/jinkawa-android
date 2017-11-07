@@ -136,7 +136,7 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
             }
 
-            val event = Event(title, "" ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, officer_only)
+            val event = Event(title, "" ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
             event.save(this)
         }
 

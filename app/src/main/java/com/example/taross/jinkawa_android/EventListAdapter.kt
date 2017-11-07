@@ -1,6 +1,7 @@
 package com.example.taross.jinkawa_android
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -40,18 +41,22 @@ class EventListAdapter(private val context: Context): BaseAdapter(){
         } catch (e : Exception) { emptyList<NCMBObject>() }
         if (results.isNotEmpty()) {
             for(result in results){
+                val rs_updateDate = result.getString("updateDate")
+                val mrs_updateDate = rs_updateDate.substring(0, 19).replace("T", " ")
+                Log.d("updateDateValue", mrs_updateDate)
                 val event: Event = Event(
                         result.getString("name"),
                         result.getString("objectId"),
                         result.getString("department"),
                         result.getString("date_start"),
-                        "",
+                        result.getString("start_time"),
                         "",
                         "",
                         result.getString("description"),
                         result.getString("location"),
                         result.getString("capacity"),
                         result.getString("deadline_day"),
+                        mrs_updateDate,
                         result.getBoolean("officer_only")
                 )
                 eveltList.add(event)

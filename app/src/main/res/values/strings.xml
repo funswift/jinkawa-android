@@ -14,11 +14,14 @@
     <string name="action_list_participants">参加者リスト</string>
     <string name="action_save_csv">CSV保存</string>
 
-    <!-- タブアイコンのテキスト -->
+    <!-- Strings related to tab icon's text -->
     <string name="tab_icon_event">イベント</string>
     <string name="tab_icon_announcement">お知らせ</string>
     <string name="tab_icon_setting">オプション</string>
     <string name="title_activity_login">ログイン</string>
+
+    <!-- Strings related to list's text -->
+    <string name="list_text_update">最終更新日:</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

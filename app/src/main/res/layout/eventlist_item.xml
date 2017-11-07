@@ -11,17 +11,90 @@
         android:layout_width = "60dp"
         android:layout_height = "60dp"
         tools:background="#f00"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/department"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/thumbnail"
+        android:background="@color/jipriMainColor"
+        android:maxLines="1"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="Test Dep" />
+
+    <TextView
+        android:id="@+id/TextUpdateAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/department"
+        android:layout_alignBottom="@+id/department"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/department"
+        android:maxLines="1"
+        android:textSize="12sp"
+        android:text="@string/list_text_update" />
+
+    <TextView
+        android:id="@+id/ValueUpdateAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextUpdateAt"
+        android:layout_alignBottom="@+id/TextUpdateAt"
+        android:layout_toEndOf="@+id/TextUpdateAt"
+        android:maxLines="1"
+        android:maxLength="10"
+        android:textSize="12sp"
+        tools:text="20XX/YY/ZZ" />
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_alignStart="@+id/department"
+        android:layout_below="@+id/department"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@android:color/black"
-        tools:text="Test Event"
-        android:textSize="18sp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/thumbnail" />
+        android:textSize="22sp"
+        tools:text="Test Event" />
+
+    <TextView
+        android:id="@+id/dateStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/title"
+        android:layout_below="@+id/title"
+        android:maxLines="1"
+        android:textSize="14sp"
+        tools:text="20XX/YY/ZZ" />
+
+    <TextView
+        android:id="@+id/timeStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dateStart"
+        android:layout_toRightOf="@+id/dateStart"
+        android:paddingStart="8dp"
+        android:maxLines="1"
+        android:textSize="14sp"
+        tools:text="AA:BB:CC" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/dateStart"
+        android:layout_below="@+id/dateStart"
+        android:maxLines="1"
+        android:textSize="14sp"
+        tools:text="Test Location" />
+
+
 </RelativeLayout>
