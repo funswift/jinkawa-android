@@ -44,7 +44,12 @@ class NoticeListAdapter(private val context: Context): BaseAdapter(){
         } catch (e : Exception) { emptyList<NCMBObject>() }
         if (results.isNotEmpty()) {
             for(result in results){
-                val notice: Notice = Notice(result.getString("title"))
+                val notice: Notice = Notice(
+                        result.getString("title"),
+                        result.getString("department_name"),
+                        result.getString("date"),
+                        result.getString("info")
+                )
                 noticeList.add(notice)
             }
         }
