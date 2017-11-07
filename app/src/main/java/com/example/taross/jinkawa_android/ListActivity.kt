@@ -22,6 +22,8 @@ import android.support.design.widget.Snackbar
 import android.util.Log
 
 import com.example.taross.jinkawa_android.EventDetailActivity
+import android.support.v4.widget.SwipeRefreshLayout
+import android.widget.BaseAdapter
 
 
 class ListActivity : AppCompatActivity() {
@@ -71,7 +73,7 @@ class ListActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int){
                 toolbar.title = mViewPager.adapter.getPageTitle(position)
             }
-        });
+        })
 
         val tabLayout = findViewById(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(mViewPager)
@@ -147,10 +149,21 @@ class ListActivity : AppCompatActivity() {
             val page = arguments.getInt(ARG_SECTION_NUMBER)
             val listView = rootView.findViewById(R.id.listView) as ListView
 
-            val listAdapter = when (page){
+            var listAdapter:LoadableListAdapter = when (page){
                 1 -> EventListAdapter(context)
                 2 -> NoticeListAdapter(context)
                 else -> EventListAdapter(context)
+            }
+
+            val mSwipeRefresh = rootView.findViewById(R.id.swipe_refresh) as SwipeRefreshLayout
+            mSwipeRefresh.setOnRefreshListener{
+                // 引っ張って離した時に呼ばれます。
+
+                listView.invalidateViews()
+
+                if (mSwipeRefresh.isRefreshing()) {
+                    mSwipeRefresh.setRefreshing(false)
+                }
             }
 
             listView.adapter = listAdapter
@@ -161,6 +174,7 @@ class ListActivity : AppCompatActivity() {
                     }
                 }
             }
+
 
             return rootView
         }
