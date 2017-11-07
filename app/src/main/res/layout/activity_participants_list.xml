@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_participants_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.taross.jinkawa_android.ParticipantsListActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/BaseToolbar"
+        android:background="@color/jipriMainColor"
+        android:minHeight="?attr/actionBarSize"
+        android:title="イベント詳細"
+        android:popupTheme="@style/PopupOverlay"/>
 
     <ListView
         android:id="@+id/participant_list"
-        android:layout_width="368dp"
-        android:layout_height="551dp"
+        android:layout_width="wrap_content"
+        android:layout_height="495dp"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp" />
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

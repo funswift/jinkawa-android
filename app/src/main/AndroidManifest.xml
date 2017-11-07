@@ -9,8 +9,9 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-    <application
+<application
         android:name="com.nifty.cloud.mb.core.NCMBApplicationController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

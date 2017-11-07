@@ -58,7 +58,7 @@ class ParticipantsListAdapter(private val context: Context):BaseAdapter(){
         this.items = items.filter { it.eventId == eventId }.toMutableList()
     }
 
-    fun listExport(event: Event){
-        CsvHelper.csvListOutput(event, items);
+    fun listExport(event: Event, callback: (()->Unit)){
+        CsvHelper.csvListOutput(event, items, callback);
     }
 }

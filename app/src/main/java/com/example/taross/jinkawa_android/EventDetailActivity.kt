@@ -70,7 +70,7 @@ class EventDetailActivity : AppCompatActivity() {
         val id = item.itemId
 
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_list) {
             startActivity(Intent(applicationContext,ParticipantsListActivity::class.java).putExtra("EVENT_EXTRA", event))
             return true
         }

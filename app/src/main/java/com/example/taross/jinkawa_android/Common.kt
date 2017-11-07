@@ -7,7 +7,12 @@ import java.io.File
 import com.nifty.cloud.mb.core.NCMBFile
 import java.io.Console
 import android.R.attr.data
+import android.content.Context
 import java.nio.charset.Charset
+import com.nifty.cloud.mb.core.NCMBException
+import com.nifty.cloud.mb.core.FetchFileCallback
+
+
 
 
 /**
@@ -15,7 +20,7 @@ import java.nio.charset.Charset
  */
 class CsvHelper{
     companion object {
-        public fun csvListOutput(event:Event, participants:MutableList<Participant>){
+        fun csvListOutput(event:Event, participants:MutableList<Participant>, callback:(()->Unit)){
             
             var data = event.title + "," + event.date_start + "," + event.location + "," + event.department
             data += "\r\n"
@@ -25,7 +30,7 @@ class CsvHelper{
             data += "\r\n"
 
             participants.forEach {
-                var sep:String  = ""
+                var sep = ""
                 data += sep + it.name
                 sep = ","
                 data += sep + it.age
@@ -35,9 +40,9 @@ class CsvHelper{
                 data += "\r\n"
             }
 
-            val file = NCMBFile("test.csv", data.toByteArray(Charsets.UTF_16), NCMBAcl())
+            val file = NCMBFile("${event.id}.csv", data.toByteArray(Charsets.UTF_16), NCMBAcl())
             file.saveInBackground {
-                print("upload")
+                callback()
             }
         }
     }

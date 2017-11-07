@@ -10,6 +10,9 @@
     <string name="title_activity_e">eActivity</string>
     <string name="title_activity_event_detail">EventDetailActivity</string>
     <string name="hint_event_name">10文字以内で入力してください。</string>
+    <string name="action_event_edit">編集</string>
+    <string name="action_list_participants">参加者リスト</string>
+    <string name="action_save_csv">CSV保存</string>
 
     <!-- タブアイコンのテキスト -->
     <string name="tab_icon_event">イベント</string>
