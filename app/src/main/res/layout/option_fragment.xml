@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/option_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textSize="18sp"
+        android:text="@string/option_setting_title"/>
+
+    <LinearLayout
+        android:id="@+id/option_setting_list"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/option_setting">
+
+        <TextView
+            android:id="@+id/option_setting_form"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:textSize="22sp"
+            android:text="@string/option_setting_form_text"/>
+
+        <TextView
+            android:id="@+id/option_setting_notification"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:textSize="22sp"
+            android:text="@string/option_setting_notification_text"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/option_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@+id/option_setting_list"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textSize="18sp"
+        android:text="@string/option_setting_contact"/>
+
+
+</RelativeLayout>
