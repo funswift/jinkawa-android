@@ -116,7 +116,7 @@ class ListActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            val fragment = ListFragment.newInstance(position + 1)
+            val fragment = if(position < 2) ListFragment.newInstance(position + 1) else OptionFragment.newInstance(position + 1)
 
             return fragment
         }
@@ -150,7 +150,7 @@ class ListActivity : AppCompatActivity() {
             val listAdapter = when (page){
                 1 -> EventListAdapter(context)
                 2 -> NoticeListAdapter(context)
-                else -> EventListAdapter(context)
+                else -> null
             }
 
             listView.adapter = listAdapter
