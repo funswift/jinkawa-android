@@ -11,8 +11,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.taross.model.Event
+import com.squareup.picasso.Picasso
 
 class EventDetailActivity : AppCompatActivity() {
 
@@ -34,6 +36,8 @@ class EventDetailActivity : AppCompatActivity() {
         if(LoginManager.isLogin){
             setSupportActionBar(toolBar)
         }
+        val imageView = findViewById(R.id.imageView) as ImageView
+        Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").into(imageView)
 
         val departmentTextView = findViewById(R.id.detail_department_name) as TextView
         departmentTextView.text = event.department
