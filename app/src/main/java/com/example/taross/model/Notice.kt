@@ -10,14 +10,14 @@ import com.nifty.cloud.mb.core.NCMBObject
  * Created by taross on 2017/08/14.
  */
 
-data class Notice(val title:String, val department:String, val date:String, val description:String):Parcelable{
+data class Notice(val title:String, val department:String, val date:String, val description:String, val update_date:String):Parcelable{
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<Notice> = object : Parcelable.Creator<Notice>{
             override fun newArray(size: Int): Array<Notice?> = arrayOfNulls(size)
 
             override fun createFromParcel(source: Parcel): Notice = source.run {
-                Notice(readString(),readString(),readString(),readString())
+                Notice(readString(),readString(),readString(),readString(),readString())
             }
         }
     }
@@ -32,6 +32,7 @@ data class Notice(val title:String, val department:String, val date:String, val 
             writeString(department)
             writeString(date)
             writeString(description)
+            writeString(update_date)
         }
     }
 
