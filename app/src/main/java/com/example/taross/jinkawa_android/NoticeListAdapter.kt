@@ -44,11 +44,14 @@ class NoticeListAdapter(private val context: Context): BaseAdapter(){
         } catch (e : Exception) { emptyList<NCMBObject>() }
         if (results.isNotEmpty()) {
             for(result in results){
+                val rs_updateDate = result.getString("updateDate")
+                val mrs_updateDate = rs_updateDate.substring(0, 19).replace("T", " ")
                 val notice: Notice = Notice(
                         result.getString("title"),
                         result.getString("department_name"),
                         result.getString("date"),
-                        result.getString("info")
+                        result.getString("info"),
+                        mrs_updateDate
                 )
                 noticeList.add(notice)
             }

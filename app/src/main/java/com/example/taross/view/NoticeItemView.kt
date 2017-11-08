@@ -23,16 +23,21 @@ class NoticeItemView: FrameLayout{
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
     var thumbnailImageView: ImageView? = null
-
+    var departmentTextView: TextView? = null
+    var valueUpdateTextView: TextView? = null
     var titleTextView: TextView? = null
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.eventlist_item, this)
+        LayoutInflater.from(context).inflate(R.layout.noticelist_item, this)
         thumbnailImageView = findViewById(R.id.thumbnail) as ImageView
+        departmentTextView = findViewById(R.id.department) as TextView
+        valueUpdateTextView = findViewById(R.id.ValueUpdateAt) as TextView
         titleTextView = findViewById(R.id.title) as TextView
     }
 
     fun setItem(item : Notice){
+        departmentTextView?.text = item.department
+        valueUpdateTextView?.text = item.update_date
         titleTextView?.text = item.title
 
         // 画像用処理
