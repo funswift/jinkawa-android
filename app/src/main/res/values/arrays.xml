@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_departments">
+        <item>@string/yakuin</item>
+        <item>@string/soumu</item>
+        <item>@string/seishounen</item>
+        <item>@string/josei</item>
+        <item>@string/hukushi</item>
+        <item>@string/kankyou</item>
+        <item>@string/boukabouhan</item>
+        <item>@string/koutsu</item>
+        <item>@string/jbus</item>
+    </string-array>
+</resources>

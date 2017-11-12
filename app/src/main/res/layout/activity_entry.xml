@@ -34,23 +34,20 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_event_entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/BaseToolbar"
         android:background="@color/jipriMainColor"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/PopupOverlay"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/appbar"
-        android:layout_alignParentStart="true">
-
-    </android.support.v7.widget.Toolbar>
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="@color/white"
+        android:popupTheme="@android:style/Theme.Material"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/toolbar_event_entry">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInput_name"
@@ -65,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/toolbar"
+                android:layout_below="@+id/toolbar_event_entry"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="氏名" />
