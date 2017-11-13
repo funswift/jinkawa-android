@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.v4.content.ContextCompat.startActivity
+import android.util.Log
 import com.example.taross.jinkawa_android.EventCreateActivity
 import com.example.taross.jinkawa_android.EventEditActivity
 import com.example.taross.jinkawa_android.ListActivity
@@ -71,18 +72,4 @@ data class Event(val title: String, val id:String, val department:String, val da
         data.saveInBackground(activity as DoneCallback)
     }
 
-    fun update(activity :EventEditActivity){
-        val data = NCMBObject("Event")
-        data.put("name", this.title)
-        data.put("department",this.department)
-        data.put("date_start", this.date_start)
-        data.put("start_time", this.time_start)
-        data.put("date_end", this.date_end)
-        data.put("end_time", this.time_end)
-        data.put("description", this.description)
-        data.put("location", this.location)
-        data.put("capacity", this.capacity)
-        data.put("deadline_day", this.deadline)
-        data.put("officer_only", this.officer_only)
-    }
 }

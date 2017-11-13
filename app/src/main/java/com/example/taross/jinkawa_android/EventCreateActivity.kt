@@ -19,7 +19,7 @@ import com.nifty.cloud.mb.core.NCMBException
 import org.w3c.dom.Text
 
 
-class EventCreateActivity : AppCompatActivity(), DoneCallback {
+open class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
     //DoneCallBack インターフェースの実装
     override fun done(arg1: NCMBException?){
@@ -35,13 +35,13 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
         val toolbar = findViewById(R.id.toolbar_event_create) as Toolbar
         toolbar.title = getString(R.string.title_event_create)
 
-        val department : Spinner = findViewById(R.id.spinner_department) as Spinner
+        val departmentSpinner : Spinner = findViewById(R.id.spinner_department) as Spinner
         val personalAdapter : ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
 
-        department.adapter = personalAdapter
+        departmentSpinner.adapter = personalAdapter
 
         val titleEditText = findViewById(R.id.edit_eventtitle) as EditText
-        val departmentSpinner = findViewById(R.id.spinner_department) as Spinner
+        //val departmentSpinner = findViewById(R.id.spinner_department) as Spinner
         val locationEditText = findViewById(R.id.edit_eventlocate) as EditText
         val capacityEditText = findViewById(R.id.edit_capacity) as EditText
         val officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch

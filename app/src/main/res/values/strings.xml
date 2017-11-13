@@ -22,6 +22,7 @@
 
     <!-- Strings related to page title's text -->
     <string name="title_event_create">イベント作成</string>
+    <string name="title_event_edit">イベント編集</string>
     <string name="title_notice_create">お知らせ作成</string>
     <string name="title_event_entry">参加申し込み</string>
 

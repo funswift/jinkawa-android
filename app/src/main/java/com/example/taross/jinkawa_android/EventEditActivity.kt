@@ -4,124 +4,65 @@ package com.example.taross.jinkawa_android
  * Created by y_snkw on 2017/11/13.
  */
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.app.DatePickerDialog.OnDateSetListener
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Intent
-import android.text.Editable
+import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.WindowManager
 import android.widget.*
-import java.util.Calendar
 import android.widget.ArrayAdapter
 import com.example.taross.model.Event
-import com.nifty.cloud.mb.core.DoneCallback
 import com.nifty.cloud.mb.core.NCMBException
-import org.w3c.dom.Text
 
-class EventEditActivity: AppCompatActivity(), DoneCallback {
+class EventEditActivity: EventCreateActivity() {
 
     //DoneCallBack インターフェースの実装
     override fun done(arg1: NCMBException?) {
-        val intent = Intent(applicationContext, ListActivity::class.java)
+        val intent = Intent(applicationContext, EventDetailActivity::class.java)
         startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
-        setContentView(R.layout.activity_event_create)
+        val event :Event by lazy{intent.getParcelableExtra<Event>("EVENT_EXTRA")}
 
-        val department: Spinner = findViewById(R.id.spinner_department) as Spinner
-        val personalAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item)
-        personalAdapter.add("青年部")
-        personalAdapter.add("総務部")
+        val toolbar = findViewById(R.id.toolbar_event_create) as Toolbar
+        toolbar.title = getString(R.string.title_event_edit)
 
-
-        department.adapter = personalAdapter
+        val departmentSpinner : Spinner = findViewById(R.id.spinner_department) as Spinner
+        val personalAdapter : ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
+        departmentSpinner.adapter = personalAdapter
+        val spinnerIndex = setSpinnerSelection(personalAdapter, event.department)
 
         val titleEditText = findViewById(R.id.edit_eventtitle) as EditText
-        val departmentSpinner = findViewById(R.id.spinner_department) as Spinner
         val locationEditText = findViewById(R.id.edit_eventlocate) as EditText
         val capacityEditText = findViewById(R.id.edit_capacity) as EditText
         val officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch
         val descriptionEditText = findViewById(R.id.edit_description) as EditText
 
         val startDateTextView = findViewById(R.id.edit_eventdate_start) as TextView
-        val startDateButton = findViewById(R.id.button_eventdate_start_picker) as Button
-        val startTimeTextView = findViewById(R.id.edit_eventtime_start) as TextView
-        val startTimeButton = findViewById(R.id.button_eventtime_start_picker) as Button
-
+        val startTimeTextView =findViewById(R.id.edit_eventtime_start) as TextView
         val endDateTextView = findViewById(R.id.edit_eventdate_end) as TextView
-        val endDateButton = findViewById(R.id.button_eventdate_end_picker) as Button
         val endTimeTextView = findViewById(R.id.edit_eventtime_end) as TextView
-        val endTimeButton = findViewById(R.id.button_eventtime_end_picker) as Button
 
         val deadlineTextView = findViewById(R.id.edit_deadline) as TextView
-        val deadlineButton = findViewById(R.id.button_deadline_picker) as Button
-        val createButton = findViewById(R.id.button_eventcreate) as Button
+        val editButton = findViewById(R.id.button_eventcreate) as Button
 
-        startDateButton.setOnClickListener {
-            val date = Calendar.getInstance()
-            var dialog = DatePickerDialog(this, OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                if (!view.isShown) {
-                    return@OnDateSetListener
-                }
-                Log.d("hoge", "onDateSet")
-                val fixed_month = monthOfYear + 1
-                startDateTextView.text = "$year/$fixed_month/$dayOfMonth"
-            }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
-            dialog.show()
-        }
+        departmentSpinner.setSelection(spinnerIndex)
+        titleEditText.setText(event.title)
+        locationEditText.setText(event.location)
+        capacityEditText.setText(event.capacity)
+        descriptionEditText.setText(event.description)
+        startDateTextView.text = event.date_start
+        startTimeTextView.text = event.time_start
+        endDateTextView.text = event.date_end
+        endTimeTextView.text = event.time_end
+        deadlineTextView.text = event.deadline
+        if(event.officer_only) officerOnlySwitch.toggle()
 
-        startTimeButton.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+        Log.d("officer_only", officerOnlySwitch.showText.toString())
 
-                startTimeTextView.text = "$hourOfDay:$minute"
-            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true)
-            dialog.show()
-        }
-
-        endDateButton.setOnClickListener {
-            val date = Calendar.getInstance()
-            val dialog = DatePickerDialog(this, OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                if (!view.isShown) {
-                    return@OnDateSetListener
-                }
-                Log.d("hoge", "onDateSet")
-                val fixed_month = monthOfYear + 1
-                endDateTextView.text = "$year/$fixed_month/$dayOfMonth"
-            }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
-            dialog.show()
-        }
-
-        endTimeButton.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-
-                endTimeTextView.text = "$hourOfDay:$minute"
-            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true)
-            dialog.show()
-        }
-
-        deadlineButton.setOnClickListener {
-            val date = Calendar.getInstance()
-            val dialog = DatePickerDialog(this, OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                if (!view.isShown) {
-                    return@OnDateSetListener
-                }
-                Log.d("hoge", "onDateSet")
-                val fixed_month = monthOfYear + 1
-                deadlineTextView.text = "$year/$fixed_month/$dayOfMonth"
-            }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
-            dialog.show()
-        }
-
-        createButton.setOnClickListener {
+        editButton.setOnClickListener{
             val title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
             val description = descriptionEditText.text.toString()
@@ -135,13 +76,21 @@ class EventEditActivity: AppCompatActivity(), DoneCallback {
             val officer_only = officerOnlySwitch.showText
 
 
-            if (true) {
+            if(true){
 
             }
 
-            val event = Event(title, "", department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
-            event.update(this)
+            val event = Event(title, "" ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
+            event.save(this)
         }
+    }
 
+    fun setSpinnerSelection(spinnerAdapter: ArrayAdapter<String>, department: String): Int{
+        var position = 0
+        for(i in 0..spinnerAdapter.count){
+            position = if(spinnerAdapter.getItem(i) == department) i else -1
+            if(position >= 0) break
+        }
+        return position
     }
 }
