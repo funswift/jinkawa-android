@@ -49,7 +49,6 @@
     </string>
 
     <!-- Departments' name -->
-    <string name="yakuin">役員</string>
     <string name="soumu">総務部</string>
     <string name="seishounen">青少年育成部</string>
     <string name="josei">女性部</string>
