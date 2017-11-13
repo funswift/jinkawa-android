@@ -15,7 +15,7 @@ import android.widget.ArrayAdapter
 import com.example.taross.model.Event
 import com.nifty.cloud.mb.core.DoneCallback
 import com.nifty.cloud.mb.core.NCMBException
-import org.w3c.dom.Text
+
 
 
 class EventCreateActivity : AppCompatActivity(), DoneCallback {
@@ -118,7 +118,7 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
             dialog.show()
         }
 
-        createButton.setOnClickListener{
+        createButton.setOnClickListener {
             val title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
             val description = descriptionEditText.text.toString()
@@ -132,15 +132,13 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
             val officer_only = officerOnlySwitch.showText
 
 
-            if(true){
+            if (true) {
 
             }
 
-            val event = Event(title, "" ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
+            val event = Event(title, "", department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
             event.save(this)
+            NotificationHelper.sendPush("お知らせ", "イベントが追加されました！")
         }
-
     }
-
-
 }

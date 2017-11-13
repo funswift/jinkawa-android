@@ -22,6 +22,9 @@ import android.support.design.widget.Snackbar
 import android.util.Log
 
 import com.example.taross.jinkawa_android.EventDetailActivity
+import com.nifty.cloud.mb.core.NCMBPush
+import org.json.JSONArray
+import org.json.JSONException
 
 
 class ListActivity : AppCompatActivity() {
@@ -71,7 +74,8 @@ class ListActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int){
                 toolbar.title = mViewPager.adapter.getPageTitle(position)
             }
-        });
+        })
+
 
         val tabLayout = findViewById(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(mViewPager)
@@ -105,6 +109,7 @@ class ListActivity : AppCompatActivity() {
         }
 
     }
+
 
 
     /**
