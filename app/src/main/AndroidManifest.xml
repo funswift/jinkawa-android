@@ -48,6 +48,7 @@
         <activity android:name=".ParticipantsListActivity" />
         <activity android:name=".EntryActivity" />
         <activity android:name=".EventCreateActivity" />
+        <activity android:name=".EventEditActivity" />
         <activity android:name=".NoticeCreateActivity" />
         <activity
             android:name=".LoginActivity"
