@@ -20,6 +20,11 @@
     <string name="tab_icon_setting">オプション</string>
     <string name="title_activity_login">ログイン</string>
 
+    <!-- Strings related to page title's text -->
+    <string name="title_event_create">イベント作成</string>
+    <string name="title_notice_create">お知らせ作成</string>
+    <string name="title_event_entry">参加申し込み</string>
+
     <!-- Strings related to list's text -->
     <string name="list_text_update">最終更新日:</string>
 
@@ -42,4 +47,15 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- Departments' name -->
+    <string name="soumu">総務部</string>
+    <string name="seishounen">青少年育成部</string>
+    <string name="josei">女性部</string>
+    <string name="hukushi">福祉部</string>
+    <string name="kankyou">環境部</string>
+    <string name="boukabouhan">防火防犯部</string>
+    <string name="koutsu">交通部</string>
+    <string name="jbus">Jバス部</string>
+
 </resources>
