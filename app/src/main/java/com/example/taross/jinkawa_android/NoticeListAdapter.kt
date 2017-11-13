@@ -39,6 +39,7 @@ class NoticeListAdapter(private val context: Context): BaseAdapter(){
         val noticeList:MutableList<Notice> = mutableListOf<Notice>()
 
         val query: NCMBQuery<NCMBObject> = NCMBQuery("Information")
+        query.addOrderByDescending("updateDate")
         val results: List<NCMBObject> = try {
             query.find()
         } catch (e : Exception) { emptyList<NCMBObject>() }

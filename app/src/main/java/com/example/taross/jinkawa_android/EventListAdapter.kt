@@ -36,6 +36,12 @@ class EventListAdapter(private val context: Context): BaseAdapter(){
         val eveltList:MutableList<Event> = mutableListOf<Event>()
 
         val query:NCMBQuery<NCMBObject> = NCMBQuery("Event")
+        /*
+            イベントを開催日順に並べる場合
+            query.addOrderByDescending("date_start")
+            query.addOrderByDescending("start_time")
+        */
+        query.addOrderByDescending("updateDate")
         val results: List<NCMBObject> = try {
             query.find()
         } catch (e : Exception) { emptyList<NCMBObject>() }

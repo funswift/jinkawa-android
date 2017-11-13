@@ -1,6 +1,7 @@
 package com.example.taross.jinkawa_android
 
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.os.Bundle
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.DatePickerDialog
@@ -31,12 +32,11 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
         setContentView(R.layout.activity_event_create)
 
+        val toolbar = findViewById(R.id.toolbar_event_create) as Toolbar
+        toolbar.title = getString(R.string.title_event_create)
 
         val department : Spinner = findViewById(R.id.spinner_department) as Spinner
-        val personalAdapter : ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item)
-        personalAdapter.add("青年部")
-        personalAdapter.add("総務部")
-
+        val personalAdapter : ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
 
         department.adapter = personalAdapter
 

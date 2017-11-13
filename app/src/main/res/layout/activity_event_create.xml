@@ -7,21 +7,20 @@
     tools:context="com.example.taross.jinkawa_android.EventCreateActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/toolbar_event_create"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/BaseToolbar"
         android:background="@color/jipriMainColor"
         android:minHeight="?attr/actionBarSize"
         android:titleTextColor="@color/white"
-        android:title="イベント作成"
         android:popupTheme="@android:style/Theme.Material"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/toolbar2">
+        android:layout_below="@+id/toolbar_event_create">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -62,6 +61,7 @@
                 android:id="@+id/spinner_department"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:dropDownWidth="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/title_department" />
 
