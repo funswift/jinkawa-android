@@ -88,8 +88,6 @@ class EventEditActivity: EventCreateActivity() {
 
 
             finish()
-//            val intent = Intent(applicationContext, EventDetailActivity::class.java).putExtra("EVENT_ITEM", event)
-//            startActivity(intent)
         }
     }
 

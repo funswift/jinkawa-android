@@ -98,7 +98,7 @@ data class Event(val title: String, val id:String, val department:String, val da
             try {
                 data.save()
             } catch (e: Exception) {
-                println("company data save error : " + e.cause.toString())
+                println("Event data save error : " + e.cause.toString())
             }
         }
     }
