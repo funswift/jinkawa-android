@@ -52,7 +52,8 @@ class NoticeListAdapter(private val context: Context): BaseAdapter(){
                         result.getString("department_name"),
                         result.getString("date"),
                         result.getString("info"),
-                        mrs_updateDate
+                        mrs_updateDate,
+                        result.getBoolean("officer_only")
                 )
                 noticeList.add(notice)
             }
