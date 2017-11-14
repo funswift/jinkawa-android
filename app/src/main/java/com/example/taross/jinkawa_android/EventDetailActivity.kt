@@ -77,6 +77,9 @@ class EventDetailActivity : AppCompatActivity() {
         if (id == R.id.action_list) {
             startActivity(Intent(applicationContext,ParticipantsListActivity::class.java).putExtra("EVENT_EXTRA", event))
             return true
+        }else if(id == R.id.action_event_edit){
+            startActivity(Intent(applicationContext,EventEditActivity::class.java).putExtra("EVENT_EXTRA", event))
+            return true
         }
 
         return super.onOptionsItemSelected(item)

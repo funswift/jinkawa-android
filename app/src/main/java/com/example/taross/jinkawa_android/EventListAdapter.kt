@@ -49,15 +49,14 @@ class EventListAdapter(private val context: Context): BaseAdapter(){
             for(result in results){
                 val rs_updateDate = result.getString("updateDate")
                 val mrs_updateDate = rs_updateDate.substring(0, 19).replace("T", " ")
-                Log.d("updateDateValue", mrs_updateDate)
                 val event: Event = Event(
                         result.getString("name"),
                         result.getString("objectId"),
                         result.getString("department"),
                         result.getString("date_start"),
                         result.getString("start_time"),
-                        "",
-                        "",
+                        result.getString("date_end"),
+                        result.getString("end_time"),
                         result.getString("description"),
                         result.getString("location"),
                         result.getString("capacity"),
