@@ -9,7 +9,6 @@
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_e">eActivity</string>
     <string name="title_activity_event_detail">EventDetailActivity</string>
-    <string name="hint_event_name">10文字以内で入力してください。</string>
     <string name="action_event_edit">編集</string>
     <string name="action_list_participants">参加者リスト</string>
     <string name="action_save_csv">CSV保存</string>
@@ -27,6 +26,26 @@
 
     <!-- Strings related to list's text -->
     <string name="list_text_update">最終更新日:</string>
+
+    <!-- Strings related to form's text -->
+    <string name="form_department_text">担当部名</string>
+    <string name="form_event_title_text">イベント名</string>
+    <string name="form_notice_title_text">タイトル名</string>
+    <string name="form_location_text">開催地</string>
+    <string name="form_capacity_text">定員</string>
+    <string name="form_date_start_text">開始日</string>
+    <string name="form_date_end_text">終了日</string>
+    <string name="form_deadline_text">申込締切日</string>
+    <string name="form_description_text">説明文</string>
+    <string name="form_officer_text">役員にのみ公開する</string>
+    <string name="form_event_create_text">イベントを作成する</string>
+
+    <!-- Strings related to hint's text -->
+    <string name="hint_event_name">10文字以内で入力してください。</string>
+    <string name="hint_location">30文字以内で入力してください。</string>
+    <string name="hint_capacity">5桁以内で入力してください。</string>
+    <string name="hint_description">250文字以内で入力してください。</string>
+
 
     <!-- Strings related to option -->
     <string name="option_setting_title">設定</string>
