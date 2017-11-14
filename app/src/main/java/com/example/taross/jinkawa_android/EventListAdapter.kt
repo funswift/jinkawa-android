@@ -65,7 +65,6 @@ class EventListAdapter(private val context: Context): BaseAdapter(){
                         result.getBoolean("officer_only")
                 )
                 eveltList.add(event)
-                Log.d("officer", result.getBoolean("officer_only").toString())
             }
         }
         return eveltList

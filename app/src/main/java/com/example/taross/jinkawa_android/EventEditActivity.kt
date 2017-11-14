@@ -15,6 +15,8 @@ import com.nifty.cloud.mb.core.NCMBException
 
 class EventEditActivity: EventCreateActivity() {
 
+    val event :Event by lazy{intent.getParcelableExtra<Event>("EVENT_EXTRA")}
+
     //DoneCallBack インターフェースの実装
     override fun done(arg1: NCMBException?) {
         val intent = Intent(applicationContext, EventDetailActivity::class.java)
@@ -24,15 +26,14 @@ class EventEditActivity: EventCreateActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val event :Event by lazy{intent.getParcelableExtra<Event>("EVENT_EXTRA")}
-
         val toolbar = findViewById(R.id.toolbar_event_create) as Toolbar
         toolbar.title = getString(R.string.title_event_edit)
 
         val departmentSpinner : Spinner = findViewById(R.id.spinner_department) as Spinner
         val personalAdapter : ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
         departmentSpinner.adapter = personalAdapter
-        val spinnerIndex = setSpinnerSelection(personalAdapter, event.department)
+        val spinnerIndex = setSpinnerSelection(personalAdapter)
+        var officer = false
 
         val titleEditText = findViewById(R.id.edit_eventtitle) as EditText
         val locationEditText = findViewById(R.id.edit_eventlocate) as EditText
@@ -47,6 +48,7 @@ class EventEditActivity: EventCreateActivity() {
 
         val deadlineTextView = findViewById(R.id.edit_deadline) as TextView
         val editButton = findViewById(R.id.button_eventcreate) as Button
+        editButton.setText(R.string.event_edit_button_text)
 
         departmentSpinner.setSelection(spinnerIndex)
         titleEditText.setText(event.title)
@@ -60,7 +62,9 @@ class EventEditActivity: EventCreateActivity() {
         deadlineTextView.text = event.deadline
         if(event.officer_only) officerOnlySwitch.toggle()
 
-        Log.d("officer_only", officerOnlySwitch.showText.toString())
+        officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
+            officer = isChecked
+        })
 
         editButton.setOnClickListener{
             val title = titleEditText.text.toString()
@@ -73,22 +77,26 @@ class EventEditActivity: EventCreateActivity() {
             val end_time = endTimeTextView.text.toString()
             val capacity = capacityEditText.text.toString()
             val deadline = deadlineTextView.text.toString()
-            val officer_only = officerOnlySwitch.showText
-
+            val officer_only = officer
 
             if(true){
 
             }
 
-            val event = Event(title, "" ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
-            event.save(this)
+            val event = Event(title, event.id ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
+            event.update(this)
+
+
+            finish()
+//            val intent = Intent(applicationContext, EventDetailActivity::class.java).putExtra("EVENT_ITEM", event)
+//            startActivity(intent)
         }
     }
 
-    fun setSpinnerSelection(spinnerAdapter: ArrayAdapter<String>, department: String): Int{
+    fun setSpinnerSelection(spinnerAdapter: ArrayAdapter<String>): Int{
         var position = 0
         for(i in 0..spinnerAdapter.count){
-            position = if(spinnerAdapter.getItem(i) == department) i else -1
+            position = if(spinnerAdapter.getItem(i) == event.department) i else -1
             if(position >= 0) break
         }
         return position

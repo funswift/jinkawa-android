@@ -26,6 +26,9 @@
     <string name="title_notice_create">お知らせ作成</string>
     <string name="title_event_entry">参加申し込み</string>
 
+    <!-- Strings related to event edit's text -->
+    <string name="event_edit_button_text">イベントの編集を完了する</string>
+
     <!-- Strings related to list's text -->
     <string name="list_text_update">最終更新日:</string>
 

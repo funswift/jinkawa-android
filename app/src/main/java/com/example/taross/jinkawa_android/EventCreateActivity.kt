@@ -35,13 +35,13 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
         val toolbar = findViewById(R.id.toolbar_event_create) as Toolbar
         toolbar.title = getString(R.string.title_event_create)
 
-        val departmentSpinner : Spinner = findViewById(R.id.spinner_department) as Spinner
-        val personalAdapter : ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
-
+        val departmentSpinner: Spinner = findViewById(R.id.spinner_department) as Spinner
+        val personalAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
         departmentSpinner.adapter = personalAdapter
 
+        var officer = false
+
         val titleEditText = findViewById(R.id.edit_eventtitle) as EditText
-        //val departmentSpinner = findViewById(R.id.spinner_department) as Spinner
         val locationEditText = findViewById(R.id.edit_eventlocate) as EditText
         val capacityEditText = findViewById(R.id.edit_capacity) as EditText
         val officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch
@@ -49,7 +49,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
         val startDateTextView = findViewById(R.id.edit_eventdate_start) as TextView
         val startDateButton = findViewById(R.id.button_eventdate_start_picker) as Button
-        val startTimeTextView =findViewById(R.id.edit_eventtime_start) as TextView
+        val startTimeTextView = findViewById(R.id.edit_eventtime_start) as TextView
         val startTimeButton = findViewById(R.id.button_eventtime_start_picker) as Button
 
         val endDateTextView = findViewById(R.id.edit_eventdate_end) as TextView
@@ -74,12 +74,12 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             dialog.show()
         }
 
-        startTimeButton.setOnClickListener{
+        startTimeButton.setOnClickListener {
             val calendar = Calendar.getInstance()
-            val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{view, hourOfDay, minute->
+            val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
 
                 startTimeTextView.text = "$hourOfDay:$minute"
-            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),true)
+            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true)
             dialog.show()
         }
 
@@ -96,12 +96,12 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             dialog.show()
         }
 
-        endTimeButton.setOnClickListener{
+        endTimeButton.setOnClickListener {
             val calendar = Calendar.getInstance()
-            val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{view, hourOfDay, minute->
+            val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
 
                 endTimeTextView.text = "$hourOfDay:$minute"
-            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),true)
+            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true)
             dialog.show()
         }
 
@@ -118,6 +118,10 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             dialog.show()
         }
 
+        officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
+            officer = isChecked
+        })
+
         createButton.setOnClickListener{
             val title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
@@ -129,7 +133,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             val end_time = endTimeTextView.text.toString()
             val capacity = capacityEditText.text.toString()
             val deadline = deadlineTextView.text.toString()
-            val officer_only = officerOnlySwitch.showText
+            val officer_only = officer
 
 
             if(true){
