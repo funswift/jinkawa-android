@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context=".MainActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/detail_toolbar"
+        style="@style/BaseToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/jipriMainColor"
+        android:minHeight="?attr/actionBarSize"
+        android:popupTheme="@style/PopupOverlay" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/detail_toolbar"
+        android:layout_weight="0.26"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button_entry"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/detail_department_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="35dp"
+                android:layout_toEndOf="@+id/detail_title_department"
+                android:ems="10"
+                android:text=""
+                android:textColor="#000000"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/detail_title_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/form_department_text"
+                android:textColor="#000000"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/detail_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@id/detail_department_name"
+                android:layout_alignTop="@+id/detail_title_date"
+                android:layout_below="@+id/detail_department_name"
+                android:layout_marginRight="10dp"
+                android:ems="10"
+                android:text="未定"
+                android:textColor="#000000"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/detail_title_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/detail_title_department"
+                android:layout_below="@+id/detail_title_department"
+                android:layout_marginTop="10dp"
+                android:text="日程"
+                android:textColor="#000000"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/detail_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@id/detail_department_name"
+                android:layout_alignTop="@+id/detail_title_description"
+                android:layout_below="@+id/detail_title_date"
+                android:layout_marginRight="10dp"
+                android:ems="10"
+                android:text="あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"
+                android:textColor="#000000"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/detail_title_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/detail_title_department"
+                android:layout_below="@+id/detail_title_date"
+                android:layout_marginTop="10dp"
+                android:text="説明文"
+                android:textColor="#000000"
+                android:textSize="8pt" />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>

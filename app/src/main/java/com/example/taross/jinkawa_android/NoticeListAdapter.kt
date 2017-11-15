@@ -49,6 +49,7 @@ class NoticeListAdapter(private val context: Context): BaseAdapter(){
                 val mrs_updateDate = rs_updateDate.substring(0, 19).replace("T", " ")
                 val notice: Notice = Notice(
                         result.getString("title"),
+                        result.getString("objectId"),
                         result.getString("department_name"),
                         result.getString("date"),
                         result.getString("info"),

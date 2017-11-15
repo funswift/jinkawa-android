@@ -23,10 +23,12 @@
     <string name="title_event_create">イベント作成</string>
     <string name="title_event_edit">イベント編集</string>
     <string name="title_notice_create">お知らせ作成</string>
+    <string name="title_notice_edit">お知らせ編集</string>
     <string name="title_event_entry">参加申し込み</string>
 
-    <!-- Strings related to event edit's text -->
+    <!-- Strings related to edit's text -->
     <string name="event_edit_button_text">イベントの編集を完了する</string>
+    <string name="notice_edit_button_text">お知らせの編集を完了する</string>
 
     <!-- Strings related to list's text -->
     <string name="list_text_update">最終更新日:</string>
@@ -72,6 +74,7 @@
     </string>
 
     <!-- Departments' name -->
+    <string name="yakuin">役員</string>
     <string name="soumu">総務部</string>
     <string name="seishounen">青少年育成部</string>
     <string name="josei">女性部</string>

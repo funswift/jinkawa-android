@@ -41,6 +41,6 @@ class NoticeItemView: FrameLayout{
         titleTextView?.text = item.title
 
         // 画像用処理
-        thumbnailImageView?.setBackgroundColor(Color.BLUE)
+        thumbnailImageView?.setImageResource(R.drawable.ic_notice_info)
     }
 }
