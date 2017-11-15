@@ -159,6 +159,9 @@ class ListActivity : AppCompatActivity() {
                     1 -> EventDetailActivity.intent(context, EventListAdapter(context).items[position]).let {
                         startActivity(it)
                     }
+                    2 -> NoticeDetailActivity.intent(context, NoticeListAdapter(context).items[position]).let{
+                        startActivity(it)
+                    }
                 }
             }
 
