@@ -39,6 +39,7 @@ class NoticeListAdapter(private val context: Context): BaseAdapter(){
         val noticeList:MutableList<Notice> = mutableListOf<Notice>()
 
         val query: NCMBQuery<NCMBObject> = NCMBQuery("Information")
+        query.addOrderByDescending("updateDate")
         val results: List<NCMBObject> = try {
             query.find()
         } catch (e : Exception) { emptyList<NCMBObject>() }
@@ -51,7 +52,8 @@ class NoticeListAdapter(private val context: Context): BaseAdapter(){
                         result.getString("department_name"),
                         result.getString("date"),
                         result.getString("info"),
-                        mrs_updateDate
+                        mrs_updateDate,
+                        result.getBoolean("officer_only")
                 )
                 noticeList.add(notice)
             }

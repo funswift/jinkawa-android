@@ -7,21 +7,20 @@
     tools:context="com.example.taross.jinkawa_android.EventCreateActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/toolbar_event_create"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/BaseToolbar"
         android:background="@color/jipriMainColor"
         android:minHeight="?attr/actionBarSize"
         android:titleTextColor="@color/white"
-        android:title="イベント作成"
         android:popupTheme="@android:style/Theme.Material"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/toolbar2">
+        android:layout_below="@+id/toolbar_event_create">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -34,7 +33,7 @@
                 android:id="@+id/switch_officeronly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="役員のみ公開"
+                android:text="@string/form_officer_text"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/textInput_deadline"
                 android:layout_alignBottom="@+id/textInput_deadline"
@@ -45,7 +44,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="イベントを作成する"
+                android:text="@string/form_event_create_text"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_below="@+id/textInput_deadline"/>
@@ -55,14 +54,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="部署名"
+                android:text="@string/form_department_text"
                 android:textColor="#222222" />
 
             <Spinner
                 android:id="@+id/spinner_department"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:dropDownWidth="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_below="@+id/title_department" />
 
             <TextView
@@ -70,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="21dp"
-                android:text="イベント名"
+                android:text="@string/form_event_title_text"
                 android:textColor="#222222"
                 android:layout_below="@+id/spinner_department"
                 android:layout_alignParentStart="true" />
@@ -87,7 +88,7 @@
                     android:id="@+id/edit_eventtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="10文字以内で入力"
+                    android:hint="@string/hint_event_name"
                     android:inputType="text" />
 
             </android.support.design.widget.TextInputLayout>
@@ -99,7 +100,7 @@
                 android:layout_below="@+id/textInput_eventtitle"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:text="開催地"
+                android:text="@string/form_location_text"
                 android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
@@ -114,7 +115,7 @@
                     android:id="@+id/edit_eventlocate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="30字以内で入力"
+                    android:hint="@string/hint_location"
                     android:inputType="textMultiLine" />
 
             </android.support.design.widget.TextInputLayout>
@@ -126,7 +127,7 @@
                 android:layout_below="@+id/textInput_eventlocate"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:text="定員"
+                android:text="@string/form_capacity_text"
                 android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
@@ -141,7 +142,7 @@
                     android:id="@+id/edit_capacity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="5桁以内で入力"
+                    android:hint="@string/hint_capacity"
                     android:inputType="number" />
 
             </android.support.design.widget.TextInputLayout>
@@ -152,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textInput_capacity"
                 android:layout_marginTop="20dp"
-                android:text="開始日"
+                android:text="@string/form_date_start_text"
                 android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
@@ -179,7 +180,6 @@
                     android:layout_height="37dp"
                     android:layout_alignStart="@+id/edit_eventdate_start"
                     android:layout_marginLeft="0dp"
-
                     android:background="@drawable/common_google_signin_btn_icon_light"
                     android:text="日付を選択" />
 
@@ -222,7 +222,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textInput_eventtime_start"
                 android:layout_marginTop="20dp"
-                android:text="終了日"
+                android:text="@string/form_date_end_text"
                 android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
@@ -292,7 +292,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textInput_eventdate_end"
                 android:layout_marginTop="20dp"
-                android:text="説明文"
+                android:text="@string/form_description_text"
                 android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
@@ -307,7 +307,7 @@
                     android:id="@+id/edit_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="250字以内で入力"
+                    android:hint="@string/hint_description"
                     android:inputType="textMultiLine" />
 
             </android.support.design.widget.TextInputLayout>
@@ -318,7 +318,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textInput_description"
                 android:layout_marginTop="20dp"
-                android:text="申込締切日"
+                android:text="@string/form_deadline_text"
                 android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
