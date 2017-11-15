@@ -20,6 +20,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:windowSoftInputMode="stateAlwaysHidden">
+
+        <!-- プッシュ通知タップ時に起動するActivityの設定 -->
+        <meta-data android:name="openPushStartActivity" android:value=".MainActivity"/>
+
+        <!-- 通知エリアに表示されるアイコンの設定 -->
+        <meta-data android:name="smallIcon" android:resource="@drawable/common_google_signin_btn_icon_dark"/>
+
+        <!-- 通知エリアに表示されるアイコンカラーの設定 -->
+        <meta-data android:name="smallIconColor" android:value="@color/jipriMainColor"/>
+
+        <!-- 通知エリアにプッシュ通知を複数表示する設定　0:最新のみ表示 , 1:複数表示 -->
+        <meta-data android:name="notificationOverlap" android:value="0"/>
+
+        <!-- カスタムダイアログプッシュを利用する場合のみ背景画像の設定 -->
+        <meta-data android:name="dialogPushBackgroundImage" android:resource="@drawable/common_google_signin_btn_icon_light"/>
+
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden">
@@ -55,6 +71,24 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"></activity>
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="com.example.taross.jinkawa_android"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.nifty.cloud.mb.core.NCMBGcmListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
