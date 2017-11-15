@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter
 import com.example.taross.model.Event
 import com.nifty.cloud.mb.core.DoneCallback
 import com.nifty.cloud.mb.core.NCMBException
-import org.w3c.dom.Text
+
 
 
 open class EventCreateActivity : AppCompatActivity(), DoneCallback {
@@ -118,10 +118,6 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             dialog.show()
         }
 
-        officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
-            officer = isChecked
-        })
-
         createButton.setOnClickListener{
             val title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
@@ -135,16 +131,18 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             val deadline = deadlineTextView.text.toString()
             val officer_only = officer
 
+          officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
+            officer = isChecked
+        })
 
-            if(true){
+
+            if (true) {
 
             }
 
-            val event = Event(title, "" ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
+            val event = Event(title, "", department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
             event.save(this)
+            NotificationHelper.sendPush("お知らせ", "イベントが追加されました！")
         }
-
     }
-
-
 }
