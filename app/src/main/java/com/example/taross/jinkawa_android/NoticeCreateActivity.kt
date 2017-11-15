@@ -11,7 +11,7 @@ import com.example.taross.model.Notice
 import com.nifty.cloud.mb.core.DoneCallback
 import com.nifty.cloud.mb.core.NCMBException
 
-class NoticeCreateActivity : AppCompatActivity(), DoneCallback {
+open class NoticeCreateActivity : AppCompatActivity(), DoneCallback {
 
     //DoneCallBack インターフェースの実装
     override fun done(arg1: NCMBException?){
@@ -37,7 +37,7 @@ class NoticeCreateActivity : AppCompatActivity(), DoneCallback {
         val descriptionEditText = findViewById(R.id.edit_notice_description) as EditText
         val officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch
 
-        val createButton = findViewById(R.id.button_notice_create)
+        val createButton = findViewById(R.id.button_notice_create) as Button
 
         officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
             officer = isChecked
@@ -53,7 +53,7 @@ class NoticeCreateActivity : AppCompatActivity(), DoneCallback {
 
             }
 
-            val notice = Notice(title, department, "20XX/YY/ZZ HH:MM", description, "", officer_only)
+            val notice = Notice(title, "", department, "20XX/YY/ZZ HH:MM", description, "", officer_only)
             notice.save(this)
         }
     }
