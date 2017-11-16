@@ -6,4 +6,5 @@ package com.example.taross.jinkawa_android
 
 interface LoadableList{
     fun loadData():MutableList<out Any>
+    fun reflesh()
 }

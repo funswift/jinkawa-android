@@ -65,5 +65,9 @@ class EventListAdapter(private val context: Context): LoadableListAdapter(){
         return eveltList
     }
 
+    override fun reflesh() {
+        this.items = loadData()
+    }
+
 
 }

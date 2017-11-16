@@ -55,4 +55,8 @@ class NoticeListAdapter(private val context: Context): LoadableListAdapter(){
         }
         return noticeList
     }
+
+    override fun reflesh() {
+        this.items = loadData()
+    }
 }

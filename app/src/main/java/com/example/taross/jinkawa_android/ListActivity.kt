@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.content.Intent
+import android.os.Handler
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
@@ -157,13 +158,12 @@ class ListActivity : AppCompatActivity() {
 
             val mSwipeRefresh = rootView.findViewById(R.id.swipe_refresh) as SwipeRefreshLayout
             mSwipeRefresh.setOnRefreshListener{
-                // 引っ張って離した時に呼ばれます。
+                // 引っ張って離した時に呼ばれる
 
-                listView.invalidateViews()
+                listAdapter.reflesh()
+                listAdapter.notifyDataSetChanged()
 
-                if (mSwipeRefresh.isRefreshing()) {
-                    mSwipeRefresh.setRefreshing(false)
-                }
+                Handler().postDelayed({ mSwipeRefresh.setRefreshing(false) }, 2000)
             }
 
             listView.adapter = listAdapter
