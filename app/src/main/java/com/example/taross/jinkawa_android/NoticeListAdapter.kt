@@ -39,16 +39,22 @@ class NoticeListAdapter(private val context: Context): LoadableListAdapter(){
         val noticeList:MutableList<Notice> = mutableListOf<Notice>()
 
         val query: NCMBQuery<NCMBObject> = NCMBQuery("Information")
+        query.addOrderByDescending("updateDate")
         val results: List<NCMBObject> = try {
             query.find()
         } catch (e : Exception) { emptyList<NCMBObject>() }
         if (results.isNotEmpty()) {
             for(result in results){
+                val rs_updateDate = result.getString("updateDate")
+                val mrs_updateDate = rs_updateDate.substring(0, 19).replace("T", " ")
                 val notice: Notice = Notice(
                         result.getString("title"),
+                        result.getString("objectId"),
                         result.getString("department_name"),
                         result.getString("date"),
-                        result.getString("info")
+                        result.getString("info"),
+                        mrs_updateDate,
+                        result.getBoolean("officer_only")
                 )
                 noticeList.add(notice)
             }

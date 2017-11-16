@@ -36,6 +36,12 @@ class EventListAdapter(private val context: Context): LoadableListAdapter(){
         val eveltList:MutableList<Event> = mutableListOf<Event>()
 
         val query:NCMBQuery<NCMBObject> = NCMBQuery("Event")
+        /*
+            イベントを開催日順に並べる場合
+            query.addOrderByDescending("date_start")
+            query.addOrderByDescending("start_time")
+        */
+        query.addOrderByDescending("updateDate")
         val results: List<NCMBObject> = try {
             query.find()
         } catch (e : Exception) { emptyList<NCMBObject>() }
@@ -43,15 +49,14 @@ class EventListAdapter(private val context: Context): LoadableListAdapter(){
             for(result in results){
                 val rs_updateDate = result.getString("updateDate")
                 val mrs_updateDate = rs_updateDate.substring(0, 19).replace("T", " ")
-                Log.d("updateDateValue", mrs_updateDate)
                 val event: Event = Event(
                         result.getString("name"),
                         result.getString("objectId"),
                         result.getString("department"),
                         result.getString("date_start"),
                         result.getString("start_time"),
-                        "",
-                        "",
+                        result.getString("date_end"),
+                        result.getString("end_time"),
                         result.getString("description"),
                         result.getString("location"),
                         result.getString("capacity"),

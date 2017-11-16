@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.taross.jinkawa_android.R
 import com.example.taross.model.Event
+import com.squareup.picasso.Picasso
 
 class EventItemView: FrameLayout{
     constructor(context: Context?) : super(context)
@@ -49,6 +50,8 @@ class EventItemView: FrameLayout{
         locationTextView?.text = item.location
 
         // 画像用処理
-        thumbnailImageView?.setBackgroundColor(Color.RED)
+        //thumbnailImageView?.setBackgroundColor(Color.RED)
+        Picasso.with(context).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${item.id}.png").into(thumbnailImageView)
+
     }
 }

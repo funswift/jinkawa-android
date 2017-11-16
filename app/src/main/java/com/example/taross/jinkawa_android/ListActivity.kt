@@ -25,6 +25,9 @@ import android.util.Log
 import com.example.taross.jinkawa_android.EventDetailActivity
 import android.support.v4.widget.SwipeRefreshLayout
 import android.widget.BaseAdapter
+import com.nifty.cloud.mb.core.NCMBPush
+import org.json.JSONArray
+import org.json.JSONException
 
 
 class ListActivity : AppCompatActivity() {
@@ -110,6 +113,7 @@ class ListActivity : AppCompatActivity() {
     }
 
 
+
     /**
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -119,7 +123,7 @@ class ListActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            val fragment = ListFragment.newInstance(position + 1)
+            val fragment = if(position < 2) ListFragment.newInstance(position + 1) else OptionFragment.newInstance(position + 1)
 
             return fragment
         }
@@ -153,7 +157,7 @@ class ListActivity : AppCompatActivity() {
             var listAdapter:LoadableListAdapter = when (page){
                 1 -> EventListAdapter(context)
                 2 -> NoticeListAdapter(context)
-                else -> EventListAdapter(context)
+                else -> null
             }
 
             val mSwipeRefresh = rootView.findViewById(R.id.swipe_refresh) as SwipeRefreshLayout
@@ -170,6 +174,9 @@ class ListActivity : AppCompatActivity() {
             listView.setOnItemClickListener { parent, view, position, id ->
                 when (page) {
                     1 -> EventDetailActivity.intent(context, EventListAdapter(context).items[position]).let {
+                        startActivity(it)
+                    }
+                    2 -> NoticeDetailActivity.intent(context, NoticeListAdapter(context).items[position]).let{
                         startActivity(it)
                     }
                 }

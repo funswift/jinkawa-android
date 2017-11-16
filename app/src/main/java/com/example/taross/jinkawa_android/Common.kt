@@ -2,17 +2,14 @@ package com.example.taross.jinkawa_android
 
 import com.example.taross.model.Event
 import com.example.taross.model.Participant
-import com.nifty.cloud.mb.core.NCMBAcl
 import java.io.File
-import com.nifty.cloud.mb.core.NCMBFile
 import java.io.Console
 import android.R.attr.data
 import android.content.Context
+import com.nifty.cloud.mb.core.*
+import org.json.JSONArray
 import java.nio.charset.Charset
-import com.nifty.cloud.mb.core.NCMBException
-import com.nifty.cloud.mb.core.FetchFileCallback
-
-
+import org.json.JSONException
 
 
 /**
@@ -45,5 +42,27 @@ class CsvHelper{
                 callback()
             }
         }
+    }
+}
+
+class NotificationHelper{
+
+    companion object {
+        @Throws(JSONException::class)
+        fun sendPush(title:String, message:String) {
+            val push = NCMBPush()
+            push.action = "com.sample.pushsample.RECEIVE_PUSH"
+            push.title = title
+            push.message = message
+            push.dialog = true
+            push.sendInBackground { e ->
+                if (e != null) {
+                    // エラー処理
+                } else {
+                    // プッシュ通知登録後の操作
+                }
+            }
+        }
+
     }
 }

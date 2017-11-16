@@ -1,6 +1,7 @@
 package com.example.taross.jinkawa_android
 
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.os.Bundle
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.DatePickerDialog
@@ -15,10 +16,10 @@ import android.widget.ArrayAdapter
 import com.example.taross.model.Event
 import com.nifty.cloud.mb.core.DoneCallback
 import com.nifty.cloud.mb.core.NCMBException
-import org.w3c.dom.Text
 
 
-class EventCreateActivity : AppCompatActivity(), DoneCallback {
+
+open class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
     //DoneCallBack インターフェースの実装
     override fun done(arg1: NCMBException?){
@@ -31,17 +32,16 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
         setContentView(R.layout.activity_event_create)
 
+        val toolbar = findViewById(R.id.toolbar_event_create) as Toolbar
+        toolbar.title = getString(R.string.title_event_create)
 
-        val department : Spinner = findViewById(R.id.spinner_department) as Spinner
-        val personalAdapter : ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item)
-        personalAdapter.add("青年部")
-        personalAdapter.add("総務部")
+        val departmentSpinner: Spinner = findViewById(R.id.spinner_department) as Spinner
+        val personalAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
+        departmentSpinner.adapter = personalAdapter
 
-
-        department.adapter = personalAdapter
+        var officer = false
 
         val titleEditText = findViewById(R.id.edit_eventtitle) as EditText
-        val departmentSpinner = findViewById(R.id.spinner_department) as Spinner
         val locationEditText = findViewById(R.id.edit_eventlocate) as EditText
         val capacityEditText = findViewById(R.id.edit_capacity) as EditText
         val officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch
@@ -49,7 +49,7 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
         val startDateTextView = findViewById(R.id.edit_eventdate_start) as TextView
         val startDateButton = findViewById(R.id.button_eventdate_start_picker) as Button
-        val startTimeTextView =findViewById(R.id.edit_eventtime_start) as TextView
+        val startTimeTextView = findViewById(R.id.edit_eventtime_start) as TextView
         val startTimeButton = findViewById(R.id.button_eventtime_start_picker) as Button
 
         val endDateTextView = findViewById(R.id.edit_eventdate_end) as TextView
@@ -74,12 +74,12 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
             dialog.show()
         }
 
-        startTimeButton.setOnClickListener{
+        startTimeButton.setOnClickListener {
             val calendar = Calendar.getInstance()
-            val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{view, hourOfDay, minute->
+            val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
 
                 startTimeTextView.text = "$hourOfDay:$minute"
-            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),true)
+            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true)
             dialog.show()
         }
 
@@ -96,12 +96,12 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
             dialog.show()
         }
 
-        endTimeButton.setOnClickListener{
+        endTimeButton.setOnClickListener {
             val calendar = Calendar.getInstance()
-            val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{view, hourOfDay, minute->
+            val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
 
                 endTimeTextView.text = "$hourOfDay:$minute"
-            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),true)
+            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true)
             dialog.show()
         }
 
@@ -129,18 +129,20 @@ class EventCreateActivity : AppCompatActivity(), DoneCallback {
             val end_time = endTimeTextView.text.toString()
             val capacity = capacityEditText.text.toString()
             val deadline = deadlineTextView.text.toString()
-            val officer_only = officerOnlySwitch.showText
+            val officer_only = officer
+
+          officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
+            officer = isChecked
+        })
 
 
-            if(true){
+            if (true) {
 
             }
 
-            val event = Event(title, "" ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
+            val event = Event(title, "", department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
             event.save(this)
+            NotificationHelper.sendPush("お知らせ", "イベントが追加されました！")
         }
-
     }
-
-
 }
