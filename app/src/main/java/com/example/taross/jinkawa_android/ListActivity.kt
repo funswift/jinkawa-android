@@ -16,12 +16,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.content.Intent
+import android.os.Handler
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.util.Log
 
 import com.example.taross.jinkawa_android.EventDetailActivity
+import android.support.v4.widget.SwipeRefreshLayout
+import android.widget.BaseAdapter
 import com.nifty.cloud.mb.core.NCMBPush
 import org.json.JSONArray
 import org.json.JSONException
@@ -75,7 +78,6 @@ class ListActivity : AppCompatActivity() {
                 toolbar.title = mViewPager.adapter.getPageTitle(position)
             }
         })
-
 
         val tabLayout = findViewById(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(mViewPager)
@@ -152,10 +154,20 @@ class ListActivity : AppCompatActivity() {
             val page = arguments.getInt(ARG_SECTION_NUMBER)
             val listView = rootView.findViewById(R.id.listView) as ListView
 
-            val listAdapter = when (page){
+            var listAdapter:LoadableListAdapter = when (page){
                 1 -> EventListAdapter(context)
                 2 -> NoticeListAdapter(context)
                 else -> null
+            }
+
+            val mSwipeRefresh = rootView.findViewById(R.id.swipe_refresh) as SwipeRefreshLayout
+            mSwipeRefresh.setOnRefreshListener{
+                // 引っ張って離した時に呼ばれる
+
+                listAdapter.reflesh()
+                listAdapter.notifyDataSetChanged()
+
+                Handler().postDelayed({ mSwipeRefresh.setRefreshing(false) }, 2000)
             }
 
             listView.adapter = listAdapter
@@ -169,6 +181,7 @@ class ListActivity : AppCompatActivity() {
                     }
                 }
             }
+
 
             return rootView
         }

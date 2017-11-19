@@ -22,8 +22,8 @@ import com.nifty.cloud.mb.core.NCMBQuery
  * Created by taross on 2017/08/12.
  */
 
-class NoticeListAdapter(private val context: Context): BaseAdapter(){
-    var items: MutableList<Notice> = noticeLoad()
+class NoticeListAdapter(private val context: Context): LoadableListAdapter(){
+    var items: MutableList<Notice> = loadData()
 
     override fun getCount(): Int = items.size
 
@@ -35,7 +35,7 @@ class NoticeListAdapter(private val context: Context): BaseAdapter(){
         setItem(items[position])
     }
 
-    fun noticeLoad():MutableList<Notice>{
+    override fun loadData():MutableList<Notice>{
         val noticeList:MutableList<Notice> = mutableListOf<Notice>()
 
         val query: NCMBQuery<NCMBObject> = NCMBQuery("Information")
@@ -60,5 +60,9 @@ class NoticeListAdapter(private val context: Context): BaseAdapter(){
             }
         }
         return noticeList
+    }
+
+    override fun reflesh() {
+        this.items = loadData()
     }
 }
