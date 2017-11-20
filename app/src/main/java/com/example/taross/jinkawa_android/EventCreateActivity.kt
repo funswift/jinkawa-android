@@ -61,6 +61,17 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
         val deadlineButton = findViewById(R.id.button_deadline_picker) as Button
         val createButton = findViewById(R.id.button_eventcreate) as Button
 
+        val eventImageButton = findViewById(R.id.imagebutton_eventImage) as ImageButton
+
+        eventImageButton.setOnClickListener{
+            val intent= Intent(Intent.ACTION_GET_CONTENT).apply {
+                    type = "image/*"
+                    addCategory(Intent.CATEGORY_OPENABLE)
+            }
+            startActivityForResult(intent, 6542)
+            Toast.makeText(this, "Open Garally", Toast.LENGTH_LONG).show()
+        }
+
         startDateButton.setOnClickListener {
             val date = Calendar.getInstance()
             var dialog = DatePickerDialog(this, OnDateSetListener { view, year, monthOfYear, dayOfMonth ->

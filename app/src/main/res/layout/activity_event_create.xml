@@ -24,30 +24,51 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
 
             <Switch
                 android:id="@+id/switch_officeronly"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/textInput_deadline"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/officer_only_button"
+                android:padding="10dp"
+                android:text="@string/form_officer_text" />
+
+            <TextView
+                android:id="@+id/title_eventImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/form_officer_text"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/textInput_deadline"
-                android:layout_alignBottom="@+id/textInput_deadline"
-                android:layout_alignStart="@+id/textInput_eventtime_start" />
+                android:layout_alignStart="@+id/imagebutton_eventImage"
+                android:layout_above="@+id/imagebutton_eventImage"
+                android:layout_marginTop="21dp"
+                android:text="@string/form_event_image_text"
+                android:textColor="#222222" />
+
+            <ImageButton
+                android:id="@+id/imagebutton_eventImage"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_alignBottom="@id/textInput_deadline"
+                android:layout_alignEnd="@id/textInput_eventtime_start"
+                android:layout_alignStart="@id/textInput_eventtime_start"
+                android:layout_alignTop="@+id/textInput_deadline"
+                android:layout_toRightOf="@+id/textInput_deadline" />
 
             <Button
                 android:id="@+id/button_eventcreate"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/switch_officeronly"
                 android:layout_centerHorizontal="true"
-                android:text="@string/form_event_create_text"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_below="@+id/textInput_deadline"/>
+                android:layout_marginTop="20dp"
+                android:text="@string/form_event_create_text" />
 
             <TextView
                 android:id="@+id/title_department"
@@ -61,20 +82,20 @@
                 android:id="@+id/spinner_department"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:dropDownWidth="wrap_content"
+                android:layout_below="@+id/title_department"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_below="@+id/title_department" />
+                android:dropDownWidth="wrap_content" />
 
             <TextView
                 android:id="@+id/title_eventname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/spinner_department"
                 android:layout_marginTop="21dp"
                 android:text="@string/form_event_title_text"
-                android:textColor="#222222"
-                android:layout_below="@+id/spinner_department"
-                android:layout_alignParentStart="true" />
+                android:textColor="#222222" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInput_eventtitle"
