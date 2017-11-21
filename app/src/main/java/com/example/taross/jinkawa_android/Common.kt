@@ -51,10 +51,14 @@ class NotificationHelper{
         @Throws(JSONException::class)
         fun sendPush(title:String, message:String) {
             val push = NCMBPush()
+            val query:NCMBQuery<NCMBInstallation> = NCMBQuery("Installation")
             push.action = "com.sample.pushsample.RECEIVE_PUSH"
             push.title = title
             push.message = message
             push.dialog = true
+            push.target = JSONArray("[ios, android]")
+            query.whereEqualTo("channels", "on")
+            push.setSearchCondition(query)
             push.sendInBackground { e ->
                 if (e != null) {
                     // エラー処理

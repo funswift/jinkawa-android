@@ -55,6 +55,7 @@ open class NoticeCreateActivity : AppCompatActivity(), DoneCallback {
 
             val notice = Notice(title, "", department, "20XX/YY/ZZ HH:MM", description, "", officer_only)
             notice.save(this)
+            NotificationHelper.sendPush(title, "お知らせが追加されました！")
         }
     }
 }
