@@ -44,6 +44,22 @@
         <!-- カスタムダイアログプッシュを利用する場合のみ背景画像の設定 -->
         <meta-data android:name="dialogPushBackgroundImage" android:resource="@drawable/common_google_signin_btn_icon_light"/>
 
+    <activity
+        android:name="com.dropbox.core.android.AuthActivity"
+        android:configChanges="orientation|keyboard"
+        android:launchMode="singleTask">
+        <intent-filter>
+
+            <!-- Insert your app key after “db-  ...” -->
+            <data android:scheme="db-yz9a803tv3hg7ov" />
+
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.BROWSABLE" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </activity>
+
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden">

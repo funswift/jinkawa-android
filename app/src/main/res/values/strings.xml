@@ -84,4 +84,6 @@
     <string name="koutsu">交通部</string>
     <string name="jbus">Jバス部</string>
 
+    <!-- DropBoxのAppKey -->
+    <string name="APP_KEY">yz9a803tv3hg7ov</string>
 </resources>

@@ -6,6 +6,8 @@ package com.example.taross.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Environment
 import android.support.design.R.id.text
 import android.support.design.widget.BottomSheetDialogFragment
@@ -26,12 +28,14 @@ import android.os.AsyncTask.execute
 import android.util.Log
 import android.os.StrictMode
 import android.os.Build.VERSION.SDK_INT
+import com.dropbox.core.android.Auth
 import java.io.*
 
 
 class CustomBottomSheetDialog : BottomSheetDialogFragment() {
 
     lateinit var saveInDeviceButton:ImageButton
+    lateinit var saveInDropboxButton:ImageButton
     lateinit var event:Event
     lateinit var activity:Activity
 
@@ -42,6 +46,7 @@ class CustomBottomSheetDialog : BottomSheetDialogFragment() {
         super.setupDialog(dialog, style)
         val view = View.inflate(context, R.layout.layout_buttom_sheet, null)
         saveInDeviceButton = view!!.findViewById(R.id.button_save_device) as ImageButton
+        saveInDropboxButton =view!!.findViewById(R.id.button_save_dropbox) as ImageButton
         dialog.setContentView(view)
 
         val policy = StrictMode.ThreadPolicy.Builder()
@@ -69,6 +74,24 @@ class CustomBottomSheetDialog : BottomSheetDialogFragment() {
 
                 dismiss()
             }
+        }
+
+        saveInDropboxButton.setOnClickListener{
+            Auth.startOAuth2Authentication(context, getString(R.string.APP_KEY))
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getAccessToken()
+    }
+
+    fun getAccessToken(){
+        val token = Auth.getOAuth2Token()
+        if(token != null){
+            val prefs = context.getSharedPreferences("com.example.taross.dropboxintegration", Context.MODE_PRIVATE)
+            prefs.edit().putString("access-token", token).apply()
         }
     }
 
