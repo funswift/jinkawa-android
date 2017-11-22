@@ -74,5 +74,11 @@ class EventListAdapter(private val context: Context): LoadableListAdapter(){
         this.items = loadData()
     }
 
+    fun filterOfficerOnly(): LoadableListAdapter{
+        if(!LoginManager.isLogin)
+            this.items = items.filter { it.officer_only == false }.toMutableList()
+        return this
+    }
+
 
 }
