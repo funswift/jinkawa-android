@@ -58,6 +58,8 @@ class ListActivity : AppCompatActivity() {
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
+        val fab = findViewById(R.id.fab) as FloatingActionButton
+
         // Set up the ViewPager with the sections adapter.
         val mViewPager = findViewById(R.id.container) as ViewPager
         mViewPager.adapter = mSectionsPagerAdapter
@@ -76,6 +78,12 @@ class ListActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int){
                 toolbar.title = mViewPager.adapter.getPageTitle(position)
+                if(LoginManager.isLogin){
+                    when(position){
+                        0, 1 -> fab.show()
+                        2 -> fab.hide()
+                    }
+                }
             }
         })
 
@@ -87,7 +95,6 @@ class ListActivity : AppCompatActivity() {
         tabLayout.getTabAt(2)?.setCustomView(R.layout.tabicon_setting)
 
         if (LoginManager.isLogin) {
-            val fab = findViewById(R.id.fab) as FloatingActionButton
             fab.show()
             fab.setOnClickListener {
                 if(mViewPager.currentItem == 0) {
@@ -98,7 +105,6 @@ class ListActivity : AppCompatActivity() {
             }
         }
         else{
-            val fab = findViewById(R.id.fab) as FloatingActionButton
             fab.hide()
         }
 
