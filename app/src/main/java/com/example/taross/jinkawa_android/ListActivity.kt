@@ -154,10 +154,11 @@ class ListActivity : AppCompatActivity() {
             val page = arguments.getInt(ARG_SECTION_NUMBER)
             val listView = rootView.findViewById(R.id.listView) as ListView
 
+            //エラー出るのでEventListAdapter仮置き
             var listAdapter:LoadableListAdapter = when (page){
-                1 -> EventListAdapter(context)
-                2 -> NoticeListAdapter(context)
-                else -> null
+                1 -> EventListAdapter(context).filterOfficerOnly()
+                2 -> NoticeListAdapter(context).filterOfficerOnly()
+                else -> EventListAdapter(context)
             }
 
             val mSwipeRefresh = rootView.findViewById(R.id.swipe_refresh) as SwipeRefreshLayout
