@@ -19,8 +19,8 @@ import com.nifty.cloud.mb.core.NCMBQuery
  * Created by taross on 2017/08/12.
  */
 
-class EventListAdapter(private val context: Context): BaseAdapter(){
-    var items: MutableList<Event> = eventLoad()
+class EventListAdapter(private val context: Context): LoadableListAdapter(){
+    var items: MutableList<Event> = loadData()
 
     override fun getCount(): Int = items.size
 
@@ -32,7 +32,7 @@ class EventListAdapter(private val context: Context): BaseAdapter(){
         setItem(items[position])
     }
 
-    fun eventLoad():MutableList<Event>{
+    override fun loadData():MutableList<Event>{
         val eveltList:MutableList<Event> = mutableListOf<Event>()
 
         val query:NCMBQuery<NCMBObject> = NCMBQuery("Event")
@@ -69,4 +69,10 @@ class EventListAdapter(private val context: Context): BaseAdapter(){
         }
         return eveltList
     }
+
+    override fun reflesh() {
+        this.items = loadData()
+    }
+
+
 }

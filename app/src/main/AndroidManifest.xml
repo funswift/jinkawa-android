@@ -76,6 +76,7 @@
         <activity android:name=".NoticeCreateActivity" />
         <activity android:name=".NoticeDetailActivity" />
         <activity android:name=".NoticeEditActivity" />
+        <activity android:name=".PasswordChangeActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"></activity>
