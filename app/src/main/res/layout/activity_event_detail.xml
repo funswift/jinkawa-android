@@ -25,6 +25,7 @@
         android:layout_height="200dp"
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
         android:layout_weight="0.26"
+        android:scaleType="centerCrop"
         android:layout_below="@+id/detail_toolbar"
         android:layout_alignParentStart="true" />
 
