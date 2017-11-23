@@ -41,7 +41,7 @@ class EventDetailActivity : AppCompatActivity() {
         val imageButton = findViewById(R.id.imageButton_eventDetail) as ImageButton
         Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").into(imageButton)
         imageButton.setOnClickListener({
-            Log.d("ImageClick", "ok")
+            startActivity(Intent(applicationContext,EventDetailTranslucentActivity::class.java).putExtra("EVENT_EXTRA", event))
         })
 
         val departmentTextView = findViewById(R.id.detail_department_name) as TextView
