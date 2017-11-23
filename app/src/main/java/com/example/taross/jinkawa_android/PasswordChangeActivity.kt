@@ -1,5 +1,6 @@
 package com.example.taross.jinkawa_android
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v7.app.AppCompatActivity
@@ -69,7 +70,10 @@ class PasswordChangeActivity : AppCompatActivity() {
                 }
             }
 
-            if(success) finish()
+            if(success) {
+                LoginManager.logout()
+                startActivity(Intent(application, MainActivity::class.java))
+            }
 
         }
     }
