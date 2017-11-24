@@ -26,6 +26,13 @@
         <item name="android:textColor">#aa3333</item><!--  errorの表示の色.error時の下線の色でもある -->
     </style>
 
+    <!-- 半透明背景設定 -->
+    <drawable name="transparameter">#7f000000</drawable>
+    <style name="Theme.TranslucentBackground" parent="android:style/Theme.Translucent">
+        <item name="android:windowBackground">@drawable/transparameter</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="BaseToolbar" parent="@style/Widget.AppCompat.Toolbar">
         <item name="android:theme">@style/ToolbarTheme</item>
     </style>
