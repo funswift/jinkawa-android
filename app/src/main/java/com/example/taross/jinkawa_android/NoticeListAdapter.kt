@@ -66,9 +66,8 @@ class NoticeListAdapter(private val context: Context): LoadableListAdapter(){
         this.items = loadData()
     }
 
-    fun filterOfficerOnly(): LoadableListAdapter{
+    override fun filter(){
         if(!LoginManager.isLogin)
             this.items = items.filter { it.officer_only == false }.toMutableList()
-        return this
     }
 }

@@ -162,8 +162,8 @@ class ListActivity : AppCompatActivity() {
 
             //エラー出るのでEventListAdapter仮置き
             var listAdapter:LoadableListAdapter = when (page){
-                1 -> EventListAdapter(context).filterOfficerOnly()
-                2 -> NoticeListAdapter(context).filterOfficerOnly()
+                1 -> EventListAdapter(context)
+                2 -> NoticeListAdapter(context)
                 else -> EventListAdapter(context)
             }
 
@@ -177,6 +177,7 @@ class ListActivity : AppCompatActivity() {
                 Handler().postDelayed({ mSwipeRefresh.setRefreshing(false) }, 2000)
             }
 
+            listAdapter.filter()
             listView.adapter = listAdapter
             listView.setOnItemClickListener { parent, view, position, id ->
                 when (page) {

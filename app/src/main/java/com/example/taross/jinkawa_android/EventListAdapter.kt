@@ -30,6 +30,7 @@ class EventListAdapter(private val context: Context): LoadableListAdapter(){
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View = ((convertView as? EventItemView) ?: EventItemView(context)).apply {
         setItem(items[position])
+
     }
 
     override fun loadData():MutableList<Event>{
@@ -72,12 +73,12 @@ class EventListAdapter(private val context: Context): LoadableListAdapter(){
 
     override fun reflesh() {
         this.items = loadData()
+        this.filter()
     }
 
-    fun filterOfficerOnly(): LoadableListAdapter{
+    override fun filter(){
         if(!LoginManager.isLogin)
             this.items = items.filter { it.officer_only == false }.toMutableList()
-        return this
     }
 
 
