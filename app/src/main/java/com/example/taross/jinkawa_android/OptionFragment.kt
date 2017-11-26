@@ -26,7 +26,7 @@ class OptionFragment: Fragment() {
 
         pushButton?.setOnCheckedChangeListener { buttonView, isChecked ->
             UserConfig.is_pushed = isChecked
-            UserConfig.sendPushConfigChange()
+            UserConfig.sendPushConfigChange(context)
             Log.d("プッシュ通知チャンネル変更", "${isChecked}に変更されました")
         }
 
