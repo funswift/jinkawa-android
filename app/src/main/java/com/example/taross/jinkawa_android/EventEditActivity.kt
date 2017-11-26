@@ -11,7 +11,7 @@ import android.util.Log
 import android.widget.*
 import android.widget.ArrayAdapter
 import com.example.taross.model.Event
-import com.nifty.cloud.mb.core.NCMBException
+import com.nifty.cloud.mb.core.*
 
 class EventEditActivity: EventCreateActivity() {
 
@@ -86,6 +86,24 @@ class EventEditActivity: EventCreateActivity() {
             val event = Event(title, event.id ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
             event.update(this)
 
+            //画像追加
+            val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
+
+            query.whereEqualTo("name", title)
+            val result = try {
+                query.find()
+            } catch (e :Exception){
+                emptyList<NCMBObject>()
+            }
+            Log.d("result", "$result")
+            if (result.isNotEmpty()){
+                Log.d("test", "${result[0].getString("objectId")}を取得しました！")
+                val fileName = result[0].getString("objectId")
+                imageBmp?.let {
+                    val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
+                    file.save()
+                }
+            }
 
             finish()
         }
