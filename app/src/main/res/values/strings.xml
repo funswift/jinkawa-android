@@ -99,4 +99,7 @@
     <string name="koutsu">交通部</string>
     <string name="jbus">Jバス部</string>
 
+    <!-- SharedPref`s key -->
+    <string name = "user_config">com.example.taross.jinkawa_android.user_config</string>
+    <string name = "push">push_toggle</string>
 </resources>

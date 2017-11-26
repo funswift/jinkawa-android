@@ -1,6 +1,8 @@
 package com.example.taross.jinkawa_android
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -11,6 +13,8 @@ import android.widget.Switch
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.nifty.cloud.mb.core.NCMBInstallation
+import org.json.JSONArray
 
 
 /**
@@ -24,9 +28,25 @@ class OptionFragment: Fragment() {
         val rootView = inflater!!.inflate(R.layout.option_fragment, container, false)
         pushButton = rootView.findViewById(R.id.option_setting_notification_switch) as? Switch
 
+        val pushPref = context.getSharedPreferences(getString(R.string.user_config), Context.MODE_PRIVATE)
+        val pushConfig = pushPref.getBoolean(getString(R.string.push), true)
+
+        pushButton?.isChecked = pushConfig
+
+        val editor:SharedPreferences.Editor = pushPref.edit()
+
         pushButton?.setOnCheckedChangeListener { buttonView, isChecked ->
-            UserConfig.is_pushed = isChecked
-            UserConfig.sendPushConfigChange()
+            val editor:SharedPreferences.Editor = pushPref.edit()
+            editor.putBoolean(getString(R.string.push), isChecked)
+            editor.commit()
+
+            val installation = NCMBInstallation.getCurrentInstallation()
+            installation.channels = if(isChecked){
+                JSONArray("[on]")
+            } else{
+                JSONArray("[off]")
+            }
+            installation.saveInBackground()
             Log.d("プッシュ通知チャンネル変更", "${isChecked}に変更されました")
         }
 
