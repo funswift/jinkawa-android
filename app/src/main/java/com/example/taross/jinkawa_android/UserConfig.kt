@@ -9,7 +9,7 @@ import org.json.JSONArray
 
 object UserConfig{
     var is_pushed = true
-    val channel = arrayOf("on", "off")
+    // プッシュ通知はNCMBのチャンネルで制御、onチャンネルのみに配信する設定になっている
     fun sendPushConfigChange(){
         val installation = NCMBInstallation.getCurrentInstallation()
         installation.channels = if(is_pushed){
