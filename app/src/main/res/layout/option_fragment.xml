@@ -31,7 +31,9 @@
         <RelativeLayout
             android:id="@+id/option_setting_from"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_ripple"
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/option_setting_form_textView"
@@ -57,7 +59,8 @@
         <RelativeLayout
             android:id="@+id/option_setting_notification"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/background_holo_light">
 
             <TextView
                 android:id="@+id/option_setting_notification_textView"
@@ -113,6 +116,7 @@
             android:id="@+id/option_account_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/btn_ripple"
             android:clickable="true">
 
             <TextView
@@ -139,7 +143,9 @@
         <RelativeLayout
             android:id="@+id/option_account_logout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_ripple"
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/option_account_logout_textView"
@@ -182,7 +188,9 @@
         android:id="@+id/option_contact_jinkawa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/option_contact">
+        android:layout_below="@+id/option_contact"
+        android:background="@drawable/btn_ripple"
+        android:clickable="true">
 
         <TextView
             android:id="@+id/option_contact_jinkawa_textView"
