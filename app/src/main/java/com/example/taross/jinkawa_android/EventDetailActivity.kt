@@ -7,10 +7,12 @@ import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.taross.model.Event
@@ -36,8 +38,11 @@ class EventDetailActivity : AppCompatActivity() {
         if(LoginManager.isLogin){
             setSupportActionBar(toolBar)
         }
-        val imageView = findViewById(R.id.imageView) as ImageView
-        Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").into(imageView)
+        val imageButton = findViewById(R.id.imageButton_eventDetail) as ImageButton
+        Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").into(imageButton)
+        imageButton.setOnClickListener({
+            startActivity(Intent(applicationContext,EventDetailTranslucentActivity::class.java).putExtra("EVENT_EXTRA", event))
+        })
 
         val departmentTextView = findViewById(R.id.detail_department_name) as TextView
         departmentTextView.text = event.department

@@ -10,31 +10,59 @@ import org.json.JSONArray
  */
 
 object UserConfig{
-    val CONFIG_FILE_NAME = "com.example.taross.jinkawa_android.config"
+    private val CONFIG_FILE_NAME = "com.example.taross.jinkawa_android.user_config"
 
-    val KEY_IS_PUSHED = "pushed"
-    val KEY_PARTICIPANT_FLAG = "participant.flag"
+    private val KEY_IS_PUSHED = "pushed"
+    private val KEY_PARTICIPANT_FLAG = "participant.flag"
     private val KEY_PARTICIPANT_NAME = "participant.name"
     private val KEY_PARTICIPANT_ADDRESS = "participant.address"
     private val KEY_PARTICIPANT_TELL = "participant.tell"
     private val KEY_PARTICIPANT_AGE = "participant.age"
     private val KEY_PARTICIPANT_GENDER = "participant.gender"
 
-    var is_pushed = true
-    val channel = arrayOf("on", "off")
-
-    fun sendPushConfigChange(context: Context){
+    // プッシュ通知はNCMBのチャンネルで制御、onチャンネルのみに配信する設定になっている
+    fun sendPushConfigChange(context: Context, isChecked: Boolean){
         val sharedPreferences = context.getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE)
-        val pushed = sharedPreferences.getBoolean(KEY_PARTICIPANT_FLAG, true)
+        sharedPreferences.edit()
+                .putBoolean(KEY_IS_PUSHED, isChecked)
+                .apply()
 
         val installation = NCMBInstallation.getCurrentInstallation()
         installation.channels =
-                if(is_pushed){
+                if(getIsPushed(context)){
                     JSONArray("[on]")
                 } else{
                     JSONArray("[off]")
                 }
         installation.saveInBackground()
+    }
+
+    fun setParicipantFlag(context: Context, flag: Boolean){
+        val sharedPreferences = context.getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+                .putBoolean(KEY_PARTICIPANT_FLAG, flag)
+                .apply()
+    }
+
+    fun setParticipantData(context: Context, participant: Participant){
+        val sharedPreferences = context.getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+                .putString(KEY_PARTICIPANT_NAME, participant.name)
+                .putString(KEY_PARTICIPANT_ADDRESS, participant.address)
+                .putString(KEY_PARTICIPANT_TELL, participant.tell)
+                .putString(KEY_PARTICIPANT_AGE, participant.age)
+                .putString(KEY_PARTICIPANT_GENDER, participant.gender)
+                .apply()
+    }
+
+    fun getIsPushed(context: Context): Boolean{
+        val sharedPreferences = context.getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean(KEY_IS_PUSHED, true)
+    }
+
+    fun getParticipantFlag(context: Context): Boolean{
+        val sharedPreferences = context.getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean(KEY_PARTICIPANT_FLAG, false)
     }
 
     fun getParticipantData(context: Context): Participant{

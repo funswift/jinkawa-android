@@ -77,6 +77,9 @@
         <activity android:name=".NoticeDetailActivity" />
         <activity android:name=".NoticeEditActivity" />
         <activity android:name=".PasswordChangeActivity" />
+        <activity android:name=".EventDetailTranslucentActivity"
+            android:theme="@style/Theme.TranslucentBackground">
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"></activity>
