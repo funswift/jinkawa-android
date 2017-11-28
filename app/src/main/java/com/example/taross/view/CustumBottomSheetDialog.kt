@@ -5,6 +5,7 @@ package com.example.taross.view
  */
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
@@ -16,12 +17,10 @@ import android.support.design.widget.Snackbar
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
-import com.example.taross.jinkawa_android.R
 import com.example.taross.model.Event
 import com.nifty.cloud.mb.core.NCMBFile
 import android.system.Os.mkdir
 import android.widget.LinearLayout
-import com.example.taross.jinkawa_android.LoginManager
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import android.os.AsyncTask.execute
@@ -30,6 +29,9 @@ import android.os.StrictMode
 import android.os.Build.VERSION.SDK_INT
 import com.dropbox.core.android.Auth
 import java.io.*
+import android.content.Intent
+import com.example.taross.jinkawa_android.*
+import java.net.URI
 
 
 class CustomBottomSheetDialog : BottomSheetDialogFragment() {
@@ -93,6 +95,43 @@ class CustomBottomSheetDialog : BottomSheetDialogFragment() {
             val prefs = context.getSharedPreferences("com.example.taross.dropboxintegration", Context.MODE_PRIVATE)
             prefs.edit().putString("access-token", token).apply()
         }
+        upload()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode:Int, data:Intent) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        val prefs = context.getSharedPreferences("com.example.taross.dropboxintegration", Context.MODE_PRIVATE)
+        val accessToken:String = prefs.getString("access-token", "")
+
+        if (resultCode != RESULT_OK || data == null) return
+         // Check which request we're responding to
+        if (requestCode == 5237) {
+        // Make sure the request was successful
+        if (resultCode == RESULT_OK) {
+          //Image URI received
+            val file= File(data.toUri(Intent.URI_INTENT_SCHEME))
+            if (file != null) {
+              //Initialize UploadTask
+              UploadTask(DropboxClient.getClient(accessToken), file, context).execute();
+          }
+      }
+  }
+}
+
+
+    private fun upload() {
+        val prefs = context.getSharedPreferences("com.example.taross.dropboxintegration", Context.MODE_PRIVATE)
+        val accessToken:String = prefs.getString("access-token", "")
+
+        if (accessToken.isNotEmpty()) return
+        //Select image to upload
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+        startActivityForResult(Intent.createChooser(intent,
+                "Upload to Dropbox"),5237)
     }
 
     override fun onPause() {

@@ -17,7 +17,7 @@ import java.io.IOException
  */
 class UploadTask internal constructor(private val dbxClient: DbxClientV2, private val file: File, private val context: Context) : AsyncTask<Any, Any, Any>() {
 
-    protected override fun doInBackground(params: Array<Any>): Any? {
+    override fun doInBackground(params: Array<Any>): Any? {
         val value: Any = try {
             // Upload to Dropbox
             val inputStream = FileInputStream(file)
@@ -34,7 +34,7 @@ class UploadTask internal constructor(private val dbxClient: DbxClientV2, privat
         return null
     }
 
-    protected override fun onPostExecute(o: Any) {
+    override fun onPostExecute(o: Any) {
         super.onPostExecute(o)
         Toast.makeText(context, "Image uploaded successfully", Toast.LENGTH_SHORT).show()
     }
