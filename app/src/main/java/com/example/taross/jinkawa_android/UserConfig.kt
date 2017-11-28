@@ -37,7 +37,7 @@ object UserConfig{
         installation.saveInBackground()
     }
 
-    fun setParicipantFlag(context: Context, flag: Boolean){
+    fun setParticipantFlag(context: Context, flag: Boolean){
         val sharedPreferences = context.getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE)
         sharedPreferences.edit()
                 .putBoolean(KEY_PARTICIPANT_FLAG, flag)
@@ -77,5 +77,18 @@ object UserConfig{
         val participant = Participant(p_name, p_age, p_tell, p_address, p_gender, "")
 
         return participant
+    }
+
+    fun resetParticipantData(context: Context){
+        val sharedPreferences = context.getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE)
+
+        sharedPreferences.edit()
+                .putBoolean(KEY_PARTICIPANT_FLAG, false)
+                .remove(KEY_PARTICIPANT_NAME)
+                .remove(KEY_PARTICIPANT_ADDRESS)
+                .remove(KEY_PARTICIPANT_TELL)
+                .remove(KEY_PARTICIPANT_AGE)
+                .remove(KEY_PARTICIPANT_GENDER)
+                .apply()
     }
 }

@@ -99,7 +99,22 @@
     <string name="koutsu">交通部</string>
     <string name="jbus">Jバス部</string>
 
-    <!-- SharedPref`s key -->
-    <string name = "user_config">com.example.taross.jinkawa_android.user_config</string>
-    <string name = "push">push_toggle</string>
+    <!-- Event entry item's name -->
+    <string name="entry_item_name">氏名</string>
+    <string name="entry_item_address">住所</string>
+    <string name="entry_item_tell">電話番号</string>
+    <string name="entry_item_gender">性別</string>
+    <string name="entry_item_age">年齢</string>
+
+    <!-- Alert Dialog's base text -->
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="_return">もどる</string>
+    <string name="confirm">確認</string>
+    <!-- Alert Dialog's specific text -->
+    <string name="delete_message">本当に削除してもよろしいですか？</string>
+    <string name="delete_entry_log">入力履歴を削除しました</string>
+    <string name="nothing_entry_log">入力履歴がありません</string>
+
+    <!-- template <string name=""></string> -->
 </resources>

@@ -49,7 +49,7 @@ class EntryActivity : AppCompatActivity() {
             participant.tell = tellText.text.toString()
             participant.age = ageText.text.toString()
 
-            UserConfig.setParicipantFlag(applicationContext, true)
+            UserConfig.setParticipantFlag(applicationContext, true)
             UserConfig.setParticipantData(applicationContext, participant)
             participant.save(eventId)
             finish()
