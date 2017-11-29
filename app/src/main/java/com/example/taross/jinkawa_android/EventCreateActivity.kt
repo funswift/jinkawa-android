@@ -68,7 +68,16 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
         toolbar.title = getString(R.string.title_event_create)
 
         val departmentSpinner: Spinner = findViewById(R.id.spinner_department) as Spinner
-        val personalAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
+        var personalAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item)
+
+        LoginManager.account?.let {
+            personalAdapter =
+                    if (it.auth.any{it == "all"})
+                        ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
+                    else
+                        ArrayAdapter(applicationContext, R.layout.spinner_item, it.auth)
+        }
+
         departmentSpinner.adapter = personalAdapter
 
         var officer = false

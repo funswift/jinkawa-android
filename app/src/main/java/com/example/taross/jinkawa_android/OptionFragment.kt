@@ -14,6 +14,9 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.nifty.cloud.mb.core.NCMBInstallation
+import org.jetbrains.anko.*
+import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.support.v4.alert
 import org.json.JSONArray
 
 
@@ -28,26 +31,65 @@ class OptionFragment: Fragment() {
         val rootView = inflater!!.inflate(R.layout.option_fragment, container, false)
         pushButton = rootView.findViewById(R.id.option_setting_notification_switch) as? Switch
 
-        val pushPref = context.getSharedPreferences(getString(R.string.user_config), Context.MODE_PRIVATE)
-        val pushConfig = pushPref.getBoolean(getString(R.string.push), true)
-
-        pushButton?.isChecked = pushConfig
-
-        val editor:SharedPreferences.Editor = pushPref.edit()
+        pushButton?.isChecked = UserConfig.getIsPushed(context)
 
         pushButton?.setOnCheckedChangeListener { buttonView, isChecked ->
-            val editor:SharedPreferences.Editor = pushPref.edit()
-            editor.putBoolean(getString(R.string.push), isChecked)
-            editor.commit()
 
-            val installation = NCMBInstallation.getCurrentInstallation()
-            installation.channels = if(isChecked){
-                JSONArray("[on]")
-            } else{
-                JSONArray("[off]")
-            }
-            installation.saveInBackground()
+            UserConfig.sendPushConfigChange(context, isChecked)
+
             Log.d("プッシュ通知チャンネル変更", "${isChecked}に変更されました")
+        }
+
+        val settingFormLayout = rootView.findViewById(R.id.option_setting_from) as RelativeLayout
+        settingFormLayout.setOnClickListener {
+            when (UserConfig.getParticipantFlag(context)) {
+                true -> alert {
+                            title = getString(R.string.option_setting_form_text)
+                            customView {
+                                val entryInformation = UserConfig.getParticipantData(context)
+                                linearLayout {
+                                    topPadding = dip(16)
+                                    verticalLayout {
+                                        padding = dip(16)
+                                        textView(getString(R.string.entry_item_name)) { textSize = 18f }
+                                        textView(getString(R.string.entry_item_address)) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                        textView(getString(R.string.entry_item_tell)) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                        textView(getString(R.string.entry_item_gender)) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                        textView(getString(R.string.entry_item_age)) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                    }
+                                    verticalLayout {
+                                        padding = dip(16)
+                                        textView(entryInformation.name) { textSize = 18f }
+                                        textView(entryInformation.address) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.tell) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.gender) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.age) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                    }
+                                }
+                            }
+                            positiveButton(getString(R.string._return)) {
+                                alert(getString(R.string.delete_message)) {
+                                    title = getString(R.string.confirm)
+                                    positiveButton(getString(R.string.yes)) {
+                                        UserConfig.resetParticipantData(context)
+                                        snackbar(rootView, getString(R.string.delete_entry_log))
+                                    }
+                                    negativeButton(getString(R.string.no)) {}
+                                }.show()
+                            }
+                            negativeButton(getString(R.string._return)) {}
+                        }.show()
+                false -> alert {
+                    title = getString(R.string.option_setting_form_text)
+                    customView {
+                        linearLayout {
+                            padding = dip(32)
+                            textView(getString(R.string.nothing_entry_log)) { textSize = 18f }
+                        }
+                    }
+                    negativeButton(getString(R.string._return)){}
+                }.show()
+            }
         }
 
         val accountTextView = rootView.findViewById(R.id.option_account) as TextView
