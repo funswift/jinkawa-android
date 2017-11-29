@@ -10,6 +10,7 @@
     <string name="title_activity_e">eActivity</string>
     <string name="title_activity_event_detail">EventDetailActivity</string>
     <string name="action_event_edit">編集</string>
+    <string name="action_event_delete">削除</string>
     <string name="action_list_participants">参加者リスト</string>
     <string name="action_save_csv">CSV保存</string>
 

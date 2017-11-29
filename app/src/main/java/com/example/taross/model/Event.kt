@@ -102,4 +102,22 @@ data class Event(val title: String, val id:String, val department:String, val da
             }
         }
     }
+
+    fun delete(){
+        val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
+        query.whereEqualTo("objectId", this.id)
+        val datas: List<NCMBObject> = try {
+            query.find()
+        } catch (e: Exception) {
+            emptyList<NCMBObject>()
+        }
+        if (datas.isNotEmpty()) {
+            val data = datas[0]
+            try {
+                data.deleteObject()
+            } catch (e: Exception) {
+                println("Event data delete error : " + e.cause.toString())
+            }
+        }
+    }
 }
