@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="background_holo_light">#fff3f3f3</color>
     <color name="StartButton">#d77d7d</color>
     <color name="white">#ffffff</color>
     <color name="lightGray">#d8d8d8</color>
