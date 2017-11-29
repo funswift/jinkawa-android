@@ -32,7 +32,7 @@ class CsvHelper{
                 sep = ","
                 data += sep + it.age
                 data += sep + it.gender
-                data += sep + it.tel
+                data += sep + it.tell
                 data += sep + it.address
                 data += "\r\n"
             }
