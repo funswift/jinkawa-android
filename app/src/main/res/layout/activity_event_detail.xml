@@ -35,6 +35,8 @@
         android:id="@+id/button_entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:text="行きたい！"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
@@ -48,15 +50,17 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/detail_department_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="35dp"
+                android:layout_alignBaseline="@+id/detail_title_department"
+                android:layout_alignBottom="@+id/detail_title_department"
+                android:layout_marginStart="40dp"
+                android:layout_marginRight="60dp"
                 android:layout_toEndOf="@+id/detail_title_location"
                 android:ems="10"
                 android:text=""
@@ -67,122 +71,99 @@
                 android:id="@+id/detail_title_department"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="20dp"
                 android:text="部署"
                 android:textColor="#000000"
-                android:textSize="8pt"
-                android:layout_marginLeft="10dp"
-                />
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/detail_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/detail_title_date"
+                android:layout_alignBottom="@+id/detail_title_date"
+                android:layout_alignStart="@+id/detail_location"
                 android:ems="10"
                 android:text="未定"
                 android:textColor="#000000"
-                android:textSize="8pt"
-                android:layout_marginRight="10dp"
-                android:layout_below="@+id/detail_department_name"
-                android:layout_alignStart="@id/detail_department_name"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/detail_title_date"
-                />
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/detail_title_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="日程"
                 android:layout_alignStart="@+id/detail_title_department"
-                android:layout_marginTop="10dp"
                 android:layout_below="@+id/detail_title_department"
+                android:layout_marginTop="10dp"
+                android:text="日程"
                 android:textColor="#000000"
-                android:textSize="8pt"
-                />
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/detail_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@id/detail_department_name"
+                android:layout_alignTop="@+id/detail_title_location"
+                android:layout_below="@+id/detail_date"
+                android:layout_marginRight="10dp"
                 android:ems="10"
                 android:text="未定"
                 android:textColor="#000000"
-                android:textSize="8pt"
-                android:layout_marginRight="10dp"
-                android:layout_below="@+id/detail_date"
-                android:layout_alignStart="@id/detail_department_name"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/detail_title_location"
-                />
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/detail_title_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="開催場所"
                 android:layout_alignStart="@+id/detail_title_department"
-                android:layout_marginTop="10dp"
                 android:layout_below="@+id/detail_title_date"
+                android:layout_marginTop="10dp"
+                android:text="開催場所"
                 android:textColor="#000000"
-                android:textSize="8pt"
-                />
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/detail_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@id/detail_department_name"
+                android:layout_alignTop="@+id/detail_title_capacity"
+                android:layout_below="@+id/detail_location"
+                android:layout_marginRight="10dp"
                 android:ems="10"
                 android:text="なし"
                 android:textColor="#000000"
-                android:textSize="8pt"
-                android:layout_marginRight="10dp"
-                android:layout_below="@+id/detail_location"
-                android:layout_alignStart="@id/detail_department_name"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/detail_title_capacity"
-                />
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/detail_title_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="参加上限"
                 android:layout_alignStart="@+id/detail_title_department"
-                android:layout_marginTop="10dp"
                 android:layout_below="@+id/detail_title_location"
+                android:layout_marginTop="10dp"
+                android:text="参加上限"
                 android:textColor="#000000"
-                android:textSize="8pt"
-                />
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/detail_description"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/detail_capacity"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="23dp"
                 android:ems="10"
                 android:text="あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"
                 android:textColor="#000000"
-                android:textSize="8pt"
-                android:layout_marginRight="10dp"
-                android:layout_below="@+id/detail_capacity"
-                android:layout_alignStart="@id/detail_department_name"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/detail_title_description"
-                />
-
-            <TextView
-                android:id="@+id/detail_title_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="説明文"
-                android:layout_alignStart="@+id/detail_title_department"
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/detail_title_capacity"
-                android:textColor="#000000"
-                android:textSize="8pt"
-                />
+                android:textSize="8pt" />
 
         </RelativeLayout>
-
 
 
     </ScrollView>
