@@ -36,7 +36,9 @@ class NoticeDetailActivity : AppCompatActivity() {
         }
 
         val imageView = findViewById(R.id.imageView) as ImageView
-        imageView.setImageResource(R.drawable.ic_notice_info)
+        val id = notice.typeSelecetedToIcon(notice.type, resources)
+        if(id != -1)
+            imageView.setImageResource(id)
 
         val departmentTextView = findViewById(R.id.detail_department_name) as TextView
         departmentTextView.text = notice.department
