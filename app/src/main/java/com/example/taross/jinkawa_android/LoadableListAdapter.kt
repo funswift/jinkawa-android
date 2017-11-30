@@ -7,6 +7,6 @@ import android.widget.BaseAdapter
  * Created by taross on 2017/11/07.
  */
 
-abstract class LoadableListAdapter : BaseAdapter(), LoadableList{
+abstract class LoadableListAdapter<T> : BaseAdapter(), LoadableList<T>{
 
 }
