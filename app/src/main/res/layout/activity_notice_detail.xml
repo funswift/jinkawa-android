@@ -61,38 +61,13 @@
                 android:textSize="8pt" />
 
             <TextView
-                android:id="@+id/detail_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignStart="@id/detail_department_name"
-                android:layout_alignTop="@+id/detail_title_date"
-                android:layout_below="@+id/detail_department_name"
-                android:layout_marginRight="10dp"
-                android:ems="10"
-                android:text="未定"
-                android:textColor="#000000"
-                android:textSize="8pt" />
-
-            <TextView
-                android:id="@+id/detail_title_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/detail_title_department"
-                android:layout_below="@+id/detail_title_department"
-                android:layout_marginTop="10dp"
-                android:text="日程"
-                android:textColor="#000000"
-                android:textSize="8pt" />
-
-            <TextView
                 android:id="@+id/detail_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignStart="@id/detail_department_name"
                 android:layout_alignTop="@+id/detail_title_description"
-                android:layout_below="@+id/detail_title_date"
+                android:layout_below="@+id/detail_title_department"
                 android:layout_marginRight="10dp"
                 android:ems="10"
                 android:text="あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"
@@ -104,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/detail_title_department"
-                android:layout_below="@+id/detail_title_date"
+                android:layout_below="@+id/detail_title_department"
                 android:layout_marginTop="10dp"
                 android:text="説明文"
                 android:textColor="#000000"

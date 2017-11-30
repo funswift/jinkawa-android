@@ -40,7 +40,7 @@ class NoticeItemView: FrameLayout{
         titleTextView?.text = item.title
 
         // 画像用処理
-        val id = item.typeSelecetedToIcon(item.type, resources)
+        val id = item.typeSelectedToIcon(item.type, resources)
         if(id != -1)
             thumbnailImageView?.setImageResource(id)
     }

@@ -84,7 +84,8 @@ data class Notice(val title:String, val id:String, val department:String, val da
         }
     }
 
-    fun typeSelecetedToIcon(typeName: String, resource: Resources): Int{
+    //お知らせの種類(type)によって対応したアイコンのResourceIDを取得する関数
+    fun typeSelectedToIcon(typeName: String, resource: Resources): Int{
         val typeArray = resource.getStringArray(R.array.array_notice_types)
         val iconImageId: Int = when(typeName){
             typeArray[0] -> R.drawable.ic_notice_info
