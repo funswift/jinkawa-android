@@ -29,19 +29,22 @@ class NoticeEditActivity: NoticeCreateActivity() {
         toolbar.title = getString(R.string.title_notice_edit)
 
         val departmentSpinner : Spinner = findViewById(R.id.spinner_department) as Spinner
-
-        var personalAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item)
-
+        var departmentPersonalAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item)
         LoginManager.account?.let {
-            personalAdapter =
+            departmentPersonalAdapter=
                     if (it.auth.any{it == "all"})
                         ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
                     else
                         ArrayAdapter(applicationContext, R.layout.spinner_item, it.auth)
         }
+        departmentSpinner.adapter = departmentPersonalAdapter
 
-        departmentSpinner.adapter = personalAdapter
-        val spinnerIndex = setSpinnerSelection(personalAdapter)
+        val typeSpinner : Spinner = findViewById(R.id.spinner_type) as Spinner
+        val typePersonalAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_notice_types))
+        typeSpinner.adapter = typePersonalAdapter
+
+        val departmentSpinnerIndex = setSpinnerSelection(departmentPersonalAdapter, notice.department)
+        val typeSpinnerIndex = setSpinnerSelection(typePersonalAdapter, notice.type)
         var officer = false
 
         val titleEditText = findViewById(R.id.edit_notice_title) as EditText
@@ -51,7 +54,8 @@ class NoticeEditActivity: NoticeCreateActivity() {
         val editButton = findViewById(R.id.button_notice_create) as Button
         editButton.setText(R.string.notice_edit_button_text)
 
-        departmentSpinner.setSelection(spinnerIndex)
+        departmentSpinner.setSelection(departmentSpinnerIndex)
+        typeSpinner.setSelection(typeSpinnerIndex)
         titleEditText.setText(notice.title)
         descriptionEditText.setText(notice.description)
         if(notice.officer_only) officerOnlySwitch.toggle()
@@ -63,12 +67,13 @@ class NoticeEditActivity: NoticeCreateActivity() {
         editButton.setOnClickListener{
             val title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
+            val type = typeSpinner.selectedItem.toString()
             val description = descriptionEditText.text.toString()
             val officer_only = officer
 
             if(true){}
 
-            val notice = Notice(title, notice.id, department, notice.date, description, "", officer_only)
+            val notice = Notice(title, notice.id, department, notice.date, description, "", type, officer_only)
             notice.update(this)
 
             finish()
@@ -76,10 +81,10 @@ class NoticeEditActivity: NoticeCreateActivity() {
     }
 
 
-    fun setSpinnerSelection(spinnerAdapter: ArrayAdapter<String>): Int{
+    fun setSpinnerSelection(spinnerAdapter: ArrayAdapter<String>, word: String): Int{
         var position = 0
         for(i in 0..spinnerAdapter.count){
-            position = if(spinnerAdapter.getItem(i) == notice.department) i else -1
+            position = if(spinnerAdapter.getItem(i) == word) i else -1
             if(position >= 0) break
         }
         return position

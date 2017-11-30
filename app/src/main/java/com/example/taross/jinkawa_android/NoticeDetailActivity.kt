@@ -3,7 +3,6 @@ package com.example.taross.jinkawa_android
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -37,13 +36,12 @@ class NoticeDetailActivity : AppCompatActivity() {
         }
 
         val imageView = findViewById(R.id.imageView) as ImageView
-        imageView.setImageResource(R.drawable.ic_notice_info)
+        val id = notice.typeSelectedToIcon(notice.type, resources)
+        if(id != -1)
+            imageView.setImageResource(id)
 
         val departmentTextView = findViewById(R.id.detail_department_name) as TextView
         departmentTextView.text = notice.department
-
-        val dateTextView = findViewById(R.id.detail_date) as TextView
-        dateTextView.text = notice.date
 
         val descriptionTextView = findViewById(R.id.detail_description) as TextView
         descriptionTextView.text = notice.description
