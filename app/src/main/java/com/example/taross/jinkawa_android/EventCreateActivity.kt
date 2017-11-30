@@ -196,6 +196,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             event.save(this)
             NotificationHelper.sendPush(title, "イベントが追加されました！")
 
+
             //画像追加
             val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
 
