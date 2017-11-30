@@ -79,17 +79,12 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
         val officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch
         val descriptionEditText = findViewById(R.id.edit_description) as EditText
 
-        val startDateTextView = findViewById(R.id.edit_eventdate_start) as TextView
         val startDateButton = findViewById(R.id.button_eventdate_start_picker) as Button
-        val startTimeTextView = findViewById(R.id.edit_eventtime_start) as TextView
         val startTimeButton = findViewById(R.id.button_eventtime_start_picker) as Button
 
-        val endDateTextView = findViewById(R.id.edit_eventdate_end) as TextView
         val endDateButton = findViewById(R.id.button_eventdate_end_picker) as Button
-        val endTimeTextView = findViewById(R.id.edit_eventtime_end) as TextView
         val endTimeButton = findViewById(R.id.button_eventtime_end_picker) as Button
 
-        val deadlineTextView = findViewById(R.id.edit_deadline) as TextView
         val deadlineButton = findViewById(R.id.button_deadline_picker) as Button
         val createButton = findViewById(R.id.button_eventcreate) as Button
 
@@ -112,7 +107,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
                 }
                 Log.d("hoge", "onDateSet")
                 val fixed_month = monthOfYear + 1
-                startDateTextView.text = "$year/$fixed_month/$dayOfMonth"
+                startDateButton.text = "$year/$fixed_month/$dayOfMonth"
             }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
             dialog.show()
         }
@@ -121,7 +116,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             val calendar = Calendar.getInstance()
             val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
 
-                startTimeTextView.text = "$hourOfDay:$minute"
+                startTimeButton.text = "$hourOfDay:$minute"
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true)
             dialog.show()
         }
@@ -134,7 +129,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
                 }
                 Log.d("hoge", "onDateSet")
                 val fixed_month = monthOfYear + 1
-                endDateTextView.text = "$year/$fixed_month/$dayOfMonth"
+                endDateButton.text = "$year/$fixed_month/$dayOfMonth"
             }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
             dialog.show()
         }
@@ -143,7 +138,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             val calendar = Calendar.getInstance()
             val dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
 
-                endTimeTextView.text = "$hourOfDay:$minute"
+                endTimeButton.setText( "$hourOfDay:$minute")
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true)
             dialog.show()
         }
@@ -156,7 +151,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
                 }
                 Log.d("hoge", "onDateSet")
                 val fixed_month = monthOfYear + 1
-                deadlineTextView.text = "$year/$fixed_month/$dayOfMonth"
+                deadlineButton.setText("$year/$fixed_month/$dayOfMonth")
             }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
             dialog.show()
         }
@@ -166,12 +161,12 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             val department = departmentSpinner.selectedItem.toString()
             val description = descriptionEditText.text.toString()
             val location = locationEditText.text.toString()
-            val start_date = startDateTextView.text.toString()
-            val start_time = startTimeTextView.text.toString()
-            val end_date = endDateTextView.text.toString()
-            val end_time = endTimeTextView.text.toString()
+            val start_date = startDateButton.text.toString()
+            val start_time = startTimeButton.text.toString()
+            val end_date = endDateButton.text.toString()
+            val end_time = endTimeButton.text.toString()
             val capacity = capacityEditText.text.toString()
-            val deadline = deadlineTextView.text.toString()
+            val deadline = deadlineButton.text.toString()
             val officer_only = officer
 
           officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
