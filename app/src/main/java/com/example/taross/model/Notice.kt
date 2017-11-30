@@ -78,4 +78,22 @@ data class Notice(val title:String, val id:String, val department:String, val da
         }
     }
 
+    fun delete(){
+        val queryEvent: NCMBQuery<NCMBObject> = NCMBQuery("Information")
+        queryEvent.whereEqualTo("objectId", this.id)
+        val datas: List<NCMBObject> = try {
+            queryEvent.find()
+        } catch (e: Exception) {
+            emptyList<NCMBObject>()
+        }
+        if (datas.isNotEmpty()) {
+            val data = datas[0]
+            try {
+                data.deleteObject()
+            } catch (e: Exception) {
+                println("Event data delete error : " + e.cause.toString())
+            }
+        }
+    }
+
 }
