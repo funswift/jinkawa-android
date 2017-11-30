@@ -91,7 +91,7 @@ class EventDetailActivity : AppCompatActivity() {
             return true
         }else if (id == R.id.action_event_delete){
             event.delete()
-            Log.d("Event Delete Button", "Pushed!!")
+            finish()
         }
 
         return super.onOptionsItemSelected(item)
