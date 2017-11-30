@@ -13,6 +13,11 @@ import com.nifty.cloud.mb.core.NCMBException
 import com.nifty.cloud.mb.core.NCMBObject
 import com.nifty.cloud.mb.core.FetchCallback
 import com.nifty.cloud.mb.core.NCMBQuery
+import com.squareup.picasso.Cache
+import com.squareup.picasso.Picasso
+import java.io.File
+
+
 
 
 /**
@@ -72,8 +77,19 @@ class EventListAdapter(private val context: Context): LoadableListAdapter(){
     }
 
     override fun reflesh() {
+        //deleteDirectoryTree(context.cacheDir)
         this.items = loadData()
         this.filter()
+    }
+
+    fun deleteDirectoryTree(fileOrDirectory: File) {
+        if (fileOrDirectory.isDirectory) {
+            for (child in fileOrDirectory.listFiles()!!) {
+                deleteDirectoryTree(child)
+            }
+        }
+
+        fileOrDirectory.delete()
     }
 
     override fun filter(){
