@@ -10,7 +10,7 @@ import com.nifty.cloud.mb.core.NCMBObject
 /**
  * Created by taross on 2017/08/26.
  */
- data class Participant(var name:String = "", var age:String = "", val tel:String = "", val address:String = "", val gender:String = "", val eventId: String = ""):Parcelable{
+ data class Participant(var name:String = "", var age:String = "", var tell:String = "", var address:String = "", var gender:String = "", val eventId: String = ""):Parcelable{
 
     companion object {
         @JvmField
@@ -35,7 +35,7 @@ import com.nifty.cloud.mb.core.NCMBObject
         data.put("name", this.name)
         data.put("sex",this.gender)
         data.put("age", this.age)
-        data.put("tell", this.tel)
+        data.put("tell", this.tell)
         data.put("address", this.address)
         data.put("eventID", eventId )
 

@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter
 import com.example.taross.model.Event
 import com.nifty.cloud.mb.core.NCMBException
 import com.squareup.picasso.Picasso
+import com.nifty.cloud.mb.core.*
+
 
 class EventEditActivity: EventCreateActivity() {
 
@@ -31,7 +33,18 @@ class EventEditActivity: EventCreateActivity() {
         toolbar.title = getString(R.string.title_event_edit)
 
         val departmentSpinner : Spinner = findViewById(R.id.spinner_department) as Spinner
-        val personalAdapter : ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
+
+        // 部署スピナーの内容追加
+        var personalAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item)
+
+        LoginManager.account?.let {
+            personalAdapter =
+                    if (it.auth.any{it == "all"})
+                        ArrayAdapter(applicationContext, R.layout.spinner_item, resources.getStringArray(R.array.array_departments))
+                    else
+                        ArrayAdapter(applicationContext, R.layout.spinner_item, it.auth)
+        }
+
         departmentSpinner.adapter = personalAdapter
         val spinnerIndex = setSpinnerSelection(personalAdapter)
         var officer = false
@@ -89,6 +102,24 @@ class EventEditActivity: EventCreateActivity() {
             val event = Event(title, event.id ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
             event.update(this)
 
+            //画像追加
+            val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
+
+            query.whereEqualTo("name", title)
+            val result = try {
+                query.find()
+            } catch (e :Exception){
+                emptyList<NCMBObject>()
+            }
+            Log.d("result", "$result")
+            if (result.isNotEmpty()){
+                Log.d("test", "${result[0].getString("objectId")}を取得しました！")
+                val fileName = result[0].getString("objectId")
+                imageBmp?.let {
+                    val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
+                    file.save()
+                }
+            }
 
             finish()
         }

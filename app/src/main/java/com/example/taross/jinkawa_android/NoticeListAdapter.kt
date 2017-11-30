@@ -54,6 +54,7 @@ class NoticeListAdapter(private val context: Context): LoadableListAdapter(){
                         result.getString("date"),
                         result.getString("info"),
                         mrs_updateDate,
+                        result.getString("type"),
                         result.getBoolean("officer_only")
                 )
                 noticeList.add(notice)
@@ -64,11 +65,11 @@ class NoticeListAdapter(private val context: Context): LoadableListAdapter(){
 
     override fun reflesh() {
         this.items = loadData()
+        this.filter()
     }
 
-    fun filterOfficerOnly(): LoadableListAdapter{
+    override fun filter(){
         if(!LoginManager.isLogin)
             this.items = items.filter { it.officer_only == false }.toMutableList()
-        return this
     }
 }

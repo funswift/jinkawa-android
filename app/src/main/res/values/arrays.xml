@@ -11,4 +11,12 @@
         <item>@string/koutsu</item>
         <item>@string/jbus</item>
     </string-array>
+
+    <string-array name="array_notice_types">
+        <item>@string/info</item>
+        <item>@string/attention</item>
+        <item>@string/bus</item>
+        <item>@string/shopping</item>
+        <item>@string/emergency</item>
+    </string-array>
 </resources>

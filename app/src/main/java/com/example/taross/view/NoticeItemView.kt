@@ -1,7 +1,6 @@
 package com.example.taross.view
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -41,6 +40,8 @@ class NoticeItemView: FrameLayout{
         titleTextView?.text = item.title
 
         // 画像用処理
-        thumbnailImageView?.setImageResource(R.drawable.ic_notice_info)
+        val id = item.typeSelectedToIcon(item.type, resources)
+        if(id != -1)
+            thumbnailImageView?.setImageResource(id)
     }
 }

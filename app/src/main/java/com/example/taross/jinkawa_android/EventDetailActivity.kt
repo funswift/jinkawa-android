@@ -68,7 +68,11 @@ class EventDetailActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_event_list, menu)
+        if (LoginManager.isLogin)
+            LoginManager.account?.let {
+                if (it.auth.any{ it == "all" || it == event.department})
+                menuInflater.inflate(R.menu.menu_event_list, menu)
+            }
         return true
     }
 
@@ -84,6 +88,10 @@ class EventDetailActivity : AppCompatActivity() {
             return true
         }else if(id == R.id.action_event_edit){
             startActivity(Intent(applicationContext,EventEditActivity::class.java).putExtra("EVENT_EXTRA", event))
+            return true
+        }else if (id == R.id.action_event_delete){
+            event.delete()
+            finish()
             return true
         }
 
