@@ -68,7 +68,7 @@ class NoticeEditActivity: NoticeCreateActivity() {
 
             if(true){}
 
-            val notice = Notice(title, notice.id, department, notice.date, description, "", officer_only)
+            val notice = Notice(title, notice.id, department, notice.date, description, "", "", officer_only)
             notice.update(this)
 
             finish()

@@ -99,6 +99,13 @@
     <string name="koutsu">交通部</string>
     <string name="jbus">Jバス部</string>
 
+    <!-- Notice type's name -->
+    <string name="info">告知</string>
+    <string name="attention">注意</string>
+    <string name="bus">バス</string>
+    <string name="shopping">買い物</string>
+    <string name="emergency">緊急</string>
+
     <!-- Event entry item's name -->
     <string name="entry_item_name">氏名</string>
     <string name="entry_item_address">住所</string>

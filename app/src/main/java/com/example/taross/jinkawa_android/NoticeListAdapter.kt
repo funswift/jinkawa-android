@@ -54,6 +54,7 @@ class NoticeListAdapter(private val context: Context): LoadableListAdapter(){
                         result.getString("date"),
                         result.getString("info"),
                         mrs_updateDate,
+                        result.getString("type"),
                         result.getBoolean("officer_only")
                 )
                 noticeList.add(notice)
