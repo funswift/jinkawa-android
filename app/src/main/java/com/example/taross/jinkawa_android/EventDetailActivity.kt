@@ -89,6 +89,10 @@ class EventDetailActivity : AppCompatActivity() {
         }else if(id == R.id.action_event_edit){
             startActivity(Intent(applicationContext,EventEditActivity::class.java).putExtra("EVENT_EXTRA", event))
             return true
+        }else if (id == R.id.action_event_delete){
+            event.delete()
+            finish()
+            return true
         }
 
         return super.onOptionsItemSelected(item)

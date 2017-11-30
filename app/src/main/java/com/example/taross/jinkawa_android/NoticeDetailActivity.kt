@@ -67,6 +67,10 @@ class NoticeDetailActivity : AppCompatActivity() {
         if(id == R.id.action_notice_edit){
             startActivity(Intent(applicationContext, NoticeEditActivity::class.java).putExtra("NOTICE_EXTRA", notice))
             return true
+        }else if(id == R.id.action_notice_delete){
+            notice.delete()
+            finish()
+            return true
         }
 
         return super.onOptionsItemSelected(item)

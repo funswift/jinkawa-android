@@ -7,12 +7,10 @@ import android.os.Parcelable
 import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
 import com.example.taross.jinkawa_android.EventCreateActivity
+import com.example.taross.jinkawa_android.EventDetailActivity
 import com.example.taross.jinkawa_android.EventEditActivity
 import com.example.taross.jinkawa_android.ListActivity
-import com.nifty.cloud.mb.core.DoneCallback
-import com.nifty.cloud.mb.core.NCMBException
-import com.nifty.cloud.mb.core.NCMBObject
-import com.nifty.cloud.mb.core.NCMBQuery
+import com.nifty.cloud.mb.core.*
 
 /**
  * Created by taross on 2017/08/12.
@@ -99,6 +97,39 @@ data class Event(val title: String, val id:String, val department:String, val da
                 data.save()
             } catch (e: Exception) {
                 println("Event data save error : " + e.cause.toString())
+            }
+        }
+    }
+
+    fun delete(){
+        val queryEvent: NCMBQuery<NCMBObject> = NCMBQuery("Event")
+        queryEvent.whereEqualTo("objectId", this.id)
+        val datas: List<NCMBObject> = try {
+            queryEvent.find()
+        } catch (e: Exception) {
+            emptyList<NCMBObject>()
+        }
+        if (datas.isNotEmpty()) {
+            val data = datas[0]
+            try {
+                data.deleteObject()
+            } catch (e: Exception) {
+                println("Event data delete error : " + e.cause.toString())
+            }
+        }
+        val queryImage: NCMBQuery<NCMBFile> = NCMBFile.getQuery()
+        queryImage.whereEqualTo("fileName", "${this.id}.png")
+        val files: List<NCMBFile> = try{
+            queryImage.find()
+        } catch (e: Exception){
+            emptyList<NCMBFile>()
+        }
+        if(files.isNotEmpty()){
+            val file = files[0]
+            try {
+                file.delete()
+            } catch (e: Exception){
+                println("Event image delete error : " + e.cause.toString())
             }
         }
     }

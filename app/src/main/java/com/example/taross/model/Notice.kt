@@ -85,9 +85,9 @@ data class Notice(val title:String, val id:String, val department:String, val da
     }
 
     //お知らせの種類(type)によって対応したアイコンのResourceIDを取得する関数
-    fun typeSelectedToIcon(typeName: String, resource: Resources): Int{
+    fun typeSelectedToIcon(typeName: String, resource: Resources): Int {
         val typeArray = resource.getStringArray(R.array.array_notice_types)
-        val iconImageId: Int = when(typeName){
+        val iconImageId: Int = when (typeName) {
             typeArray[0] -> R.drawable.ic_notice_info
             typeArray[1] -> R.drawable.ic_notice_attention
             typeArray[2] -> R.drawable.ic_notice_bus
@@ -98,4 +98,21 @@ data class Notice(val title:String, val id:String, val department:String, val da
         return iconImageId
     }
 
+    fun delete() {
+        val queryEvent: NCMBQuery<NCMBObject> = NCMBQuery("Information")
+        queryEvent.whereEqualTo("objectId", this.id)
+        val datas: List<NCMBObject> = try {
+            queryEvent.find()
+        } catch (e: Exception) {
+            emptyList<NCMBObject>()
+        }
+        if (datas.isNotEmpty()) {
+            val data = datas[0]
+            try {
+                data.deleteObject()
+            } catch (e: Exception) {
+                println("Event data delete error : " + e.cause.toString())
+            }
+        }
+    }
 }
