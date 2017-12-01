@@ -48,6 +48,7 @@
     <string name="form_deadline_text">申込締切日</string>
     <string name="form_description_text">説明文</string>
     <string name="form_officer_text">役員にのみ公開する</string>
+    <string name="form_officer_false_text">全員に公開する</string>
     <string name="form_event_create_text">イベントを作成する</string>
 
     <!-- Strings related to password's text -->
@@ -124,6 +125,8 @@
     <string name="delete_message">本当に削除してもよろしいですか？</string>
     <string name="delete_entry_log">入力履歴を削除しました</string>
     <string name="nothing_entry_log">入力履歴がありません</string>
+    <string name="create_confirm">この内容でよろしいですか？</string>
+    <string name="create_text">作成する</string>
 
     <!-- template <string name=""></string> -->
 </resources>

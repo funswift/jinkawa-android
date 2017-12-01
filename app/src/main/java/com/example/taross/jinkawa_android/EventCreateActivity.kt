@@ -24,6 +24,9 @@ import java.util.Calendar
 import android.widget.ArrayAdapter
 import com.example.taross.model.Event
 import com.nifty.cloud.mb.core.*
+import org.jetbrains.anko.*
+import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.support.v4.alert
 import java.io.ByteArrayOutputStream
 import java.io.FileDescriptor
 
@@ -171,7 +174,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
         }
 
         createButton.setOnClickListener{
-            val title = titleEditText.text.toString()
+            val _title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
             val description = descriptionEditText.text.toString()
             val location = locationEditText.text.toString()
@@ -183,36 +186,69 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             val deadline = deadlineTextView.text.toString()
             val officer_only = officer
 
-          officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
-            officer = isChecked
-          })
+            officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
+                officer = isChecked
+            })
 
-
-            if (true) {
-
+            var confirm_ok = false
+            val open_text: String? = when(officer_only){
+                true -> getString(R.string.form_officer_text)
+                false -> getString(R.string.form_officer_false_text)
             }
 
-            val event = Event(title, "", department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
-            event.save(this)
-            NotificationHelper.sendPush(title, "イベントが追加されました！")
+            alert(getString(R.string.create_confirm)) {
+                title = getString(R.string.confirm)
+                customView {
+                    linearLayout {
+                        verticalLayout {
+                            padding = dip(16)
+                            textView(getString(R.string.form_department_text)) { textSize = 18f }
+                            textView(getString(R.string.form_event_title_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
+                            textView(getString(R.string.form_location_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
+                            textView(getString(R.string.form_capacity_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
+                            textView(getString(R.string.form_date_start_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
+                            textView(getString(R.string.form_deadline_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
+                            textView(getString(R.string.form_officer_false_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
+                        }
+                        verticalLayout {
+                            padding = dip(16)
+                            textView(department) { textSize = 18f }
+                            textView(_title) { textSize = 18f }.lparams { topMargin = dip(8) }
+                            textView(location) { textSize = 18f }.lparams { topMargin = dip(8) }
+                            textView(capacity) { textSize = 18f }.lparams { topMargin = dip(8) }
+                            textView(deadline) { textSize = 18f }.lparams { topMargin = dip(8) }
+                            textView(start_date) { textSize = 18f }.lparams { topMargin = dip(8) }
+                            textView(open_text) { textSize = 18f }.lparams { topMargin = dip(8) }
+                        }
+                    }
+                }
+                positiveButton(getString(R.string.create_text)){confirm_ok = true}
+                negativeButton(getString(R.string._return)){}
+            }.show()
+
+            if(confirm_ok) {
+                val event = Event(_title, "", department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
+                event.save(this)
+                NotificationHelper.sendPush(_title, "イベントが追加されました！")
 
 
-            //画像追加
-            val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
+                //画像追加
+                val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
 
-            query.whereEqualTo("name", title)
-            val result = try {
-                query.find()
-            } catch (e :Exception){
-                emptyList<NCMBObject>()
-            }
-            Log.d("result", "$result")
-            if (result.isNotEmpty()){
-                Log.d("test", "${result[0].getString("objectId")}を取得しました！")
-                val fileName = result[0].getString("objectId")
-                imageBmp?.let {
-                    val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it),NCMBAcl())
-                    file.save()
+                query.whereEqualTo("name", _title)
+                val result = try {
+                    query.find()
+                } catch (e: Exception) {
+                    emptyList<NCMBObject>()
+                }
+                Log.d("result", "$result")
+                if (result.isNotEmpty()) {
+                    Log.d("test", "${result[0].getString("objectId")}を取得しました！")
+                    val fileName = result[0].getString("objectId")
+                    imageBmp?.let {
+                        val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
+                        file.save()
+                    }
                 }
             }
         }
