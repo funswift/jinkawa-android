@@ -82,7 +82,7 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
