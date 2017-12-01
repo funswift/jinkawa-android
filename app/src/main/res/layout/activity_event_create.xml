@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         style="@style/BaseToolbar"
         android:background="@color/jipriMainColor"
-        android:minHeight="?attr/actionBarSize"
         android:titleTextColor="@color/white"
         android:popupTheme="@android:style/Theme.Material"/>
 
@@ -53,21 +52,25 @@
             <ImageButton
                 android:id="@+id/imagebutton_eventImage"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_alignBottom="@id/textInput_deadline"
+                android:background="@drawable/image_placeholder"
+                android:elevation="5dp"
                 android:layout_alignEnd="@id/textInput_eventtime_start"
                 android:layout_alignStart="@id/textInput_eventtime_start"
-                android:layout_alignTop="@+id/textInput_deadline"
-                android:layout_toRightOf="@+id/textInput_deadline" />
+                android:layout_alignTop="@+id/textInput_deadline" />
 
             <Button
                 android:id="@+id/button_eventcreate"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/switch_officeronly"
+                android:elevation="10dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:text="@string/form_event_create_text" />
 
             <TextView
@@ -186,22 +189,13 @@
                 app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
                 app:theme="@style/AppTheme.Design.TextInputLayout">
 
-                <TextView
-                    android:id="@+id/edit_eventdate_start"
-                    android:layout_width="145dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="下のボタンで入力"
-                    android:textAlignment="textStart"
-                    android:textSize="18sp" />
-
                 <Button
                     android:id="@+id/button_eventdate_start_picker"
                     android:layout_width="150dp"
                     android:layout_height="37dp"
                     android:layout_alignStart="@+id/edit_eventdate_start"
                     android:layout_marginLeft="0dp"
-                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:background="@drawable/form_button"
                     android:text="日付を選択" />
 
             </android.support.design.widget.TextInputLayout>
@@ -217,22 +211,12 @@
                 app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
                 app:theme="@style/AppTheme.Design.TextInputLayout">
 
-                <TextView
-                    android:id="@+id/edit_eventtime_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="0.58"
-                    android:text="下のボタンで入力"
-                    android:textAlignment="textStart"
-                    android:textSize="18sp" />
-
                 <Button
                     android:id="@+id/button_eventtime_start_picker"
                     android:layout_width="150dp"
                     android:layout_height="37dp"
                     android:layout_marginLeft="0dp"
-                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:background="@drawable/form_button"
                     android:text="時間を選択" />
 
             </android.support.design.widget.TextInputLayout>
@@ -255,22 +239,12 @@
                 app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
                 app:theme="@style/AppTheme.Design.TextInputLayout">
 
-                <TextView
-                    android:id="@+id/edit_eventdate_end"
-                    android:layout_width="145dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="0.58"
-                    android:text="下のボタンで入力"
-                    android:textAlignment="textStart"
-                    android:textSize="18sp" />
-
                 <Button
                     android:id="@+id/button_eventdate_end_picker"
                     android:layout_width="150dp"
                     android:layout_height="37dp"
                     android:layout_marginLeft="0dp"
-                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:background="@drawable/form_button"
                     android:text="日付を選択" />
 
             </android.support.design.widget.TextInputLayout>
@@ -286,22 +260,13 @@
                 app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
                 app:theme="@style/AppTheme.Design.TextInputLayout">
 
-                <TextView
-                    android:id="@+id/edit_eventtime_end"
-                    android:layout_width="145dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="0.58"
-                    android:text="下のボタンで入力"
-                    android:textAlignment="textStart"
-                    android:textSize="18sp" />
-
                 <Button
                     android:id="@+id/button_eventtime_end_picker"
                     android:layout_width="150dp"
                     android:layout_height="37dp"
                     android:layout_marginLeft="0dp"
-                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:background="@drawable/form_button"
+                    android:elevation="5dp"
                     android:text="時間を選択" />
 
             </android.support.design.widget.TextInputLayout>
@@ -351,22 +316,12 @@
                 app:hintTextAppearance="@style/AppTheme.Design.TextAppearance.Design.Hint"
                 app:theme="@style/AppTheme.Design.TextInputLayout">
 
-                <TextView
-                    android:id="@+id/edit_deadline"
-                    android:layout_width="145dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="0.58"
-                    android:text="下のボタンで選択"
-                    android:textAlignment="textStart"
-                    android:textSize="18sp" />
-
                 <Button
                     android:id="@+id/button_deadline_picker"
                     android:layout_width="150dp"
                     android:layout_height="37dp"
                     android:layout_marginLeft="0dp"
-                    android:background="@drawable/common_google_signin_btn_icon_light"
+                    android:background="@drawable/form_button"
                     android:text="日付を選択" />
 
             </android.support.design.widget.TextInputLayout>

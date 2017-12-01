@@ -11,7 +11,10 @@ import android.util.Log
 import android.widget.*
 import android.widget.ArrayAdapter
 import com.example.taross.model.Event
+import com.nifty.cloud.mb.core.NCMBException
+import com.squareup.picasso.Picasso
 import com.nifty.cloud.mb.core.*
+
 
 class EventEditActivity: EventCreateActivity() {
 
@@ -52,12 +55,16 @@ class EventEditActivity: EventCreateActivity() {
         val officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch
         val descriptionEditText = findViewById(R.id.edit_description) as EditText
 
-        val startDateTextView = findViewById(R.id.edit_eventdate_start) as TextView
-        val startTimeTextView =findViewById(R.id.edit_eventtime_start) as TextView
-        val endDateTextView = findViewById(R.id.edit_eventdate_end) as TextView
-        val endTimeTextView = findViewById(R.id.edit_eventtime_end) as TextView
+        val startDateButton = findViewById(R.id.button_eventdate_start_picker) as Button
+        val startTimeButton = findViewById(R.id.button_eventtime_start_picker) as Button
+        val endDateButton = findViewById(R.id.button_eventdate_end_picker) as Button
+        val endTimeButton = findViewById(R.id.button_eventtime_end_picker) as Button
+        val deadlineButton = findViewById(R.id.button_deadline_picker) as Button
 
-        val deadlineTextView = findViewById(R.id.edit_deadline) as TextView
+        val eventImageButton = findViewById(R.id.imagebutton_eventImage) as ImageButton
+
+        Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").into(eventImageButton)
+
         val editButton = findViewById(R.id.button_eventcreate) as Button
         editButton.setText(R.string.event_edit_button_text)
 
@@ -66,11 +73,11 @@ class EventEditActivity: EventCreateActivity() {
         locationEditText.setText(event.location)
         capacityEditText.setText(event.capacity)
         descriptionEditText.setText(event.description)
-        startDateTextView.text = event.date_start
-        startTimeTextView.text = event.time_start
-        endDateTextView.text = event.date_end
-        endTimeTextView.text = event.time_end
-        deadlineTextView.text = event.deadline
+        startDateButton.setText(event.date_start)
+        startTimeButton.setText(event.time_start)
+        endDateButton.setText(event.date_end)
+        endTimeButton.setText(event.time_end)
+        deadlineButton.setText(event.deadline)
         if(event.officer_only) officerOnlySwitch.toggle()
 
         officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
@@ -82,17 +89,15 @@ class EventEditActivity: EventCreateActivity() {
             val department = departmentSpinner.selectedItem.toString()
             val description = descriptionEditText.text.toString()
             val location = locationEditText.text.toString()
-            val start_date = startDateTextView.text.toString()
-            val start_time = startTimeTextView.text.toString()
-            val end_date = endDateTextView.text.toString()
-            val end_time = endTimeTextView.text.toString()
+            val start_date = startDateButton.text.toString()
+            val start_time = startTimeButton.text.toString()
+            val end_date = endDateButton.text.toString()
+            val end_time = endTimeButton.text.toString()
             val capacity = capacityEditText.text.toString()
-            val deadline = deadlineTextView.text.toString()
+            val deadline = deadlineButton.text.toString()
             val officer_only = officer
 
-            if(true){
 
-            }
 
             val event = Event(title, event.id ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
             event.update(this)
