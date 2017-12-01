@@ -44,17 +44,26 @@ class EventDetailActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext,EventDetailTranslucentActivity::class.java).putExtra("EVENT_EXTRA", event))
         })
 
-        val departmentTextView = findViewById(R.id.detail_department_name) as TextView
+        val departmentTextView = findViewById(R.id.detail_department) as TextView
         departmentTextView.text = event.department
 
-        val dateTextView = findViewById(R.id.detail_date) as TextView
-        dateTextView.text = event.date_start
+        val updateTextView = findViewById(R.id.detail_last_update) as TextView
+        updateTextView.text = event.update_date
+
+        val startTextView = findViewById(R.id.detail_start) as TextView
+        startTextView.text = event.date_start
+
+        val endTextView = findViewById(R.id.detail_end) as TextView
+        endTextView.text = event.date_end
 
         val locationTextView = findViewById(R.id.detail_location) as TextView
         locationTextView.text = event.location
 
         val capacityTextView = findViewById(R.id.detail_capacity) as TextView
         capacityTextView.text = event.capacity
+
+        val deadlineTextView = findViewById(R.id.detail_capacity) as TextView
+        deadlineTextView.text = event.deadline
 
         val descriptionTextView = findViewById(R.id.detail_description) as TextView
         descriptionTextView.text = event.description
@@ -63,6 +72,7 @@ class EventDetailActivity : AppCompatActivity() {
         entryButton.setOnClickListener({
             startActivity(Intent(applicationContext, EntryActivity::class.java).putExtra("EVENT_ID_EXTRA", event.id))
         })
+
 
     }
 
