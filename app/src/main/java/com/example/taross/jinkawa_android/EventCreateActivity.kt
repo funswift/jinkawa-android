@@ -234,34 +234,59 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
                         }
                     }
                 }
-                positiveButton(getString(R.string.create_text)){confirm_ok = true}
-                negativeButton(getString(R.string._return)){}
+                positiveButton(getString(R.string.yes)){
+                    event.save(this@EventCreateActivity)
+                    NotificationHelper.sendPush(_title, "イベントが追加されました！")
+
+
+                    //画像追加
+                    val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
+
+                    query.whereEqualTo("name", _title)
+                    val result = try {
+                        query.find()
+                    } catch (e: Exception) {
+                        emptyList<NCMBObject>()
+                    }
+                    Log.d("result", "$result")
+                    if (result.isNotEmpty()) {
+                        Log.d("test", "${result[0].getString("objectId")}を取得しました！")
+                        val fileName = result[0].getString("objectId")
+                        imageBmp?.let {
+                            val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
+                            file.save()
+                        }
+                    }
+                    finish()
+                }
+                negativeButton(getString(R.string.no)){}
             }.show()
 
-            if(confirm_ok) {
-                event.save(this)
-                NotificationHelper.sendPush(_title, "イベントが追加されました！")
-
-
-                //画像追加
-                val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
-
-                query.whereEqualTo("name", _title)
-                val result = try {
-                    query.find()
-                } catch (e: Exception) {
-                    emptyList<NCMBObject>()
-                }
-                Log.d("result", "$result")
-                if (result.isNotEmpty()) {
-                    Log.d("test", "${result[0].getString("objectId")}を取得しました！")
-                    val fileName = result[0].getString("objectId")
-                    imageBmp?.let {
-                        val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
-                        file.save()
-                    }
-                }
-            }
+//            if(confirm_ok) {
+//                event.save(this)
+//                NotificationHelper.sendPush(_title, "イベントが追加されました！")
+//
+//
+//                //画像追加
+//                val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
+//
+//                query.whereEqualTo("name", _title)
+//                val result = try {
+//                    query.find()
+//                } catch (e: Exception) {
+//                    emptyList<NCMBObject>()
+//                }
+//                Log.d("result", "$result")
+//                if (result.isNotEmpty()) {
+//                    Log.d("test", "${result[0].getString("objectId")}を取得しました！")
+//                    val fileName = result[0].getString("objectId")
+//                    imageBmp?.let {
+//                        val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
+//                        file.save()
+//                    }
+//                }
+//                finish()
+//            }
         }
     }
 

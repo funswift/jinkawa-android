@@ -17,6 +17,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.taross.model.Event
 import com.squareup.picasso.Picasso
+import org.jetbrains.anko.activityManager
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.support.v4.alert
 
 class EventDetailActivity : AppCompatActivity() {
 
@@ -30,7 +34,7 @@ class EventDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_event_detail)
+        val rootView = setContentView(R.layout.activity_event_detail)
 
         val toolBar = findViewById(R.id.detail_toolbar) as Toolbar
         toolBar.title = event.title
@@ -100,8 +104,14 @@ class EventDetailActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext,EventEditActivity::class.java).putExtra("EVENT_EXTRA", event))
             return true
         }else if (id == R.id.action_event_delete){
-            event.delete()
-            finish()
+            alert(getString(R.string.delete_message)) {
+                title = getString(R.string.confirm)
+                positiveButton(getString(R.string.yes)) {
+                    event.delete()
+                    finish()
+                }
+                negativeButton(getString(R.string.no)) {}
+            }.show()
             return true
         }
 

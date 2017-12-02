@@ -145,8 +145,8 @@ class EventEditActivity: EventCreateActivity() {
                         }
                     }
                 }
-                positiveButton(getString(R.string.create_text)){confirm_ok = true}
-                negativeButton(getString(R.string._return)){}
+                positiveButton(getString(R.string.yes)){confirm_ok = true}
+                negativeButton(getString(R.string.no)){}
             }.show()
 
 

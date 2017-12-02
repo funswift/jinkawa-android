@@ -47,31 +47,31 @@ class OptionFragment: Fragment() {
             when (UserConfig.getParticipantFlag(context)) {
                 true -> alert {
                             title = getString(R.string.option_setting_form_text)
-                            val _textSize = 16f
+                            val _textSize = 18f
                             val colon = "："
                             customView {
                                 val entryInformation = UserConfig.getParticipantData(context)
                                 verticalLayout {
                                     padding = dip(16)
                                     linearLayout {
-                                        textView(getString(R.string.entry_item_name) + colon) { textSize = 18f }
-                                        textView(entryInformation.name) { textSize = 18f }
+                                        textView(getString(R.string.entry_item_name) + colon) { textSize = _textSize }
+                                        textView(entryInformation.name) { textSize = _textSize }
                                     }
                                     linearLayout {
-                                        textView(getString(R.string.entry_item_address) + colon) { textSize = 18f }.lparams { topMargin = dip(16) }
-                                        textView(entryInformation.address) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                        textView(getString(R.string.entry_item_address) + colon) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.address) { textSize = _textSize }.lparams { topMargin = dip(16) }
                                     }
                                     linearLayout {
-                                        textView(getString(R.string.entry_item_tell) + colon) { textSize = 18f }.lparams { topMargin = dip(16) }
-                                        textView(entryInformation.tell) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                        textView(getString(R.string.entry_item_tell) + colon) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.tell) { textSize = _textSize }.lparams { topMargin = dip(16) }
                                     }
                                     linearLayout {
-                                        textView(getString(R.string.entry_item_gender) + colon) { textSize = 18f }.lparams { topMargin = dip(16) }
-                                        textView(entryInformation.gender) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                        textView(getString(R.string.entry_item_gender) + colon) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.gender) { textSize = _textSize }.lparams { topMargin = dip(16) }
                                     }
                                     linearLayout {
-                                        textView(getString(R.string.entry_item_age) + colon) { textSize = 18f }.lparams { topMargin = dip(16) }
-                                        textView(entryInformation.age) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                        textView(getString(R.string.entry_item_age) + colon) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.age) { textSize = _textSize }.lparams { topMargin = dip(16) }
                                     }
                                 }
                             }
@@ -130,7 +130,7 @@ class OptionFragment: Fragment() {
                     verticalLayout {
                         padding = dip(16)
                         textView(getString(R.string.contact_address)) { textSize = 18f }
-                        val tell = textView(getString(R.string.contact_tell)) {
+                        textView(getString(R.string.contact_tell)) {
                             textSize = 18f
                             autoLinkMask = PHONE_NUMBERS
                         }.lparams { topMargin = dip(16) }
