@@ -24,6 +24,7 @@ class EntryActivity : AppCompatActivity() {
         val ageText = findViewById(R.id.text_age) as EditText
 
         val genderRadioGroup = findViewById(R.id.radioGroup) as RadioGroup
+        participant.gender = "男"
 
         if(UserConfig.getParticipantFlag(applicationContext)) {
             participant = UserConfig.getParticipantData(applicationContext)

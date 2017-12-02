@@ -191,29 +191,46 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
                 false -> getString(R.string.form_officer_false_text)
             }
 
+            val event = Event(_title, "", department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
+
             alert(getString(R.string.create_confirm)) {
                 title = getString(R.string.confirm)
+                val _textSize = 16f
+                val colon = "："
                 customView {
-                    linearLayout {
-                        verticalLayout {
-                            padding = dip(16)
-                            textView(getString(R.string.form_department_text)) { textSize = 18f }
-                            textView(getString(R.string.form_event_title_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
-                            textView(getString(R.string.form_location_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
-                            textView(getString(R.string.form_capacity_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
-                            textView(getString(R.string.form_date_start_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
-                            textView(getString(R.string.form_deadline_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
-                            textView(getString(R.string.form_officer_false_text)) { textSize = 18f }.lparams { topMargin = dip(8) }
+                    verticalLayout {
+                        padding = dip(16)
+                        linearLayout {
+                            textView(getString(R.string.form_department_text) + colon) { textSize = _textSize }
+                            textView(department) { textSize = _textSize }
                         }
-                        verticalLayout {
-                            padding = dip(16)
-                            textView(department) { textSize = 18f }
-                            textView(_title) { textSize = 18f }.lparams { topMargin = dip(8) }
-                            textView(location) { textSize = 18f }.lparams { topMargin = dip(8) }
-                            textView(capacity) { textSize = 18f }.lparams { topMargin = dip(8) }
-                            textView(deadline) { textSize = 18f }.lparams { topMargin = dip(8) }
-                            textView(start_date) { textSize = 18f }.lparams { topMargin = dip(8) }
-                            textView(open_text) { textSize = 18f }.lparams { topMargin = dip(8) }
+                        linearLayout {
+                            textView(getString(R.string.form_event_title_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(_title) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_location_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(location) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_capacity_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(capacity + "人") { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_date_start_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(start_date + "　" + start_time) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_date_end_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(end_date + "　" + end_time) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_deadline_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(deadline) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_officer_false_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(open_text) { textSize = _textSize }.lparams { topMargin = dip(8) }
                         }
                     }
                 }
@@ -222,7 +239,6 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             }.show()
 
             if(confirm_ok) {
-                val event = Event(_title, "", department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
                 event.save(this)
                 NotificationHelper.sendPush(_title, "イベントが追加されました！")
 
@@ -254,5 +270,6 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         return  byteArrayOutputStream.toByteArray()
     }
+
 }
 
