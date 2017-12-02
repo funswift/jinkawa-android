@@ -24,8 +24,8 @@ import java.io.File
  * Created by taross on 2017/08/12.
  */
 
-class EventListAdapter(private val context: Context): LoadableListAdapter(){
-    var items: MutableList<Event> = loadData()
+class EventListAdapter(private val context: Context): LoadableListAdapter<Event>(){
+    override var items: MutableList<Event> = loadData()
 
     override fun getCount(): Int = items.size
 

@@ -22,8 +22,8 @@ import com.nifty.cloud.mb.core.NCMBQuery
  * Created by taross on 2017/08/12.
  */
 
-class NoticeListAdapter(private val context: Context): LoadableListAdapter(){
-    var items: MutableList<Notice> = loadData()
+class NoticeListAdapter(private val context: Context): LoadableListAdapter<Notice>(){
+    override var items: MutableList<Notice> = loadData()
 
     override fun getCount(): Int = items.size
 

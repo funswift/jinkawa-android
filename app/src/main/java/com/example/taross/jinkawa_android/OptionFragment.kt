@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.util.Linkify.PHONE_NUMBERS
+import android.text.util.Linkify.WEB_URLS
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -95,6 +97,8 @@ class OptionFragment: Fragment() {
         val accountTextView = rootView.findViewById(R.id.option_account) as TextView
         val accountList = rootView.findViewById(R.id.option_account_list) as LinearLayout
         val accountPassLayout = rootView.findViewById(R.id.option_account_pass) as RelativeLayout
+        val accountLogoutLayout = rootView.findViewById(R.id.option_account_logout) as RelativeLayout
+        val contactJinkawaLayout = rootView.findViewById(R.id.option_contact_jinkawa) as RelativeLayout
 
         if(LoginManager.isLogin){
             accountTextView.setVisibility(View.VISIBLE)
@@ -106,6 +110,33 @@ class OptionFragment: Fragment() {
 
         accountPassLayout.setOnClickListener{
             startActivity(Intent(activity, PasswordChangeActivity::class.java))
+        }
+
+        accountLogoutLayout.setOnClickListener {
+            LoginManager.logout()
+            startActivity(Intent(activity, MainActivity::class.java))
+        }
+
+        contactJinkawaLayout.setOnClickListener {
+            alert {
+                title = getString(R.string.option_setting_contact_jinkawa)
+                customView {
+                    verticalLayout {
+                        padding = dip(16)
+                        textView(getString(R.string.contact_address)) { textSize = 18f }
+                        val tell = textView(getString(R.string.contact_tell)) {
+                            textSize = 18f
+                            autoLinkMask = PHONE_NUMBERS
+                        }.lparams { topMargin = dip(16) }
+                        textView(getString(R.string.contact_facebook)) { textSize = 18f }.lparams { topMargin = dip(16) }
+                        textView(getString(R.string.contact_facebook_url)) {
+                            textSize = 15f
+                            autoLinkMask = WEB_URLS
+                        }.lparams { leftMargin = dip(8) }
+                    }
+                }
+                positiveButton(getString(R.string._return)){}
+            }.show()
         }
 
         return rootView

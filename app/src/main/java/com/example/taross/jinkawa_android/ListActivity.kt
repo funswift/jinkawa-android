@@ -1,5 +1,6 @@
 package com.example.taross.jinkawa_android
 
+import android.app.usage.UsageEvents
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -25,9 +26,12 @@ import android.util.Log
 import com.example.taross.jinkawa_android.EventDetailActivity
 import android.support.v4.widget.SwipeRefreshLayout
 import android.widget.BaseAdapter
+import com.example.taross.model.Event
+import com.example.taross.model.Notice
 import com.nifty.cloud.mb.core.NCMBPush
 import org.json.JSONArray
 import org.json.JSONException
+import java.util.*
 
 
 class ListActivity : AppCompatActivity() {
@@ -161,7 +165,7 @@ class ListActivity : AppCompatActivity() {
             val listView = rootView.findViewById(R.id.listView) as ListView
 
             //エラー出るのでEventListAdapter仮置き
-            var listAdapter:LoadableListAdapter = when (page){
+            var listAdapter:LoadableListAdapter<*> = when (page){
                 1 -> EventListAdapter(context)
                 2 -> NoticeListAdapter(context)
                 else -> EventListAdapter(context)
@@ -181,10 +185,10 @@ class ListActivity : AppCompatActivity() {
             listView.adapter = listAdapter
             listView.setOnItemClickListener { parent, view, position, id ->
                 when (page) {
-                    1 -> EventDetailActivity.intent(context, EventListAdapter(context).items[position]).let {
+                    1 -> EventDetailActivity.intent(context, listAdapter.items[position] as Event).let {
                         startActivity(it)
                     }
-                    2 -> NoticeDetailActivity.intent(context, NoticeListAdapter(context).items[position]).let{
+                    2 -> NoticeDetailActivity.intent(context, listAdapter.items[position] as Notice).let{
                         startActivity(it)
                     }
                 }
