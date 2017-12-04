@@ -77,14 +77,14 @@ class LoginActivity : AppCompatActivity() {
 
             if (id.length < 3 || id.length > 10){
                 idTextInput?.isErrorEnabled = true
-                idTextInput?.error = "IDは3文字以上10文字以内で入力して下さい"
+                idTextInput?.error = getString(R.string.login_error_id)
             } else{
                 idTextInput?.isErrorEnabled = false
             }
 
             if (password.length < 5 || password.length > 10){
                 passwordTextInput?.isErrorEnabled = true
-                passwordTextInput?.error = "パスワードは5文字以上10文字以内で入力して下さい"
+                passwordTextInput?.error = getString(R.string.login_error_password)
             } else {
                 passwordTextInput?.isErrorEnabled = false
             }
@@ -95,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(application, ListActivity::class.java)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(applicationContext,"ログインできませんでした。通信状況を確認してください。", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,getString(R.string.login_error), Toast.LENGTH_LONG).show()
                 }
             }
         }
