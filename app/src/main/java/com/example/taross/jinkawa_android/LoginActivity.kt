@@ -22,16 +22,15 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.inputmethod.EditorInfo
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 
 import com.example.taross.jinkawa_android.LoginManager
 
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
+import android.support.design.widget.TextInputEditText
+import android.support.design.widget.TextInputLayout
+import android.widget.*
+import org.w3c.dom.Text
 
 /**
  * A login screen that offers login via email/password.
@@ -47,11 +46,16 @@ class LoginActivity : AppCompatActivity() {
     private var mPasswordView: EditText? = null
     private var mProgressView: View? = null
     private var mLoginFormView: View? = null
+    var idTextInput:TextInputLayout? = null
+    var passwordTextInput:TextInputLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         // Set up the login form.
+
+        idTextInput = findViewById(R.id.text_input_id) as TextInputLayout
+        passwordTextInput = findViewById(R.id.text_input_password) as TextInputLayout
         mEmailView = findViewById(R.id.email) as EditText
         populateAutoComplete()
 
@@ -65,13 +69,34 @@ class LoginActivity : AppCompatActivity() {
         })
 
         val logInButton = findViewById(R.id.login_button) as Button
+
         logInButton.setOnClickListener {
-            val id =mEmailView.let { it?.text.toString() }
+
+            val id = mEmailView.let { it?.text.toString() }
             val password = mPasswordView.let { it?.text.toString() }
 
-            if(LoginManager.login(id, password)){
-                val intent = Intent(application, ListActivity::class.java)
-                startActivity(intent)
+            if (id.length < 3 || id.length > 10){
+                idTextInput?.isErrorEnabled = true
+                idTextInput?.error = "IDは3文字以上10文字以内で入力して下さい"
+            } else{
+                idTextInput?.isErrorEnabled = false
+            }
+
+            if (password.length < 5 || password.length > 10){
+                passwordTextInput?.isErrorEnabled = true
+                passwordTextInput?.error = "パスワードは5文字以上10文字以内で入力して下さい"
+            } else {
+                passwordTextInput?.isErrorEnabled = false
+            }
+
+
+            if(idTextInput?.isErrorEnabled != true && passwordTextInput?.isErrorEnabled != true){
+                if(LoginManager.login(id, password)){
+                    val intent = Intent(application, ListActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(applicationContext,"ログインできませんでした。通信状況を確認してください。", Toast.LENGTH_LONG).show()
+                }
             }
         }
 
