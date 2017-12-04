@@ -46,6 +46,9 @@ class EventDetailActivity : AppCompatActivity() {
 
         val departmentTextView = findViewById(R.id.detail_department) as TextView
         departmentTextView.text = event.department
+        val idColor = event.selectDepartmentColorId(resources)
+        if(idColor != -1)
+            departmentTextView.setBackgroundResource(idColor)
 
         val updateTextView = findViewById(R.id.detail_last_update) as TextView
         updateTextView.text = event.update_date

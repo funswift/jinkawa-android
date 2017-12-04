@@ -39,9 +39,14 @@ class NoticeItemView: FrameLayout{
         valueUpdateTextView?.text = item.update_date
         titleTextView?.text = item.title
 
+        //部署背景色処理
+        val idColor = item.selectDepartmentColorId(resources)
+        if(idColor != -1)
+            departmentTextView?.setBackgroundResource(idColor)
+
         // 画像用処理
-        val id = item.typeSelectedToIcon(item.type, resources)
-        if(id != -1)
-            thumbnailImageView?.setImageResource(id)
+        val idIcon = item.typeSelectedToIcon(item.type, resources)
+        if(idIcon != -1)
+            thumbnailImageView?.setImageResource(idIcon)
     }
 }

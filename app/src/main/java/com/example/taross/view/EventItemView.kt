@@ -6,6 +6,7 @@ package com.example.taross.view
 
 import android.content.Context
 import android.graphics.Color
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -48,6 +49,10 @@ class EventItemView: FrameLayout{
         dateStartTextView?.text = item.date_start
         timeStartTextView?.text = item.time_start
         locationTextView?.text = item.location
+
+        val idColor = item.selectDepartmentColorId(resources)
+        if(idColor != -1)
+            departmentTextView?.setBackgroundResource(idColor)
 
         // 画像用処理
         //thumbnailImageView?.setBackgroundColor(Color.RED)

@@ -84,20 +84,6 @@ data class Notice(val title:String, val id:String, val department:String, val da
         }
     }
 
-    //お知らせの種類(type)によって対応したアイコンのResourceIDを取得する関数
-    fun typeSelectedToIcon(typeName: String, resource: Resources): Int {
-        val typeArray = resource.getStringArray(R.array.array_notice_types)
-        val iconImageId: Int = when (typeName) {
-            typeArray[0] -> R.drawable.ic_notice_info
-            typeArray[1] -> R.drawable.ic_notice_attention
-            typeArray[2] -> R.drawable.ic_notice_bus
-            typeArray[3] -> R.drawable.ic_notice_shopping
-            typeArray[4] -> R.drawable.ic_notice_emergency
-            else -> -1
-        }
-        return iconImageId
-    }
-
     fun delete() {
         val queryEvent: NCMBQuery<NCMBObject> = NCMBQuery("Information")
         queryEvent.whereEqualTo("objectId", this.id)
@@ -114,5 +100,36 @@ data class Notice(val title:String, val id:String, val department:String, val da
                 println("Event data delete error : " + e.cause.toString())
             }
         }
+    }
+
+    //お知らせの種類(type)によって対応したアイコンのResourceIDを取得する関数
+    fun typeSelectedToIcon(typeName: String, resource: Resources): Int {
+        val typeArray = resource.getStringArray(R.array.array_notice_types)
+        val iconImageId: Int = when (typeName) {
+            typeArray[0] -> R.drawable.ic_notice_info
+            typeArray[1] -> R.drawable.ic_notice_attention
+            typeArray[2] -> R.drawable.ic_notice_bus
+            typeArray[3] -> R.drawable.ic_notice_shopping
+            typeArray[4] -> R.drawable.ic_notice_emergency
+            else -> -1
+        }
+        return iconImageId
+    }
+
+    fun selectDepartmentColorId(resources: Resources): Int{
+        val departmentStrings = resources.getStringArray(R.array.array_departments)
+        val color = when(this.department){
+            departmentStrings[0] -> R.color.yakuin
+            departmentStrings[1] -> R.color.soumu
+            departmentStrings[2] -> R.color.seishounen
+            departmentStrings[3] -> R.color.josei
+            departmentStrings[4] -> R.color.hukushi
+            departmentStrings[5] -> R.color.kankyou
+            departmentStrings[6] -> R.color.boukabouhan
+            departmentStrings[7] -> R.color.koutsu
+            departmentStrings[8] -> R.color.jbus
+            else -> -1
+        }
+        return color
     }
 }
