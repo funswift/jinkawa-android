@@ -39,7 +39,7 @@ class EventDetailActivity : AppCompatActivity() {
             setSupportActionBar(toolBar)
         }
         val imageButton = findViewById(R.id.imageButton_eventDetail) as ImageButton
-        Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").into(imageButton)
+        Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").error(R.drawable.jinkawa_logo).into(imageButton)
         imageButton.setOnClickListener({
             startActivity(Intent(applicationContext,EventDetailTranslucentActivity::class.java).putExtra("EVENT_EXTRA", event))
         })

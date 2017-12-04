@@ -56,7 +56,7 @@ class EventItemView: FrameLayout{
 
         // 画像用処理
         //thumbnailImageView?.setBackgroundColor(Color.RED)
-        Picasso.with(context).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${item.id}.png").skipMemoryCache().into(thumbnailImageView)
+        Picasso.with(context).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${item.id}.png").skipMemoryCache().error(R.drawable.jinkawa_logo).into(thumbnailImageView)
 
     }
 }
