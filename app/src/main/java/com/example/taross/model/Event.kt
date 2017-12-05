@@ -2,15 +2,16 @@ package com.example.taross.model
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
+import android.content.res.TypedArray
+import android.graphics.Color
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.v4.content.ContextCompat.getColor
 import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
-import com.example.taross.jinkawa_android.EventCreateActivity
-import com.example.taross.jinkawa_android.EventDetailActivity
-import com.example.taross.jinkawa_android.EventEditActivity
-import com.example.taross.jinkawa_android.ListActivity
 import com.nifty.cloud.mb.core.*
+import com.example.taross.jinkawa_android.*
 
 /**
  * Created by taross on 2017/08/12.
@@ -132,5 +133,23 @@ data class Event(val title: String, val id:String, val department:String, val da
                 println("Event image delete error : " + e.cause.toString())
             }
         }
+    }
+
+    fun selectDepartmentColorId(resources: Resources): Int{
+        val departmentStrings = resources.getStringArray(R.array.array_departments)
+        val color = when(this.department){
+            departmentStrings[0] -> R.color.yakuin
+            departmentStrings[1] -> R.color.soumu
+            departmentStrings[2] -> R.color.seishounen
+            departmentStrings[3] -> R.color.josei
+            departmentStrings[4] -> R.color.hukushi
+            departmentStrings[5] -> R.color.kankyou
+            departmentStrings[6] -> R.color.boukabouhan
+            departmentStrings[7] -> R.color.koutsu
+            departmentStrings[8] -> R.color.jbus
+            else -> -1
+        }
+        Log.d("ColorID", "$color")
+        return color
     }
 }

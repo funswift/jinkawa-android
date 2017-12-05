@@ -39,13 +39,16 @@ class EventDetailActivity : AppCompatActivity() {
             setSupportActionBar(toolBar)
         }
         val imageButton = findViewById(R.id.imageButton_eventDetail) as ImageButton
-        Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").into(imageButton)
+        Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").error(R.drawable.jinkawa_logo).into(imageButton)
         imageButton.setOnClickListener({
             startActivity(Intent(applicationContext,EventDetailTranslucentActivity::class.java).putExtra("EVENT_EXTRA", event))
         })
 
         val departmentTextView = findViewById(R.id.detail_department) as TextView
         departmentTextView.text = event.department
+        val idColor = event.selectDepartmentColorId(resources)
+        if(idColor != -1)
+            departmentTextView.setBackgroundResource(idColor)
 
         val updateTextView = findViewById(R.id.detail_last_update) as TextView
         updateTextView.text = event.update_date

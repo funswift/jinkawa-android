@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
 
     <ImageView
         android:id = "@+id/thumbnail"
@@ -19,14 +21,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="14dp"
         android:layout_toEndOf="@+id/thumbnail"
         android:background="@color/jipriMainColor"
         android:maxLines="1"
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="12sp"
         tools:text="Test Dep" />
 
     <TextView
@@ -38,7 +40,7 @@
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/department"
         android:maxLines="1"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:text="@string/list_text_update" />
 
     <TextView
@@ -50,7 +52,7 @@
         android:layout_toEndOf="@+id/TextUpdateAt"
         android:maxLines="1"
         android:maxLength="10"
-        android:textSize="12sp"
+        android:textSize="10sp"
         tools:text="20XX/YY/ZZ" />
 
     <TextView
@@ -63,7 +65,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@android:color/black"
-        android:textSize="22sp"
+        android:textSize="18sp"
         tools:text="Test Notice" />
 
 
