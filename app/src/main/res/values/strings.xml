@@ -37,7 +37,7 @@
 
     <string name="login_error_id">IDは3文字以上10文字以内で入力して下さい</string>
     <string name="login_error_password">パスワードは5文字以上10文字以内で入力して下さい</string>
-    <string name="login_error">ログインできませんでした。通信状況を確認してください</string>
+    <string name="login_error">ログインできませんでした。IDとパスワードを確認して下さい。</string>
 
     <!-- Strings related to form's text -->
     <string name="form_department_text">担当部名</string>
