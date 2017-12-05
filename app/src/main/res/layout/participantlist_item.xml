@@ -12,6 +12,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="15dp"
         android:text="陣川陣川陣川陣川"
+        android:textColor="@android:color/black"
         android:textSize="24sp" />
 
     <TextView
@@ -21,6 +22,7 @@
         android:layout_alignStart="@+id/participant_name"
         android:layout_below="@+id/participant_name"
         android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
         android:text="TextView" />
 
     <TextView
@@ -30,7 +32,18 @@
         android:layout_alignStart="@+id/participant_name"
         android:layout_below="@+id/participant_gender"
         android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/participant_tell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/participant_name"
+        android:layout_below="@+id/participant_address"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
+        android:textColor="@android:color/black"
         android:text="TextView" />
 
 
