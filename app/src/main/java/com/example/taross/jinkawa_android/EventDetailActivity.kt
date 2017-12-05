@@ -54,10 +54,10 @@ class EventDetailActivity : AppCompatActivity() {
         updateTextView.text = event.update_date
 
         val startTextView = findViewById(R.id.detail_start) as TextView
-        startTextView.text = event.date_start
+        startTextView.text = "${event.date_start} ${event.time_start}"
 
         val endTextView = findViewById(R.id.detail_end) as TextView
-        endTextView.text = event.date_end
+        endTextView.text = "${event.date_end} ${event.time_end}"
 
         val locationTextView = findViewById(R.id.detail_location) as TextView
         locationTextView.text = event.location
@@ -65,7 +65,7 @@ class EventDetailActivity : AppCompatActivity() {
         val capacityTextView = findViewById(R.id.detail_capacity) as TextView
         capacityTextView.text = event.capacity
 
-        val deadlineTextView = findViewById(R.id.detail_capacity) as TextView
+        val deadlineTextView = findViewById(R.id.detail_deadline) as TextView
         deadlineTextView.text = event.deadline
 
         val descriptionTextView = findViewById(R.id.detail_description) as TextView
