@@ -21,6 +21,7 @@ object LoginManager{
             query.find()
         } catch (e:Exception){
             emptyList<NCMBObject>()
+            return false
         }
 
         if (results.isNotEmpty()){
@@ -32,9 +33,10 @@ object LoginManager{
                     result.getString("role"),
                     result.getList("auth").toList() as List<String>)
             this.isLogin = true
+            return true
         }
 
-        return this.isLogin
+        return false
     }
 
     fun logout(){
