@@ -124,6 +124,7 @@
     <string name="no">いいえ</string>
     <string name="_return">もどる</string>
     <string name="confirm">確認</string>
+    <string name="_delete">削除</string>
     <!-- Alert Dialog's specific text -->
     <string name="delete_message">本当に削除してもよろしいですか？</string>
     <string name="delete_entry_log">入力履歴を削除しました</string>
