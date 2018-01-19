@@ -69,7 +69,7 @@ class OptionFragment: Fragment() {
                                     }
                                 }
                             }
-                            positiveButton(getString(R.string._return)) {
+                            positiveButton(getString(R.string._delete)) {
                                 alert(getString(R.string.delete_message)) {
                                     title = getString(R.string.confirm)
                                     positiveButton(getString(R.string.yes)) {
