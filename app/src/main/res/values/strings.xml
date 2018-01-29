@@ -47,6 +47,7 @@
     <string name="form_date_end_text">終了日</string>
     <string name="form_deadline_text">申込締切日</string>
     <string name="form_description_text">説明文</string>
+    <string name="form_officer_description_text">公開設定</string>
     <string name="form_officer_text">役員にのみ公開する</string>
     <string name="form_officer_false_text">全員に公開する</string>
     <string name="form_event_create_text">イベントを作成する</string>
@@ -123,6 +124,7 @@
     <string name="confirm">確認</string>
     <string name="create_text">作成する</string>
     <string name="delete_text">削除する</string>
+    <string name="error_text">エラー</string>
     <!-- Alert Dialog's specific text -->
     <string name="delete_message">本当に削除してもよろしいですか？</string>
     <string name="delete_entry_log">入力履歴を削除しました</string>
@@ -132,6 +134,11 @@
     <string name="contact_tell">電話番号：0138-31-8855</string>
     <string name="contact_facebook">facebook：</string>
     <string name="contact_facebook_url">https://ja-jp.facebook.com/jinnkawaasahi/</string>
+    <string name="pass_change_error_1">入力したパスワードが間違っています。</string>
+    <string name="pass_change_error_2">新しいパスワードが入力されいてません。</string>
+    <string name="pass_change_error_3">新しいパスワードと確認用パスワードが一致しません。</string>
+    <string name="logout_confirm_text">本当にログアウトしてよろしいですか？</string>
+
 
     <!-- template <string name=""></string> -->
 </resources>

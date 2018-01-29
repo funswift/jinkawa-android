@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.taross.model.Notice
+import org.jetbrains.anko.alert
 
 /**
  * Created by y_snkw on 2017/11/14.
@@ -68,8 +69,14 @@ class NoticeDetailActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext, NoticeEditActivity::class.java).putExtra("NOTICE_EXTRA", notice))
             return true
         }else if(id == R.id.action_notice_delete){
-            notice.delete()
-            finish()
+            alert(getString(R.string.delete_message)) {
+                title = getString(R.string.confirm)
+                positiveButton(getString(R.string.yes)){
+                    notice.delete()
+                    finish()
+                }
+                negativeButton(getString(R.string.no)){}
+            }.show()
             return true
         }
 

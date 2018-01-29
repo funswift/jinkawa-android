@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import org.jetbrains.anko.*
 import com.example.taross.model.Account
 
 /**
@@ -51,16 +52,28 @@ class PasswordChangeActivity : AppCompatActivity() {
                 nowPass != inOldPass -> {
                     //エラー処理を追加する
                     Log.d("Error", "not nowPass")
+                    alert(getString(R.string.pass_change_error_1)){
+                        title = getString(R.string.error_text)
+                        positiveButton(getString(R.string._return)) {  }
+                    }.show()
                     false
                 }
                 inNewPass == "" -> {
                     //エラー処理を追加する
                     Log.d("Error", "newPass is Empty")
+                    alert(getString(R.string.pass_change_error_2)){
+                        title = getString(R.string.error_text)
+                        positiveButton(getString(R.string._return)) {  }
+                    }.show()
                     false
                 }
                 inNewPass != inConfPass -> {
                     //エラー処理を追加する
                     Log.d("Error", "confPass is not newPass")
+                    alert(getString(R.string.pass_change_error_3)){
+                        title = getString(R.string.error_text)
+                        positiveButton(getString(R.string._return)) {  }
+                    }.show()
                     false
                 }
                 else -> {

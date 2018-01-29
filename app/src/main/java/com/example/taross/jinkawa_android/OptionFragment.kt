@@ -119,8 +119,14 @@ class OptionFragment: Fragment() {
         }
 
         accountLogoutLayout.setOnClickListener {
-            LoginManager.logout()
-            startActivity(Intent(activity, MainActivity::class.java))
+            alert(getString(R.string.logout_confirm_text)) {
+                title = getString(R.string.option_account_logout_text)
+                positiveButton(getString(R.string.yes)){
+                    LoginManager.logout()
+                    startActivity(Intent(activity, MainActivity::class.java))
+                }
+                negativeButton(getString(R.string.no)){}
+            }.show()
         }
 
         contactJinkawaLayout.setOnClickListener {

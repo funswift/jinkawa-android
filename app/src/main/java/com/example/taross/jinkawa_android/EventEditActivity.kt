@@ -140,7 +140,7 @@ class EventEditActivity: EventCreateActivity() {
                             textView(deadline) { textSize = _textSize }.lparams { topMargin = dip(8) }
                         }
                         linearLayout {
-                            textView(getString(R.string.form_officer_false_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(getString(R.string.form_officer_description_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
                             textView(open_text) { textSize = _textSize }.lparams { topMargin = dip(8) }
                         }
                     }

@@ -168,6 +168,10 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             dialog.show()
         }
 
+        officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
+            officer = isChecked
+        })
+
         createButton.setOnClickListener{
             val _title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
@@ -181,11 +185,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             val deadline = deadlineButton.text.toString()
             val officer_only = officer
 
-            officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
-                officer = isChecked
-            })
-
-            var confirm_ok = false
+            //var confirm_ok = false
             val open_text: String? = when(officer_only){
                 true -> getString(R.string.form_officer_text)
                 false -> getString(R.string.form_officer_false_text)
@@ -229,7 +229,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
                             textView(deadline) { textSize = _textSize }.lparams { topMargin = dip(8) }
                         }
                         linearLayout {
-                            textView(getString(R.string.form_officer_false_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(getString(R.string.form_officer_description_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
                             textView(open_text) { textSize = _textSize }.lparams { topMargin = dip(8) }
                         }
                     }

@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import android.widget.*
 import com.example.taross.model.Notice
 import com.nifty.cloud.mb.core.NCMBException
+import org.jetbrains.anko.*
 
 
 /**
@@ -65,18 +66,49 @@ class NoticeEditActivity: NoticeCreateActivity() {
         })
 
         editButton.setOnClickListener{
-            val title = titleEditText.text.toString()
+            val _title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
             val type = typeSpinner.selectedItem.toString()
             val description = descriptionEditText.text.toString()
             val officer_only = officer
 
-            if(true){}
+            val open_text: String? = when(officer_only){
+                true -> getString(R.string.form_officer_text)
+                false -> getString(R.string.form_officer_false_text)
+            }
 
-            val notice = Notice(title, notice.id, department, notice.date, description, "", type, officer_only)
-            notice.update(this)
-
-            finish()
+            val notice = Notice(_title, notice.id, department, notice.date, description, "", type, officer_only)
+            alert(R.string.create_confirm){
+                title = getString(R.string.confirm)
+                val _textSize = 16f
+                val colon = "："
+                customView {
+                    verticalLayout {
+                        padding = dip(16)
+                        linearLayout {
+                            textView(getString(R.string.form_department_text) + colon) { textSize = _textSize }
+                            textView(department) { textSize = _textSize }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_event_title_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(_title) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_notice_type_text) + colon) { textSize = _textSize }.lparams{ topMargin = dip(8) }
+                            textView(type) { textSize = _textSize }.lparams{ topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_officer_description_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(open_text) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                    }
+                }
+                positiveButton(getString(R.string.yes)){
+                    notice.update(this@NoticeEditActivity)
+                    finish()
+                }
+                negativeButton(getString(R.string.no)){}
+            }.show()
         }
     }
 
