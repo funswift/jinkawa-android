@@ -43,22 +43,25 @@ class EventDetailActivity : AppCompatActivity() {
             setSupportActionBar(toolBar)
         }
         val imageButton = findViewById(R.id.imageButton_eventDetail) as ImageButton
-        Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").into(imageButton)
+        Picasso.with(applicationContext).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${event.id}.png").error(R.drawable.jinkawa_logo).into(imageButton)
         imageButton.setOnClickListener({
             startActivity(Intent(applicationContext,EventDetailTranslucentActivity::class.java).putExtra("EVENT_EXTRA", event))
         })
 
         val departmentTextView = findViewById(R.id.detail_department) as TextView
         departmentTextView.text = event.department
+        val idColor = event.selectDepartmentColorId(resources)
+        if(idColor != -1)
+            departmentTextView.setBackgroundResource(idColor)
 
         val updateTextView = findViewById(R.id.detail_last_update) as TextView
         updateTextView.text = event.update_date
 
         val startTextView = findViewById(R.id.detail_start) as TextView
-        startTextView.text = event.date_start
+        startTextView.text = "${event.date_start} ${event.time_start}"
 
         val endTextView = findViewById(R.id.detail_end) as TextView
-        endTextView.text = event.date_end
+        endTextView.text = "${event.date_end} ${event.time_end}"
 
         val locationTextView = findViewById(R.id.detail_location) as TextView
         locationTextView.text = event.location
@@ -66,7 +69,7 @@ class EventDetailActivity : AppCompatActivity() {
         val capacityTextView = findViewById(R.id.detail_capacity) as TextView
         capacityTextView.text = event.capacity
 
-        val deadlineTextView = findViewById(R.id.detail_capacity) as TextView
+        val deadlineTextView = findViewById(R.id.detail_deadline) as TextView
         deadlineTextView.text = event.deadline
 
         val descriptionTextView = findViewById(R.id.detail_description) as TextView

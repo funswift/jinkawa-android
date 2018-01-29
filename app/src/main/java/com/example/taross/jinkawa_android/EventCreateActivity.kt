@@ -16,6 +16,7 @@ import android.os.ParcelFileDescriptor
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
+import android.support.design.widget.TextInputLayout
 import android.text.Editable
 import android.util.Log
 import android.view.WindowManager
@@ -34,7 +35,31 @@ import java.io.FileDescriptor
 open class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
     lateinit var eventImageButton: ImageButton
+    lateinit var toolbar:Toolbar
+
+    lateinit var titleTextInputLayout:TextInputLayout
+    lateinit var locationTextInputLayout:TextInputLayout
+    lateinit var capacityTextInputLayout:TextInputLayout
+
+    lateinit var titleEditText: EditText
+    lateinit var locationEditText: EditText
+    lateinit var capacityEditText: EditText
+    lateinit var descriptionEditText: EditText
+
+    lateinit var officerOnlySwitch: Switch
+
+    lateinit var startDateButton: Button
+    lateinit var startTimeButton: Button
+
+    lateinit var endDateButton: Button
+    lateinit var endTimeButton: Button
+
+    lateinit var deadlineButton: Button
+    lateinit var createButton: Button
     var imageBmp: Bitmap? = null
+
+    lateinit var departmentSpinner: Spinner
+    lateinit var personalAdapter: ArrayAdapter<String>
 
     //DoneCallBack インターフェースの実装
     override fun done(arg1: NCMBException?){
@@ -67,11 +92,32 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
 
         setContentView(R.layout.activity_event_create)
 
-        val toolbar = findViewById(R.id.toolbar_event_create) as Toolbar
-        toolbar.title = getString(R.string.title_event_create)
+        toolbar = findViewById(R.id.toolbar_event_create) as Toolbar
 
-        val departmentSpinner: Spinner = findViewById(R.id.spinner_department) as Spinner
-        var personalAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext, R.layout.spinner_item)
+        titleTextInputLayout = findViewById(R.id.textInput_eventtitle) as TextInputLayout
+        locationTextInputLayout = findViewById(R.id.textInput_eventlocate) as TextInputLayout
+        capacityTextInputLayout = findViewById(R.id.textInput_capacity) as TextInputLayout
+
+        titleEditText = findViewById(R.id.edit_eventtitle) as EditText
+        locationEditText = findViewById(R.id.edit_eventlocate) as EditText
+        capacityEditText = findViewById(R.id.edit_capacity) as EditText
+        officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch
+        descriptionEditText = findViewById(R.id.edit_description) as EditText
+
+        startDateButton = findViewById(R.id.button_eventdate_start_picker) as Button
+        startTimeButton = findViewById(R.id.button_eventtime_start_picker) as Button
+
+        endDateButton = findViewById(R.id.button_eventdate_end_picker) as Button
+        endTimeButton = findViewById(R.id.button_eventtime_end_picker) as Button
+
+        deadlineButton = findViewById(R.id.button_deadline_picker) as Button
+        createButton = findViewById(R.id.button_eventcreate) as Button
+
+
+        departmentSpinner = findViewById(R.id.spinner_department) as Spinner
+        personalAdapter = ArrayAdapter(applicationContext, R.layout.spinner_item)
+
+        toolbar.title = getString(R.string.title_event_create)
 
         LoginManager.account?.let {
             personalAdapter =
@@ -84,21 +130,6 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
         departmentSpinner.adapter = personalAdapter
 
         var officer = false
-
-        val titleEditText = findViewById(R.id.edit_eventtitle) as EditText
-        val locationEditText = findViewById(R.id.edit_eventlocate) as EditText
-        val capacityEditText = findViewById(R.id.edit_capacity) as EditText
-        val officerOnlySwitch = findViewById(R.id.switch_officeronly) as Switch
-        val descriptionEditText = findViewById(R.id.edit_description) as EditText
-
-        val startDateButton = findViewById(R.id.button_eventdate_start_picker) as Button
-        val startTimeButton = findViewById(R.id.button_eventtime_start_picker) as Button
-
-        val endDateButton = findViewById(R.id.button_eventdate_end_picker) as Button
-        val endTimeButton = findViewById(R.id.button_eventtime_end_picker) as Button
-
-        val deadlineButton = findViewById(R.id.button_deadline_picker) as Button
-        val createButton = findViewById(R.id.button_eventcreate) as Button
 
         eventImageButton = findViewById(R.id.imagebutton_eventImage) as ImageButton
 
@@ -168,9 +199,9 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             dialog.show()
         }
 
-        officerOnlySwitch.setOnCheckedChangeListener( { buttonView, isChecked ->
+        officerOnlySwitch.setOnCheckedChangeListener{ buttonView, isChecked ->
             officer = isChecked
-        })
+        }
 
         createButton.setOnClickListener{
             val _title = titleEditText.text.toString()
@@ -234,60 +265,100 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
                         }
                     }
                 }
-                positiveButton(getString(R.string.yes)){
-                    event.save(this@EventCreateActivity)
-                    NotificationHelper.sendPush(_title, "イベントが追加されました！")
+
+                positiveButton(getString(R.string.yes)) {
+                    var query: NCMBQuery<NCMBObject>?
+                    var result: List<NCMBObject>?
+                    var fileName: String?
+                    var file: NCMBFile?
+
+                    if (validate()) {
+                        event.save(this@EventCreateActivity)
+                        NotificationHelper.sendPush(_title, "イベントが追加されました！")
 
 
-                    //画像追加
-                    val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
+                        //画像追加
+                        query = NCMBQuery("Event")
 
-                    query.whereEqualTo("name", _title)
-                    val result = try {
-                        query.find()
-                    } catch (e: Exception) {
-                        emptyList<NCMBObject>()
-                    }
-                    Log.d("result", "$result")
-                    if (result.isNotEmpty()) {
-                        Log.d("test", "${result[0].getString("objectId")}を取得しました！")
-                        val fileName = result[0].getString("objectId")
-                        imageBmp?.let {
-                            val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
-                            file.save()
+                        query.whereEqualTo("name", _title)
+                        result = try {
+                            query.find()
+                        } catch (e: Exception) {
+                            emptyList<NCMBObject>()
+                        }
+                        Log.d("result", "$result")
+                        if (result.isNotEmpty()) {
+                            Log.d("test", "${result[0].getString("objectId")}を取得しました！")
+                            fileName = result[0].getString("objectId")
+                            imageBmp?.let {
+                                file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
+                                file?.save()
+                            }
                         }
                     }
                     finish()
                 }
                 negativeButton(getString(R.string.no)){}
             }.show()
-
-//            if(confirm_ok) {
-//                event.save(this)
-//                NotificationHelper.sendPush(_title, "イベントが追加されました！")
-//
-//
-//                //画像追加
-//                val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
-//
-//                query.whereEqualTo("name", _title)
-//                val result = try {
-//                    query.find()
-//                } catch (e: Exception) {
-//                    emptyList<NCMBObject>()
-//                }
-//                Log.d("result", "$result")
-//                if (result.isNotEmpty()) {
-//                    Log.d("test", "${result[0].getString("objectId")}を取得しました！")
-//                    val fileName = result[0].getString("objectId")
-//                    imageBmp?.let {
-//                        val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
-//                        file.save()
-//                    }
-//                }
-//                finish()
-//            }
         }
+    }
+
+    fun validate():Boolean{
+        var isSuccess = true
+
+        if(titleEditText.text.length > 10){
+            titleTextInputLayout.isErrorEnabled = true
+            titleTextInputLayout.error = "入力文字数が10文字を超えています。"
+            isSuccess = false
+        } else if(titleEditText.text.length == 0){
+            titleTextInputLayout.isErrorEnabled = true
+            titleTextInputLayout.error = "必須項目です。"
+            isSuccess = false
+        }else {
+            titleTextInputLayout.isErrorEnabled = false
+        }
+
+        if(locationEditText.text.length > 30){
+            locationTextInputLayout.isErrorEnabled = true
+            locationTextInputLayout.error = "入力文字数が30文字を超えています。"
+            isSuccess = false
+        } else if(locationEditText.text.length == 0){
+            locationTextInputLayout.isErrorEnabled = true
+            locationTextInputLayout.error = "必須項目です。"
+            isSuccess = false
+        } else {
+            locationTextInputLayout.isErrorEnabled = false
+        }
+
+        if(capacityEditText.text.length > 5){
+            capacityTextInputLayout.isErrorEnabled = true
+            capacityTextInputLayout.error = "入力桁数が5桁を超えています。"
+            isSuccess = false
+        } else if(capacityEditText.text.length == 0){
+            capacityEditText.setText("指定なし")
+            capacityTextInputLayout.isErrorEnabled = false
+        } else {
+            capacityTextInputLayout.isErrorEnabled = false
+        }
+
+        if(startDateButton.text == "日付を選択"){
+            Toast.makeText(applicationContext, "開始日が入力されていません", Toast.LENGTH_SHORT).show()
+            isSuccess = false
+        } else if (startTimeButton.text == "時間を選択"){
+            Toast.makeText(applicationContext, "開始時間が入力されていません", Toast.LENGTH_SHORT).show()
+            isSuccess = false
+        } else if (endDateButton.text == "日付を選択"){
+            Toast.makeText(applicationContext, "終了日が入力されていません", Toast.LENGTH_SHORT).show()
+            isSuccess = false
+        } else if (endTimeButton.text == "時間を選択"){
+            Toast.makeText(applicationContext, "終了時間が入力されていません", Toast.LENGTH_SHORT).show()
+            isSuccess = false
+        } else if (deadlineButton.text == "日付を選択"){
+            Toast.makeText(applicationContext, "申し込み締切日が入力されていません", Toast.LENGTH_SHORT).show()
+            isSuccess = false
+        }
+
+        return isSuccess
     }
 
     fun getBitmapAsByteArray(bitmap: Bitmap):ByteArray{

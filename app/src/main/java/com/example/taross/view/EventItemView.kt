@@ -6,6 +6,7 @@ package com.example.taross.view
 
 import android.content.Context
 import android.graphics.Color
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -49,9 +50,13 @@ class EventItemView: FrameLayout{
         timeStartTextView?.text = item.time_start
         locationTextView?.text = item.location
 
+        val idColor = item.selectDepartmentColorId(resources)
+        if(idColor != -1)
+            departmentTextView?.setBackgroundResource(idColor)
+
         // 画像用処理
         //thumbnailImageView?.setBackgroundColor(Color.RED)
-        Picasso.with(context).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${item.id}.png").skipMemoryCache().into(thumbnailImageView)
+        Picasso.with(context).load("https://mb.api.cloud.nifty.com/2013-09-01/applications/zUockxBwPHqxceBH/publicFiles/${item.id}.png").skipMemoryCache().error(R.drawable.jinkawa_logo).into(thumbnailImageView)
 
     }
 }

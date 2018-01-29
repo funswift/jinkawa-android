@@ -19,4 +19,16 @@
         <item>@string/shopping</item>
         <item>@string/emergency</item>
     </string-array>
+
+    <array name="array_color_departments">
+        <item>#ce1d1c</item>
+        <item>#cc4454</item>
+        <item>#4b93bc</item>
+        <item>#d45273</item>
+        <item>#d96047</item>
+        <item>#3ba88d</item>
+        <item>#1e2952</item>
+        <item>#00913a</item>
+        <item>#4cacd9</item>
+    </array>
 </resources>

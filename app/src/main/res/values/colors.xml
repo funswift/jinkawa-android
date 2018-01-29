@@ -8,5 +8,16 @@
     <color name="white">#ffffff</color>
     <color name="lightGray">#d8d8d8</color>
     <color name="black">#000000</color>
-    <color name="jipriMainColor">#c85b5b</color>>
+    <color name="jipriMainColor">#c85b5b</color>
+
+    <!-- Departments' Color -->
+    <color name="yakuin">#ce1d1c</color>
+    <color name="soumu">#cc4454</color>
+    <color name="seishounen">#4b93bc</color>
+    <color name="josei">#d45273</color>
+    <color name="hukushi">#d96047</color>
+    <color name="kankyou">#3ba88d</color>
+    <color name="boukabouhan">#1e2952</color>
+    <color name="koutsu">#00913a</color>
+    <color name="jbus">#4cacd9</color>
 </resources>
