@@ -14,6 +14,7 @@ import com.example.taross.model.Event
 import com.nifty.cloud.mb.core.NCMBException
 import com.squareup.picasso.Picasso
 import com.nifty.cloud.mb.core.*
+import org.jetbrains.anko.*
 
 
 class EventEditActivity: EventCreateActivity() {
@@ -85,7 +86,7 @@ class EventEditActivity: EventCreateActivity() {
         })
 
         editButton.setOnClickListener{
-            val title = titleEditText.text.toString()
+            val _title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
             val description = descriptionEditText.text.toString()
             val location = locationEditText.text.toString()
@@ -97,31 +98,83 @@ class EventEditActivity: EventCreateActivity() {
             val deadline = deadlineButton.text.toString()
             val officer_only = officer
 
-
-
-            val event = Event(title, event.id ,department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
-            event.update(this)
-
-            //画像追加
-            val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
-
-            query.whereEqualTo("name", title)
-            val result = try {
-                query.find()
-            } catch (e :Exception){
-                emptyList<NCMBObject>()
+            var confirm_ok = false
+            val open_text: String? = when(officer_only){
+                true -> getString(R.string.form_officer_text)
+                false -> getString(R.string.form_officer_false_text)
             }
-            Log.d("result", "$result")
-            if (result.isNotEmpty()){
-                Log.d("test", "${result[0].getString("objectId")}を取得しました！")
-                val fileName = result[0].getString("objectId")
-                imageBmp?.let {
-                    val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
-                    file.save()
+
+            alert(getString(R.string.create_confirm)) {
+                title = getString(R.string.confirm)
+                val _textSize = 16f
+                val colon = "："
+                customView {
+                    verticalLayout {
+                        padding = dip(16)
+                        linearLayout {
+                            textView(getString(R.string.form_department_text) + colon) { textSize = _textSize }
+                            textView(department) { textSize = _textSize }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_event_title_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(_title) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_location_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(location) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_capacity_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(capacity + "人") { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_date_start_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(start_date + "　" + start_time) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_date_end_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(end_date + "　" + end_time) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_deadline_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(deadline) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_officer_description_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(open_text) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                    }
                 }
+                positiveButton(getString(R.string.yes)){confirm_ok = true}
+                negativeButton(getString(R.string.no)){}
+            }.show()
+
+
+            if(confirm_ok) {
+                val event = Event(_title, event.id, department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
+                event.update(this)
+
+                //画像追加
+                val query: NCMBQuery<NCMBObject> = NCMBQuery("Event")
+
+                query.whereEqualTo("name", _title)
+                val result = try {
+                    query.find()
+                } catch (e: Exception) {
+                    emptyList<NCMBObject>()
+                }
+                Log.d("result", "$result")
+                if (result.isNotEmpty()) {
+                    Log.d("test", "${result[0].getString("objectId")}を取得しました！")
+                    val fileName = result[0].getString("objectId")
+                    imageBmp?.let {
+                        val file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
+                        file.save()
+                    }
+                }
+                finish()
             }
 
-            finish()
         }
     }
 

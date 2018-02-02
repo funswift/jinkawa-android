@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
 import com.example.taross.model.Participant
+import org.jetbrains.anko.*
 
 class EntryActivity : AppCompatActivity() {
 
@@ -24,6 +25,7 @@ class EntryActivity : AppCompatActivity() {
         val ageText = findViewById(R.id.text_age) as EditText
 
         val genderRadioGroup = findViewById(R.id.radioGroup) as RadioGroup
+        participant.gender = "男"
 
         if(UserConfig.getParticipantFlag(applicationContext)) {
             participant = UserConfig.getParticipantData(applicationContext)
@@ -43,16 +45,49 @@ class EntryActivity : AppCompatActivity() {
 
         val eventId = intent.getStringExtra("EVENT_ID_EXTRA")
         val submitButton = findViewById(R.id.button_entry_submit) as Button
-        submitButton.setOnClickListener({
+        submitButton.setOnClickListener{
             participant.name = nameText.text.toString()
             participant.address = addressText.text.toString()
             participant.tell = tellText.text.toString()
             participant.age = ageText.text.toString()
 
-            UserConfig.setParticipantFlag(applicationContext, true)
-            UserConfig.setParticipantData(applicationContext, participant)
-            participant.save(eventId)
-            finish()
-        })
+            alert(getString(R.string.create_confirm)) {
+                title = getString(R.string.confirm)
+                val _textSize = 16f
+                val colon = "："
+                customView{
+                    verticalLayout {
+                        padding = dip(16)
+                        linearLayout {
+                            textView(getString(R.string.entry_item_name) + colon) {textSize = _textSize}
+                            textView(participant.name) {textSize = _textSize}
+                        }
+                        linearLayout {
+                            textView(getString(R.string.entry_item_address) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(participant.address) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.entry_item_tell) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(participant.tell) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.entry_item_age) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(participant.age) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.entry_item_gender) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(participant.gender) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                    }
+                }
+                positiveButton(getString(R.string.yes)){
+                    UserConfig.setParticipantFlag(applicationContext, true)
+                    UserConfig.setParticipantData(applicationContext, participant)
+                    participant.save(eventId)
+                    finish()
+                }
+                negativeButton(getString(R.string.no)){}
+            }.show()
+        }
     }
 }

@@ -25,6 +25,9 @@ import java.util.Calendar
 import android.widget.ArrayAdapter
 import com.example.taross.model.Event
 import com.nifty.cloud.mb.core.*
+import org.jetbrains.anko.*
+import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.support.v4.alert
 import java.io.ByteArrayOutputStream
 import java.io.FileDescriptor
 
@@ -201,7 +204,7 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
         }
 
         createButton.setOnClickListener{
-            val title = titleEditText.text.toString()
+            val _title = titleEditText.text.toString()
             val department = departmentSpinner.selectedItem.toString()
             val description = descriptionEditText.text.toString()
             val location = locationEditText.text.toString()
@@ -213,39 +216,90 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
             val deadline = deadlineButton.text.toString()
             val officer_only = officer
 
-            val event = Event(title, "", department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
+            //var confirm_ok = false
+            val open_text: String? = when(officer_only){
+                true -> getString(R.string.form_officer_text)
+                false -> getString(R.string.form_officer_false_text)
+            }
 
-            //画像追加
-            var query: NCMBQuery<NCMBObject>?
-            var result:List<NCMBObject>?
-            var fileName:String?
-            var file:NCMBFile?
+            val event = Event(_title, "", department, start_date, start_time, end_date, end_time, description, location, capacity, deadline, "", officer_only)
 
-            if (validate()) {
-
-                event.save(this)
-                NotificationHelper.sendPush(title, "イベントが追加されました！")
-
-
-                //画像追加
-                query = NCMBQuery("Event")
-
-                query.whereEqualTo("name", title)
-                result = try {
-                    query.find()
-                } catch (e: Exception) {
-                    emptyList<NCMBObject>()
-                }
-                Log.d("result", "$result")
-                if (result.isNotEmpty()) {
-                    Log.d("test", "${result[0].getString("objectId")}を取得しました！")
-                    fileName = result[0].getString("objectId")
-                    imageBmp?.let {
-                        file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
-                        file?.save()
+            alert(getString(R.string.create_confirm)) {
+                title = getString(R.string.confirm)
+                val _textSize = 16f
+                val colon = "："
+                customView {
+                    verticalLayout {
+                        padding = dip(16)
+                        linearLayout {
+                            textView(getString(R.string.form_department_text) + colon) { textSize = _textSize }
+                            textView(department) { textSize = _textSize }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_event_title_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(_title) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_location_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(location) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_capacity_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(capacity + "人") { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_date_start_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(start_date + "　" + start_time) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_date_end_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(end_date + "　" + end_time) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_deadline_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(deadline) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
+                        linearLayout {
+                            textView(getString(R.string.form_officer_description_text) + colon) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                            textView(open_text) { textSize = _textSize }.lparams { topMargin = dip(8) }
+                        }
                     }
                 }
-            }
+
+                positiveButton(getString(R.string.yes)) {
+                    var query: NCMBQuery<NCMBObject>?
+                    var result: List<NCMBObject>?
+                    var fileName: String?
+                    var file: NCMBFile?
+
+                    if (validate()) {
+                        event.save(this@EventCreateActivity)
+                        NotificationHelper.sendPush(_title, "イベントが追加されました！")
+
+
+                        //画像追加
+                        query = NCMBQuery("Event")
+
+                        query.whereEqualTo("name", _title)
+                        result = try {
+                            query.find()
+                        } catch (e: Exception) {
+                            emptyList<NCMBObject>()
+                        }
+                        Log.d("result", "$result")
+                        if (result.isNotEmpty()) {
+                            Log.d("test", "${result[0].getString("objectId")}を取得しました！")
+                            fileName = result[0].getString("objectId")
+                            imageBmp?.let {
+                                file = NCMBFile("${fileName}.png", getBitmapAsByteArray(it), NCMBAcl())
+                                file?.save()
+                            }
+                        }
+                    }
+                    finish()
+                }
+                negativeButton(getString(R.string.no)){}
+            }.show()
         }
     }
 
@@ -312,5 +366,6 @@ open class EventCreateActivity : AppCompatActivity(), DoneCallback {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         return  byteArrayOutputStream.toByteArray()
     }
+
 }
 

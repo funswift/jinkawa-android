@@ -47,29 +47,35 @@ class OptionFragment: Fragment() {
             when (UserConfig.getParticipantFlag(context)) {
                 true -> alert {
                             title = getString(R.string.option_setting_form_text)
+                            val _textSize = 18f
+                            val colon = "："
                             customView {
                                 val entryInformation = UserConfig.getParticipantData(context)
-                                linearLayout {
-                                    topPadding = dip(16)
-                                    verticalLayout {
-                                        padding = dip(16)
-                                        textView(getString(R.string.entry_item_name)) { textSize = 18f }
-                                        textView(getString(R.string.entry_item_address)) { textSize = 18f }.lparams { topMargin = dip(16) }
-                                        textView(getString(R.string.entry_item_tell)) { textSize = 18f }.lparams { topMargin = dip(16) }
-                                        textView(getString(R.string.entry_item_gender)) { textSize = 18f }.lparams { topMargin = dip(16) }
-                                        textView(getString(R.string.entry_item_age)) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                verticalLayout {
+                                    padding = dip(16)
+                                    linearLayout {
+                                        textView(getString(R.string.entry_item_name) + colon) { textSize = _textSize }
+                                        textView(entryInformation.name) { textSize = _textSize }
                                     }
-                                    verticalLayout {
-                                        padding = dip(16)
-                                        textView(entryInformation.name) { textSize = 18f }
-                                        textView(entryInformation.address) { textSize = 18f }.lparams { topMargin = dip(16) }
-                                        textView(entryInformation.tell) { textSize = 18f }.lparams { topMargin = dip(16) }
-                                        textView(entryInformation.gender) { textSize = 18f }.lparams { topMargin = dip(16) }
-                                        textView(entryInformation.age) { textSize = 18f }.lparams { topMargin = dip(16) }
+                                    linearLayout {
+                                        textView(getString(R.string.entry_item_address) + colon) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.address) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                    }
+                                    linearLayout {
+                                        textView(getString(R.string.entry_item_tell) + colon) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.tell) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                    }
+                                    linearLayout {
+                                        textView(getString(R.string.entry_item_gender) + colon) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.gender) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                    }
+                                    linearLayout {
+                                        textView(getString(R.string.entry_item_age) + colon) { textSize = _textSize }.lparams { topMargin = dip(16) }
+                                        textView(entryInformation.age) { textSize = _textSize }.lparams { topMargin = dip(16) }
                                     }
                                 }
                             }
-                            positiveButton(getString(R.string._delete)) {
+                            positiveButton(getString(R.string.delete_text)) {
                                 alert(getString(R.string.delete_message)) {
                                     title = getString(R.string.confirm)
                                     positiveButton(getString(R.string.yes)) {
@@ -113,8 +119,14 @@ class OptionFragment: Fragment() {
         }
 
         accountLogoutLayout.setOnClickListener {
-            LoginManager.logout()
-            startActivity(Intent(activity, MainActivity::class.java))
+            alert(getString(R.string.logout_confirm_text)) {
+                title = getString(R.string.option_account_logout_text)
+                positiveButton(getString(R.string.yes)){
+                    LoginManager.logout()
+                    startActivity(Intent(activity, MainActivity::class.java))
+                }
+                negativeButton(getString(R.string.no)){}
+            }.show()
         }
 
         contactJinkawaLayout.setOnClickListener {
@@ -124,7 +136,7 @@ class OptionFragment: Fragment() {
                     verticalLayout {
                         padding = dip(16)
                         textView(getString(R.string.contact_address)) { textSize = 18f }
-                        val tell = textView(getString(R.string.contact_tell)) {
+                        textView(getString(R.string.contact_tell)) {
                             textSize = 18f
                             autoLinkMask = PHONE_NUMBERS
                         }.lparams { topMargin = dip(16) }
